@@ -28,6 +28,7 @@
 > git checkout main
 > git pull --rebase upstream main
 (or git pull origin main)
+> npm i 
 ```
 ## make a new branch
 ```
@@ -40,6 +41,7 @@
 (or git pull origin main)
 > git checkout your-branch
 > git merge main
+> npm i
 ```
 ## write code, commit, repeat
 ```
