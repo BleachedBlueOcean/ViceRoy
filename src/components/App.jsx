@@ -20,6 +20,7 @@ function App(props) {
     <>
      <h1>Yuh!</h1>
      {renderView()}
+     <Trading />
     </>
   )
 }
