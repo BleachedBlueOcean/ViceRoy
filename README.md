@@ -49,10 +49,12 @@
 > git push origin your-branch 
 ```
 ## fix bugs, commit
+```
 git add .
 git commit -m "insert message here"
 git pull --rebase upstream main
 git push origin your-branch
+```
 
 
 
