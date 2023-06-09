@@ -3,7 +3,7 @@ import Trading from './trading_page/Trading.jsx'
 import '../css/App.css'
 import InitialPage from './initial_page/InitialPage.jsx';
 import UserProfile from './user_profile/UserProfile.jsx';
-// import InitialPage from './initial_page/InitialPage.jsx';
+
 
 function App(props) {
 
