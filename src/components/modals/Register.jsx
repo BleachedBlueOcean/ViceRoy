@@ -1,24 +1,36 @@
 import React from 'react';
+import Button from '@mui/material/Button';
 
-
-function Register(){
-
+function Register({ handleClose }) {
     return (
-        <>
-            <button onClick={() => setShowModal(true)}>Register</button>
-            <ReactModal isOpen={showModal}>
+        <div className="registrationForm" style={{color: 'black'}}>
+            <h2>Register</h2>
+            <form>
                 <div>
                     <label>First Name:</label>
-                    <label>Last Name:</label>
-                    <label>Email:</label>
-                    <label>Password:</label>
+                    <input type="text" placeholder="Enter first name" />
                 </div>
-            <button onClick={() => setShowModal(false)}>Cancel</button>
-            <button>Register</button>
-            </ReactModal>
-        </>
+                <div>
+                    <label>Last Name:</label>
+                    <input type="text" placeholder="Enter last name" />
+                </div>
+                <div>
+                    <label>Email:</label>
+                    <input type="text" placeholder="Enter e-mail" />
+                </div>
+                <div>
+                    <label>Password:</label>
+                    <input type="text" placeholder="Enter password" />
+                </div>
+                <div>
+                    <label>Confirm Password:</label>
+                    <input type="text" placeholder="Confirm password" />
+                </div>
+            </form>
+            <Button type="submit" >Register</Button>
+            <Button onClick={handleClose}>Cancel</Button>
+        </div>
     )
-
 }
 
 export default Register;
