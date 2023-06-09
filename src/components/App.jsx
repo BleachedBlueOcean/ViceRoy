@@ -5,7 +5,7 @@ function App(props) {
 
   return (
     <>
-     <h1>Yo!</h1>
+     <h1>Yuh!</h1>
     </>
   )
 }
