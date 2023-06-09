@@ -37,8 +37,8 @@
 ## merge with your branch with updated main
 ```
 > git checkout main
-> git pull --rebase upstream main
-(or git pull origin main)
+> git pull origin main
+(or git pull --rebase upstream main)
 > git checkout your-branch
 > git merge main
 > npm i
