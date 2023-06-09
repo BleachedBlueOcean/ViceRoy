@@ -15,6 +15,7 @@ const style = {
     boxShadow: 24,
     p: 4,
 }
+
 function InitialPage(){
     const [open, setOpen] = useState(false);
     const handleOpen = () => {
@@ -26,18 +27,19 @@ function InitialPage(){
 
     return (
         <div className="initialpage">
+        <h1>Login</h1>
         <div>
           <input type="text" placeholder="E-mail" />
         </div>
         <div>
-          <input type="text" placeholder="Password" />
+          <input type="password" placeholder="Password" />
         </div>
         <div>
           <Button className="loginButton">Login</Button>
         </div>
           <div className="loginoptions">
             <Button className="registerButton" onClick={handleOpen}>Register</Button>
-            <p> or </p>
+            <div> or </div>
             <Button className="guestlogin">Continue as Guest</Button>
           </div>
           <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">

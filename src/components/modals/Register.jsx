@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 
 function Register({ handleClose }) {
+
     return (
         <div className="registrationForm" style={{color: 'black'}}>
             <h2>Register</h2>
@@ -20,11 +21,11 @@ function Register({ handleClose }) {
                 </div>
                 <div>
                     <label>Password:</label>
-                    <input type="text" placeholder="Enter password" />
+                    <input type="password" placeholder="Enter password" />
                 </div>
                 <div>
                     <label>Confirm Password:</label>
-                    <input type="text" placeholder="Confirm password" />
+                    <input type="password" placeholder="Confirm password" />
                 </div>
             </form>
             <Button type="submit" >Register</Button>
