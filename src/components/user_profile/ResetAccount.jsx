@@ -1,9 +1,10 @@
 import React from 'react';
+import { Button } from '@mui/material';
 
 const ResetAccount = () => {
 
   return (
-    <button>Reset Account</button>
+    <Button variant="contained" color="primary">Reset Account</Button>
   )
 }
 
