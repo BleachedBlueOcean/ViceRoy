@@ -5,6 +5,8 @@ import InitialPage from './initial_page/InitialPage.jsx';
 import UserProfile from './user_profile/UserProfile.jsx';
 // import InitialPage from './initial_page/InitialPage.jsx';
 
+
+import NavBarTemp from './containerTemplates/NavBarTemp.jsx';
 function App(props) {
 
   const [view, setView] = useState("default");
@@ -37,7 +39,7 @@ function App(props) {
 
       <p>kkk</p>
       <UserProfile />
-
+      <NavBarTemp />
       {renderView()}
 
     </>
@@ -46,3 +48,4 @@ function App(props) {
 }
 
 export default App;
+
