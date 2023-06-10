@@ -16,23 +16,35 @@ const style = {
     p: 4,
 }
 
-function InitialPage(){
+function InitialPage () {
     const [open, setOpen] = useState(false);
+    const [signInEmail, setSignInEmail] = useState('');
+    const [signInPassword, setSignInPassword] = useState('');
+
     const handleOpen = () => {
         setOpen(true);
     }
     const handleClose = () => {
         setOpen(false);
     }
+    const onEmailChange = (event) => {
+        setSignInEmail(event.target.value);
+    }
+    const onPasswordChange = (event) => {
+        setSignInPassword(event.target.value);
+    }
+    // send post request to database with user details
+    // if login user matches, set view to trading
+    // else return message that login doesnt match any account in database
 
     return (
         <div className="initialpage">
         <h1>Login</h1>
         <div>
-          <input type="text" placeholder="E-mail" />
+          <input type="text" placeholder="E-mail" onChange={onEmailChange}/>
         </div>
         <div>
-          <input type="password" placeholder="Password" />
+          <input type="password" placeholder="Password" onChange={onPasswordChange}/>
         </div>
         <div>
           <Button className="loginButton">Login</Button>
@@ -52,3 +64,7 @@ function InitialPage(){
 }
 
 export default InitialPage;
+
+        {/* <div className="loginImage">
+            <img src="" alt="loginGraph"/>
+        </div> */}
