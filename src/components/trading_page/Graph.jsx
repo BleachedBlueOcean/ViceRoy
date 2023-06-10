@@ -1,10 +1,7 @@
-// components/LineChart.js
 import React, { useState, useEffect } from "react";
-import { Line } from "react-chartjs-2";
-import Chart from 'chart.js/auto';
-import { CategoryScale } from 'chart.js';
 import axios from "axios"
-// import Data from "./../../data/graphData.js"
+import { Chart } from 'react-google-charts'
+
 
 function LineChart({ coin, interval }) {
   const [chartData, setChartData] = useState(undefined)
@@ -14,46 +11,48 @@ function LineChart({ coin, interval }) {
       console.log(result.data.data)
       return result.data.data
     })
-    .then((Data) => {
-      console.log('This is what setChartData sees ', Data)
-      setChartData({
-        labels: Data.map((data) => data.date),
-        datasets: [
-          {
-            label: `Value of ${coin}`,
-            data: Data.map((data) => data.priceUsd),
-            backgroundColor: [
-              "rgba(75,192,192,1)",
-              "#ecf0f1",
-              "#50AF95",
-              "#f3ba2f",
-              "#2a71d0"
-            ],
-            borderColor: "white",
-            borderWidth: 2
-          }
-        ]
+    .then((result) => {
+      console.log('This is what setChartData sees ', result)
+      let data = result.map((point) => {
+        return [point.date, Number(point.priceUsd)]
       })
+      data.unshift(["date", `${coin.toUpperCase()}`])
+      console.log('This is the data going to the chart', data)
+      setChartData(data)
     })
   }, [coin])
+
+  const options = {
+    title: `${coin.toUpperCase()}`,
+    curveType: "function",
+    legend: {
+      position: "bottom",
+      textStyle: {color: "white"}
+    },
+    backgroundColor: "#32322C",
+    colors:["#13C4A3"],
+    explorer:{},
+    hAxis: {
+      textStyle: {color: "white"},
+      titleTextStyle: {color: "white"}
+    },
+    vAxis: {
+      textStyle: {color: "white"},
+      titleTextStyle: {color: "white"}
+    },
+    titleTextStyle: {color: "white"}
+  };
 
   return (
     <div className="chart-container">
       <h2 style={{ textAlign: "center" }}></h2>
-      { chartData !== undefined && <Line
-        data={chartData}
-        options={{
-          plugins: {
-            title: {
-              display: true,
-              text: `Value of ${coin}`
-            },
-            legend: {
-              display: false
-            }
-          }
-        }}
-      />}
+      { chartData !== undefined && <Chart
+      chartType="LineChart"
+      width="100%"
+      height="400px"
+      data={chartData}
+      options={options}
+    />}
     </div>
   );
 }
