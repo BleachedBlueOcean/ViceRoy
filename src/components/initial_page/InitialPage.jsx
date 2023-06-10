@@ -3,6 +3,9 @@ import Register from '../modals/Register.jsx';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import Input from '@mui/material/Input';
 
 const style = {
     position: 'absolute',
@@ -38,13 +41,16 @@ function InitialPage () {
     // else return message that login doesnt match any account in database
 
     return (
-        <div className="initialpage">
+        <Box className="initialpage">
         <h1>Login</h1>
+        <form>
         <div>
-          <input type="text" placeholder="E-mail" onChange={onEmailChange}/>
+        <InputLabel htmlFor="signInEmail">Email:</InputLabel>
+          <Input id="signInEmail" type="text" placeholder="E-mail" onChange={onEmailChange}/>
         </div>
         <div>
-          <input type="password" placeholder="Password" onChange={onPasswordChange}/>
+        <InputLabel htmlFor="signInPassword">Password:</InputLabel>
+          <Input id="signInPassword" type="password" placeholder="Password" onChange={onPasswordChange}/>
         </div>
         <div>
           <Button className="loginButton">Login</Button>
@@ -54,12 +60,13 @@ function InitialPage () {
             <div> or </div>
             <Button className="guestlogin">Continue as Guest</Button>
           </div>
+        </form>
           <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
             <Box sx={style}>
               <Register handleClose={handleClose}/>
             </Box>
           </Modal>
-        </div>
+        </Box>
     )
 }
 
