@@ -36,6 +36,7 @@ function App(props) {
     <>
 
       <p>kkk</p>
+      <UserProfile />
 
       {renderView()}
 
