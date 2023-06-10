@@ -31,23 +31,47 @@ function App(props) {
       const data = await controllers.getUsers();
       console.log(data);
     } catch (err){
+      console.error(err);
+    }
+  }
+
+  const getUserById= async (id)=> {
+    try {
+      const data = await controllers.getUserByID(id);
+      console.log(data);
+    } catch (err){
+      console.error(err);
+    }
+  }
+
+  const addUser = async (obj) => {
+    try{
+      await controllers.createUser(obj)
+    }catch(err){
+      console.error(err);
+    }
+  }
+
+  const updateUser= async (id,obj)=> {
+    try {
+      const data = await controllers.updateUser(id,obj);
+      console.log(data);
+    } catch (err){
+      console.error(err);
+    }
+  }
+  const deleteUser = async (id) => {
+    try {
+      const data = await controllers.deleteUser(id);
+      console.log(data);
+    } catch (err){
       console.log(err);
     }
-  }
 
-  const testAPI = async ()=> {
-    try {
-      // const data = await fetch('https://cryptopanic.com/api/v1/posts/?auth_token=eacbe41187c73aa0ba4a806774a1f04cac9341d8&kind=news&filter=hot&public=true')
-      const data = await axios.get('/api')
-      console.log(data.data);
-    } catch(err){
-      console.error(err)
-    }
   }
-
 
   useEffect(()=>{
-    getUsers();
+   
   },[])
 
 
