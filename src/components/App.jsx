@@ -3,14 +3,16 @@ import Trading from './trading_page/Trading.jsx'
 import '../css/App.css'
 import InitialPage from './initial_page/InitialPage.jsx';
 import UserProfile from './user_profile/UserProfile.jsx';
-import controllers from '../backend/controllers'
+// import controllers from '../backend/controllers'
 import axios from 'axios';
 import dns from 'dns'
 
-
 import NavBarTemp from './containerTemplates/NavBarTemp.jsx';
+import GraphNavTemp from './containerTemplates/GraphNavTemp.jsx';
+
+
+
 function App(props) {
-  
   // const addUser = async() =>{
   //   try {
   //     const docRef = await addDoc(collection(db, "users"), {
@@ -27,15 +29,14 @@ function App(props) {
   // }
   const [view, setView] = useState("default");
 
-
-  const getUsers= async ()=> {
-    try {
-      const data = await controllers.getUsers();
-      console.log(data);
-    } catch (err){
-      console.log(err);
-    }
-  }
+  // const getUsers= async ()=> {
+  //   try {
+  //     const data = await controllers.getUsers();
+  //     console.log(data);
+  //   } catch (err){
+  //     console.log(err);
+  //   }
+  // }
 
   const testAPI = async ()=> {
     try {
@@ -47,11 +48,9 @@ function App(props) {
     }
   }
 
-
   useEffect(()=>{
-    getUsers();
+    // getUsers();
   },[])
-
 
   const renderView = () => {
     switch (view) {
@@ -80,8 +79,9 @@ function App(props) {
     <>
 
       <p>kkk</p>
-      <UserProfile />
-      <NavBarTemp />
+      {/* <UserProfile /> */}
+      {/* <NavBarTemp /> */}
+      <GraphNavTemp />
       {renderView()}
 
     </>

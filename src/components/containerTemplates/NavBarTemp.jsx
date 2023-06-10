@@ -1,14 +1,16 @@
 import React, {useState} from 'react';
-import {AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem} from '@mui/material';
+import {AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem, Select} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
 
+// console.log("34, 89 AdbIcon change to ours")
+// console.log("123, Avatar src")
 
 
 const pages = ['LeaderBoard', 'All Badges'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function ResponsiveAppBar() {
+function NavBarTemp() {
   const [anchorNav, setAnchorNav] = useState(null);
   const [anchorUser, setAnchorUser] = useState(null);
 
@@ -151,4 +153,4 @@ function ResponsiveAppBar() {
     </AppBar>
   );
 }
-export default ResponsiveAppBar;
+export default NavBarTemp;
