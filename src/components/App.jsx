@@ -7,8 +7,12 @@ import UserProfile from './user_profile/UserProfile.jsx';
 import axios from 'axios';
 import dns from 'dns'
 
-
 import NavBarTemp from './containerTemplates/NavBarTemp.jsx';
+import GraphNavTemp from './containerTemplates/GraphNavTemp.jsx';
+import LeftColTemp from './containerTemplates/LeftColTemp.jsx';
+import CryptoBuySellTemp from './containerTemplates/CryptoBuySellTemp.jsx';
+
+
 function App(props) {
 
   // const addUser = async() =>{
@@ -27,15 +31,14 @@ function App(props) {
   // }
   const [view, setView] = useState("default");
 
-
-  const getUsers= async ()=> {
-    try {
-      const data = await controllers.getUsers();
-      console.log(data);
-    } catch (err){
-      console.log(err);
-    }
-  }
+  // const getUsers= async ()=> {
+  //   try {
+  //     const data = await controllers.getUsers();
+  //     console.log(data);
+  //   } catch (err){
+  //     console.log(err);
+  //   }
+  // }
 
   const testAPI = async ()=> {
     try {
@@ -47,11 +50,9 @@ function App(props) {
     }
   }
 
-
   useEffect(()=>{
-    getUsers();
+    // getUsers();
   },[])
-
 
   const renderView = () => {
     switch (view) {
@@ -80,8 +81,11 @@ function App(props) {
     <>
 
       <p>kkk</p>
-      <UserProfile />
-      <NavBarTemp />
+      {/* <UserProfile /> */}
+      {/* <NavBarTemp /> */}
+      {/* <GraphNavTemp /> */}
+      {/* <LeftColTemp /> */}
+      <CryptoBuySellTemp />
       {renderView()}
 
     </>
