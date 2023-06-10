@@ -7,6 +7,8 @@ import controllers from '../backend/controllers'
 import axios from 'axios';
 import dns from 'dns'
 
+
+import NavBarTemp from './containerTemplates/NavBarTemp.jsx';
 function App(props) {
   
   // const addUser = async() =>{
@@ -79,7 +81,7 @@ function App(props) {
 
       <p>kkk</p>
       <UserProfile />
-
+      <NavBarTemp />
       {renderView()}
 
     </>
@@ -88,3 +90,4 @@ function App(props) {
 }
 
 export default App;
+

@@ -7,12 +7,13 @@ const ProfilePicture = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    console.log('this is submit', e.target)
     // console.log('this is submit', e)
     //TODO db call to upload image
   }
 
   const handleSelection = (event) => {
-    // console.log('target', e.target.files[0])
+    console.log('target', event.target.files[0])
     const file = event.target.files[0]
     setProfileImage(file)
     const reader = new FileReader();
