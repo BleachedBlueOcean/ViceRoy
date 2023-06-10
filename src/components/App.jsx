@@ -9,7 +9,8 @@ import dns from 'dns'
 
 import NavBarTemp from './containerTemplates/NavBarTemp.jsx';
 import GraphNavTemp from './containerTemplates/GraphNavTemp.jsx';
-
+import LeftColTemp from './containerTemplates/LeftColTemp.jsx';
+import CryptoBuySellTemp from './containerTemplates/CryptoBuySellTemp.jsx';
 
 
 function App(props) {
@@ -81,7 +82,9 @@ function App(props) {
       <p>kkk</p>
       {/* <UserProfile /> */}
       {/* <NavBarTemp /> */}
-      <GraphNavTemp />
+      {/* <GraphNavTemp /> */}
+      {/* <LeftColTemp /> */}
+      <CryptoBuySellTemp />
       {renderView()}
 
     </>
