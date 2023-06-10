@@ -3,14 +3,14 @@ import Trading from './trading_page/Trading.jsx'
 import '../css/App.css'
 import InitialPage from './initial_page/InitialPage.jsx';
 import UserProfile from './user_profile/UserProfile.jsx';
-import controllers from '../backend/controllers'
+// import controllers from '../backend/controllers'
 import axios from 'axios';
 import dns from 'dns'
 
 
 import NavBarTemp from './containerTemplates/NavBarTemp.jsx';
 function App(props) {
-  
+
   // const addUser = async() =>{
   //   try {
   //     const docRef = await addDoc(collection(db, "users"), {

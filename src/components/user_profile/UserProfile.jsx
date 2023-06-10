@@ -13,7 +13,7 @@ const UserProfile = () => {
       <ProfilePicture />
       <ResetAccount />
       <HistoricalData />
-      <CompletedAchievements />
+      {/* <CompletedAchievements /> */}
       <SelfCoins_Values />
     </>
   );
