@@ -6,6 +6,9 @@ import Modal from '@mui/material/Modal';
 import InputLabel from '@mui/material/InputLabel';
 import Input from '@mui/material/Input';
 
+import controllers from '../../backend/controllers/index.js'
+
+
 const style = {
     position: 'absolute',
     top: '50%',
@@ -39,6 +42,14 @@ function InitialPage() {
     // if login user matches, set view to trading
     // else return message that login doesnt match any account in database
 
+    const getUser = async () => {
+        try {
+            console.log(await controllers.getUserByID('prez_pedro@gmail.com'));
+        } catch(error) {
+            console.log(error);
+        }
+    }
+
     return (
         <Box className="initialpage">
             <h1>Login</h1>
@@ -58,6 +69,7 @@ function InitialPage() {
                     <Button className="registerButton" onClick={handleOpen}>Register</Button>
                     <div> or </div>
                     <Button className="guestlogin">Continue as Guest</Button>
+                    <Button onClick={getUser}>Test</Button>
                 </div>
             </form>
             <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">

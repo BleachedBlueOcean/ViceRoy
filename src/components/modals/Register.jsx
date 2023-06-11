@@ -26,10 +26,31 @@ function Register({ handleClose }) {
     //     console.log(registrationData)
     // }, [registrationData])
 
+    const checkUser = async () => {
+        try {
+            const userData = await controllers.getUsers();
+            return userData;
+        } catch(err) {
+            console.log('Unable to retrieve user list: ', err)
+        }
+    }
+
+    const addUser = async () => {
+        try {
+            await controllers.createUser(registrationData);
+        } catch(error) {
+            console.log('Unable to add user: ', error);
+        }
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
+        // send get request to retrieve all users
+        checkUser()
+        // search and check if full name and email combination exist
+        // if so, return error/respond with name and email already in use
+        // otherwise continue
         if (registrationData.response.password === registrationData.response.confirmPass) {
-            // axios.post('insertURL', registrationData)
             console.log('This is registration data: ', registrationData);
             addUser();
             alert('Registration Complete');
@@ -37,14 +58,6 @@ function Register({ handleClose }) {
         } else {
             alert('Passwords do not match');
             return;
-        }
-    }
-
-    const addUser = async() => {
-        try {
-            await controllers.createUser(registrationData);
-        } catch(error) {
-            console.log(error);
         }
     }
 
