@@ -3,12 +3,17 @@ import Trading from './trading_page/Trading.jsx'
 import '../css/App.css'
 import InitialPage from './initial_page/InitialPage.jsx';
 import UserProfile from './user_profile/UserProfile.jsx';
-import controllers from '../backend/controllers'
+// import controllers from '../backend/controllers'
 import axios from 'axios';
 import dns from 'dns'
 
+import NavBarTemp from './containerTemplates/NavBarTemp.jsx';
+import GraphNavTemp from './containerTemplates/GraphNavTemp.jsx';
+import LeftColTemp from './containerTemplates/LeftColTemp.jsx';
+import CryptoBuySellTemp from './containerTemplates/CryptoBuySellTemp.jsx';
+
+
 function App(props) {
-  
   // const addUser = async() =>{
   //   try {
   //     const docRef = await addDoc(collection(db, "users"), {
@@ -52,6 +57,7 @@ function App(props) {
     }
   }
 
+
   const updateUser= async (id,obj)=> {
     try {
       const data = await controllers.updateUser(id,obj);
@@ -67,13 +73,9 @@ function App(props) {
     } catch (err){
       console.log(err);
     }
-
   }
 
-  useEffect(()=>{
-   
-  },[])
-
+  useEffect(()=>{},[])
 
   const renderView = () => {
     switch (view) {
@@ -102,7 +104,11 @@ function App(props) {
     <>
 
       <p>kkk</p>
-
+      {/* <UserProfile /> */}
+      {/* <NavBarTemp /> */}
+      {/* <GraphNavTemp /> */}
+      {/* <LeftColTemp /> */}
+      <CryptoBuySellTemp />
       {renderView()}
 
     </>
@@ -111,3 +117,4 @@ function App(props) {
 }
 
 export default App;
+
