@@ -1,10 +1,12 @@
-// import React from 'React'
+import React from 'react';
 
-// function NewsEntry ( {article} ) {
+function NewsEntry ( {article} ) {
 
-//   return (
-//     <div>{article.title}</div>
-//   )
-// }
+  return (
+    <div>
+      <a href={article.url}>{article.title}</a>
+    </div>
+  )
+}
 
-// export default NewsEntry;
+export default NewsEntry
