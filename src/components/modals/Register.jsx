@@ -5,6 +5,8 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Input from '@mui/material/Input';
 
+import controllers from '../../backend/controllers/index.js'
+
 function Register({ handleClose }) {
     const [registrationData, setRegistrationData] = useState({ response: {
         firstName: '',
@@ -13,6 +15,12 @@ function Register({ handleClose }) {
         password: '',
         confirmPass: '',
     }})
+
+        const style = {
+            display: 'flex',
+            flexDirection: 'column',
+            paddingBottom: '12px',
+        }
 
     // useEffect(()=> {
     //     console.log(registrationData)
@@ -23,18 +31,21 @@ function Register({ handleClose }) {
         if (registrationData.response.password === registrationData.response.confirmPass) {
             // axios.post('insertURL', registrationData)
             console.log('This is registration data: ', registrationData);
-            alert('Registration Complete')
+            addUser();
+            alert('Registration Complete');
             handleClose();
         } else {
-            alert('Passwords do not match')
+            alert('Passwords do not match');
             return;
         }
     }
 
-    const style = {
-        display: 'flex',
-        flexDirection: 'column',
-        paddingBottom: '12px',
+    const addUser = async() => {
+        try {
+            await controllers.createUser(registrationData);
+        } catch(error) {
+            console.log(error);
+        }
     }
 
     return (
