@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import NewsEntry from './NewsEntry.jsx';
+import { List, Divider } from '@mui/material';
 
 function News () {
 
@@ -17,10 +18,26 @@ function News () {
 
   useEffect(()=>{getNews();}, [])
 
+  const style = {
+    width: '100%',
+    bgcolor: '#9e9e9e',
+  };
+
   return (
     <div className='newslist'>
-      {articles.map((article) => <NewsEntry article={article} key={article.title}/>)}
+      <List sx={style}>
+        {articles.map((article) =>
+          <div key={article.title}>
+            <Divider>
+              <NewsEntry article={article}/>
+            </Divider>
+          </div>
+        )}
+      </List>
     </div>
+    // <div className='newslist'>
+    //   {articles.map((article) => <NewsEntry article={article} key={article.title}/>)}
+    // </div>
   )
 }
 

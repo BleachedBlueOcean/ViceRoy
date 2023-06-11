@@ -8,7 +8,7 @@ function Trading(){
     return(
         <>
         <div>YO</div>
-        <LineChart coin={'bitcoin'} interval={'d1'}/>
+        {/* <LineChart coin={'bitcoin'} interval={'d1'}/> */}
         <News/>
         </>
     )

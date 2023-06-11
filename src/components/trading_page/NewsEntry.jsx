@@ -1,11 +1,14 @@
 import React from 'react';
+import { ListItem, Divider } from '@mui/material';
 
 function NewsEntry ( {article} ) {
 
   return (
-    <div>
-      <a href={article.url}>{article.title}</a>
-    </div>
+      <ListItem>
+        <div>
+          <a href={article.url}>{article.title}</a>
+        </div>
+      </ListItem>
   )
 }
 
