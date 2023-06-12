@@ -1,13 +1,14 @@
 
 import { addDoc, collection, getDocs, getDoc, doc, updateDoc, deleteDoc } from "firebase/firestore"; 
-import {app, db} from "../../../firebase-config/config.js"
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {app, db, auth} from "../../../firebase-config/config.js"
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
 
 
 
 
 const controllers =  {
     getUsers: async () => {
+        
         const useColRef = collection(db, "users")
         try{
             const data = await getDocs(useColRef)
@@ -17,7 +18,16 @@ const controllers =  {
             return err;
         }
     },
-    getUserByID: async (id) => {
+    getUserByID: async (id, email, pw) => {
+        signInWithEmailAndPassword(auth, email, pw).then(userCredential=>{
+            const user = userCredential.user;
+            console.log('signed in as', user)
+        }).catch(err=>{
+            const errorCode = err.code;
+            const errorMessage = err.message;
+
+            console.error(err.code, err.message);
+        })
         try{
             const docRef = doc(db, "users", id);
             const docSnap = await getDoc(docRef);
@@ -27,18 +37,20 @@ const controllers =  {
         }
     },
     createUser: async (obj) => {
-        // const auth = getAuth();
-        // createUserWithEmailAndPassword(auth, obj.email, obj.password)
-        // .then((userCredential) => {
-        //     // Signed in 
-        //     const user = userCredential.user;
-        //     // ...
-        // })
-        // .catch((error) => {
-        //     const errorCode = error.code;
-        //     const errorMessage = error.message;
-        //     // ..
-        // });
+        console.log(obj)
+        createUserWithEmailAndPassword(auth, obj.response.email, obj.response.password)
+        .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            console.log(user)
+            
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.error(error.code, error.message)
+        });
+
         const useColRef = collection(db, "users")
         try{
             await addDoc(useColRef, obj);
