@@ -22,15 +22,6 @@ const controllers =  {
             const userCred = await signInWithEmailAndPassword(auth, email, pw)
             const user = userCred.user;
             console.log('signed in as', user)
-<<<<<<<<< Temporary merge branch 1
-                try{
-                    const docRef = doc(db, "users", user.uid);
-                    const docSnap = await getDoc(docRef);
-                    return docSnap.data()
-                } catch(err){
-                    return err;
-                }
-=========
             try{
                 // console.log(user.uid)
                 const docRef = collection(db, "users");
@@ -41,7 +32,6 @@ const controllers =  {
                 console.error(err)
                 return err;
             }
->>>>>>>>> Temporary merge branch 2
         } catch(err){
             console.error(err.code, err.message);
         }
