@@ -80,12 +80,12 @@ function App(props) {
     <>
 
       <p>kkk</p>
-      {/* <UserProfile /> */}
+      <UserProfile />
       {/* <NavBarTemp /> */}
       {/* <GraphNavTemp /> */}
       {/* <LeftColTemp /> */}
-      <CryptoBuySellTemp />
-      {renderView()}
+      {/* <CryptoBuySellTemp /> */}
+      {/* {renderView()} */}
 
     </>
   )
