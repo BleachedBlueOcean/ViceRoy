@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs, getDoc, doc, updateDoc, deleteDoc } from "firebase/firestore"; 
+import { addDoc, collection, getDocs, getDoc, doc, updateDoc, deleteDoc, query, where} from "firebase/firestore"; 
 import {app, db, auth} from "../../../firebase-config/config.js"
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
 import helpers from './helpers.js'
@@ -20,14 +20,17 @@ const controllers =  {
         try{
             const userCred = await signInWithEmailAndPassword(auth, email, pw)
             const user = userCred.user;
-            // console.log('signed in as', user)
-                try{
-                    const docRef = doc(db, "users", user.uid);
-                    const docSnap = await getDoc(docRef);
-                    return docSnap.data()
-                } catch(err){
-                    return err;
-                }
+            console.log('signed in as', user)
+            try{
+                // console.log(user.uid)
+                const docRef = collection(db, "users");
+                const q = query(docRef, where("uid", "==", user.uid));
+                const querySnapshot = await getDocs(q);
+                return querySnapshot.docs[0].data();
+            } catch(err){
+                console.error(err)
+                return err;
+            }
         } catch(err){
             const errorCode = err.code;
             const errorMessage = err.message;
@@ -56,9 +59,9 @@ const controllers =  {
             console.error(err.code, err.message)
         }
     },
-    updateUser: async (id,obj) => {
+    updateUser: async (uid,obj) => {
         try{
-            const docRef = doc(db, "users", id);
+            const docRef = doc(db, "users", uid);
             await updateDoc(docRef, obj);
         } catch(err){
             return err;
