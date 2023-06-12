@@ -6,7 +6,7 @@ import helpers from './helpers.js'
 
 
 const controllers =  {
-    getUsers: async () => {
+    getAllUsers: async () => {
         const useColRef = collection(db, "users")
         try{
             const data = await getDocs(useColRef)
@@ -16,13 +16,13 @@ const controllers =  {
             return err;
         }
     },
-    getUserByID: async (id, email, pw) => {
+    getUser: async (email, pw) => {
         try{
             const userCred = await signInWithEmailAndPassword(auth, email, pw)
-            const user = userCredential.user;
-            console.log('signed in as', user)
+            const user = userCred.user;
+            // console.log('signed in as', user)
                 try{
-                    const docRef = doc(db, "users", uid);
+                    const docRef = doc(db, "users", user.uid);
                     const docSnap = await getDoc(docRef);
                     return docSnap.data()
                 } catch(err){
@@ -41,7 +41,7 @@ const controllers =  {
             const userCred = await createUserWithEmailAndPassword(auth, obj.response.email, obj.response.password)
             console.log(userCred)
             obj = await helpers.transformCreateUser(obj, userCred.user.uid);
-            console.log(obj)
+            // console.log(obj)
             try{
                 const useColRef = collection(db, "users")
                 console.log('ref' ,useColRef);
