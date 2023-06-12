@@ -28,7 +28,7 @@ function App(props) {
   //     console.error("Error adding document: ", e);
   //   }
   // }
-  const [view, setView] = useState("default");
+  const [view, setView] = useState("trading");
 
   // const getUsers= async ()=> {
   //   try {
