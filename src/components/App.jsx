@@ -14,6 +14,7 @@ import CryptoBuySellTemp from './containerTemplates/CryptoBuySellTemp.jsx';
 
 
 function App(props) {
+
   // const addUser = async() =>{
   //   try {
   //     const docRef = await addDoc(collection(db, "users"), {
