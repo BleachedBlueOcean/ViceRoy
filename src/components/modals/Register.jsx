@@ -63,7 +63,6 @@ function Register({ handleClose }) {
         }
 
         if (registrationData.response.password === registrationData.response.confirmPass) {
-            console.log('This is registration data: ', registrationData);
             await addUser();
             alert('Registration Complete');
             handleClose();

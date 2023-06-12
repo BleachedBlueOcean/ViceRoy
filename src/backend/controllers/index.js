@@ -1,3 +1,4 @@
+
 import { addDoc, collection, getDocs, getDoc, doc, updateDoc, deleteDoc, query, where} from "firebase/firestore"; 
 import {app, db, auth} from "../../../firebase-config/config.js"
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
@@ -32,11 +33,9 @@ const controllers =  {
                 return err;
             }
         } catch(err){
-            const errorCode = err.code;
-            const errorMessage = err.message;
             console.error(err.code, err.message);
         }
-     
+
     },
     createUser: async (obj) => {
         console.log(obj)
