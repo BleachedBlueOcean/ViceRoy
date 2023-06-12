@@ -29,17 +29,11 @@ function Register({ handleClose }) {
     const checkUser = async () => {
         try {
             const userData = await controllers.getUsers();
-            const userExists = userData.some((user) => {
-                return (user.response && user.response.firstName === registrationData.response.firstName && user.response.lastName === registrationData.response.lastName && user.response.email === registrationData.response.email)
-            });
+
             const emailExists = userData.some((user) => {
                 return (user.response && user.response.email === registrationData.response.email)
             })
 
-            if (userExists) {
-                alert('User already exists');
-                return false;
-            }
             if (emailExists) {
                 alert('Email is already in use');
                 return false;
