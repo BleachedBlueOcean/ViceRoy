@@ -5,9 +5,12 @@ function NewsEntry ( {article} ) {
 
   return (
       <ListItem>
-        <div>
+        <>
+        <span style={{color: 'black'}} onClick={()=>{console.log(article)}}>4h ago</span>
+        <span>
           <a href={article.url}>{article.title}</a>
-        </div>
+        </span>
+        </>
       </ListItem>
   )
 }

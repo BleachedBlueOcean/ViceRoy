@@ -20,7 +20,7 @@ function News () {
 
   const style = {
     width: '100%',
-    bgcolor: '#9e9e9e',
+    bgcolor: 'white',
   };
 
   return (
