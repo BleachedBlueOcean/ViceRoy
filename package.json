@@ -16,11 +16,13 @@
     "@mui/material": "^5.13.4",
     "axios": "^1.4.0",
     "chart.js": "^4.3.0",
+    "date-fns": "^2.30.0",
     "dotenv": "^16.1.4",
     "firebase": "^9.22.2",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-google-charts": "^4.0.0"
   },
   "devDependencies": {
     "@testing-library/react": "^14.0.0",

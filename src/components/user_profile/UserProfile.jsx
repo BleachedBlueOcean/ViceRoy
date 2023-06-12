@@ -15,10 +15,12 @@ const UserProfile = () => {
     <div style={{display: "flex"}}>
       <ProfilePicture />
       <ResetAccount />
+
       {/* <HistoricalData /> */}
       {/* <CompletedAchievements /> */}
       {/* <SelfCoins_Values /> */}
     </div>
+
   );
 }
 
