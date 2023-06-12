@@ -1,3 +1,4 @@
+
 import { addDoc, collection, getDocs, getDoc, doc, updateDoc, deleteDoc, query, where} from "firebase/firestore";
 import {app, db, auth} from "../../../firebase-config/config.js"
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
@@ -20,7 +21,8 @@ const controllers =  {
         try{
             const userCred = await signInWithEmailAndPassword(auth, email, pw)
             const user = userCred.user;
-            // console.log('signed in as', user)
+            console.log('signed in as', user)
+<<<<<<<<< Temporary merge branch 1
                 try{
                     const docRef = doc(db, "users", user.uid);
                     const docSnap = await getDoc(docRef);
@@ -28,6 +30,18 @@ const controllers =  {
                 } catch(err){
                     return err;
                 }
+=========
+            try{
+                // console.log(user.uid)
+                const docRef = collection(db, "users");
+                const q = query(docRef, where("uid", "==", user.uid));
+                const querySnapshot = await getDocs(q);
+                return querySnapshot.docs[0].data();
+            } catch(err){
+                console.error(err)
+                return err;
+            }
+>>>>>>>>> Temporary merge branch 2
         } catch(err){
             console.error(err.code, err.message);
         }
