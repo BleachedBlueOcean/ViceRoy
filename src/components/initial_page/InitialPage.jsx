@@ -44,7 +44,7 @@ function InitialPage() {
 
     const getUser = async () => {
         try {
-            console.log(await controllers.getUserByID('prez_pedro@gmail.com'));
+            console.log('Get user: ', await controllers.getUsers());
         } catch(error) {
             console.log(error);
         }

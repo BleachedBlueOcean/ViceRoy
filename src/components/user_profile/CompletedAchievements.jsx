@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box } from '@mui/material';
 import BadgeRow from './BadgeRow';
-import PossibleBadge from './PossibleBadge';
+// import PossibleBadge from './PossibleBadge';
 
 const CompletedAchievements = ({ achievedBadges }) => {
   const [showBadgesModal, setShowBadgesModal] = useState(false);

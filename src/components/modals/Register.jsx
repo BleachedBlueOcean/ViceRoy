@@ -29,11 +29,27 @@ function Register({ handleClose }) {
     const checkUser = async () => {
         try {
             const userData = await controllers.getUsers();
-            return userData;
-        } catch(err) {
-            console.log('Unable to retrieve user list: ', err)
+            const userExists = userData.some((user) => {
+                return (user.response && user.response.firstName === registrationData.response.firstName && user.response.lastName === registrationData.response.lastName && user.response.email === registrationData.response.email)
+            });
+            const emailExists = userData.some((user) => {
+                return (user.response && user.response.email === registrationData.response.email)
+            })
+
+            if (userExists) {
+                alert('User already exists');
+                return false;
+            }
+            if (emailExists) {
+                alert('Email is already in use');
+                return false;
+            }
+            return true;
+            } catch(err) {
+                console.log('Unable to retrieve user list: ', err)
+                return false;
+            }
         }
-    }
 
     const addUser = async () => {
         try {
@@ -43,16 +59,18 @@ function Register({ handleClose }) {
         }
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // send get request to retrieve all users
-        checkUser()
-        // search and check if full name and email combination exist
-        // if so, return error/respond with name and email already in use
-        // otherwise continue
+
+        const isUniqueUser = await checkUser();
+
+        if (!isUniqueUser) {
+            return;
+        }
+
         if (registrationData.response.password === registrationData.response.confirmPass) {
             console.log('This is registration data: ', registrationData);
-            addUser();
+            await addUser();
             alert('Registration Complete');
             handleClose();
         } else {
