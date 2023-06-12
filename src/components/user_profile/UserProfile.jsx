@@ -1,21 +1,26 @@
-import React from 'react';
+import React, {useState} from 'react';
 import HistoricalData from './HistoricalData.jsx';
 import CompletedAchievements from './CompletedAchievements.jsx';
 import ProfilePicture from './ProfilePicture.jsx';
 import ResetAccount from './ResetAccount.jsx';
-import SelfCoins_Values from './SelfCoins_Values.jsx'
+
+import SefCoins_Values from './SelfCoins_Values.jsx'
 
 
 const UserProfile = () => {
 
+
+
   return (
-    <>
+    <div style={{display: "flex"}}>
       <ProfilePicture />
       <ResetAccount />
-      <HistoricalData />
+
+      {/* <HistoricalData /> */}
       {/* <CompletedAchievements /> */}
-      <SelfCoins_Values />
-    </>
+      {/* <SelfCoins_Values /> */}
+    </div>
+
   );
 }
 
