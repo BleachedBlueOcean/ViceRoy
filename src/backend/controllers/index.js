@@ -16,13 +16,13 @@ const controllers =  {
             return err;
         }
     },
-    getUser: async (id, email, pw) => {
+    getUser: async (email, pw) => {
         try{
             const userCred = await signInWithEmailAndPassword(auth, email, pw)
-            const user = userCredential.user;
-            console.log('signed in as', user)
+            const user = userCred.user;
+            // console.log('signed in as', user)
                 try{
-                    const docRef = doc(db, "users", uid);
+                    const docRef = doc(db, "users", user.uid);
                     const docSnap = await getDoc(docRef);
                     return docSnap.data()
                 } catch(err){
