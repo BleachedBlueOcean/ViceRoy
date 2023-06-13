@@ -54,7 +54,7 @@ const controllers =  {
 
     },
     createUser: async (obj) => {
-        console.log(obj)
+        console.log('create user', obj)
         try{
             const userCred = await createUserWithEmailAndPassword(auth, obj.response.email, obj.response.password)
             console.log(userCred)

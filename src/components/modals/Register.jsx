@@ -116,10 +116,10 @@ function Register({ handleClose }) {
                         }})
                     }}/>
                 </FormControl>
-            <DialogAction>
+            <DialogActions>
                 <Button type="submit">Register</Button>
                 <Button onClick={handleClose}>Cancel</Button>
-            </DialogAction>
+            </DialogActions>
             </form>
         </Box>
     )

@@ -3,14 +3,16 @@ import {AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, B
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
 
-// console.log("34, 89 AdbIcon change to ours")
-// console.log("123, Avatar src")
+// TODO("AdbIcon AdbIcon change to ours")
+// TODO("Avatar, Avatar src")
 
 
 const pages = ['LeaderBoard', 'All Badges'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function NavBarTemp() {
+
+
+function NavBarTemp({signedIn, setSignedIn, user}) {
   const [anchorNav, setAnchorNav] = useState(null);
   const [anchorUser, setAnchorUser] = useState(null);
 
@@ -122,7 +124,7 @@ function NavBarTemp() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src={user.profilePic} />
               </IconButton>
             </Tooltip>
             <Menu
