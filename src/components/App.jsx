@@ -15,9 +15,11 @@ import UserProfile from './user_profile/UserProfile.jsx';
 export const Context = React.createContext();
 
 function App(props) {
+
   const [view, setView] = useState("default");
   const [signedIn, setSignedIn] = useState(false);
   const [user, setUser] = useState({});
+
 
 
   const getUsers= async ()=> {

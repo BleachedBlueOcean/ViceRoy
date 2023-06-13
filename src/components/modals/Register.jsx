@@ -28,14 +28,14 @@ function Register({ handleClose }) {
 
     const checkUser = async () => {
         try {
-            const userData = await controllers.getUsers();
+            const userData = await controllers.getAllUsers();
 
             const emailExists = userData.some((user) => {
-                return (user.response && user.response.email === registrationData.response.email)
+                return (user && user.email === registrationData.response.email)
             })
-
+            console.log('emailExists: ', emailExists)
             if (emailExists) {
-                alert('Email is already in use');
+                alert(`${registrationData.response.email} is already in use`);
                 return false;
             }
             return true;
@@ -57,7 +57,7 @@ function Register({ handleClose }) {
         e.preventDefault();
 
         const isUniqueUser = await checkUser();
-
+        console.log('is unique user:', isUniqueUser);
         if (!isUniqueUser) {
             return;
         }

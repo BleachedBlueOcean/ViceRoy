@@ -1,5 +1,5 @@
 
-import { addDoc, collection, getDocs, getDoc, doc, updateDoc, deleteDoc, query, where} from "firebase/firestore"; 
+import { addDoc, collection, getDocs, getDoc, doc, updateDoc, deleteDoc, query, where} from "firebase/firestore";
 import {app, db, auth} from "../../../firebase-config/config.js"
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
 import helpers from './helpers.js'
