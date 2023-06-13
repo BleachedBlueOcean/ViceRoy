@@ -11,7 +11,6 @@ const controllers =  {
         const useColRef = collection(db, "users")
         try{
             const data = await getDocs(useColRef)
-            // console.log(data.docs.map((doc)=>{console.log(doc.data())}));
             return data.docs.map((doc)=> ({...doc.data(), id: doc.id }));
         } catch(err){
             return err;
@@ -23,7 +22,6 @@ const controllers =  {
             const user = userCred.user;
             console.log('signed in as', user)
             try{
-                // console.log(user.uid)
                 const docRef = collection(db, "users");
                 const q = query(docRef, where("uid", "==", user.uid));
                 const querySnapshot = await getDocs(q);
@@ -34,6 +32,24 @@ const controllers =  {
             }
         } catch(err){
             console.error(err.code, err.message);
+            return err;
+        }
+
+    },
+    getUserById: async (id) => {
+        try{
+            const docRef = doc(db, "users", id);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                console.log("Document data:", docSnap.data());
+                return docSnap.data();
+            } else {
+            // docSnap.data() will be undefined in this case
+            console.log("No such document!");
+            }
+        } catch(err){
+            console.error(err);
+            return err;
         }
 
     },
@@ -43,7 +59,6 @@ const controllers =  {
             const userCred = await createUserWithEmailAndPassword(auth, obj.response.email, obj.response.password)
             console.log(userCred)
             obj = await helpers.transformCreateUser(obj, userCred.user.uid);
-            // console.log(obj)
             try{
                 const useColRef = collection(db, "users")
                 console.log('ref' ,useColRef);
@@ -63,6 +78,7 @@ const controllers =  {
             const docRef = doc(db, "users", uid);
             await updateDoc(docRef, obj);
         } catch(err){
+            console.error(err)
             return err;
         }
     },
