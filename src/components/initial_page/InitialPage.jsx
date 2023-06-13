@@ -24,7 +24,7 @@ const style = {
     p: 4,
 }
 
-function InitialPage({setView, setUser, setSignedIn}) {
+function InitialPage({setView, setUser, setSignedIn, setPreviewImage}) {
     const [open, setOpen] = useState(false);
     const [signInEmail, setSignInEmail] = useState('');
     const [signInPassword, setSignInPassword] = useState('');
@@ -51,6 +51,8 @@ function InitialPage({setView, setUser, setSignedIn}) {
             if(!userData.code){
                 setSignedIn(true);
                 setUser(userData);
+                //added below
+                setPreviewImage(userData.profilePic);
             }
             console.log('User Data: ', userData);
         } catch(error) {

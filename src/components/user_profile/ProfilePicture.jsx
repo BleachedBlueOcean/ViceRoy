@@ -1,22 +1,20 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Avatar, IconButton, Typography} from '@mui/material';
+import controllers from '../../backend/controllers/index.js'
 
 
-const ProfilePicture = ({user, setUser}) => {
+const ProfilePicture = ({user, setUser, previewImage, setPreviewImage}) => {
   const [profileImage, setProfileImage] = useState(user.profilePic);
-  const [previewImage, setPreviewImage] = useState(user.profilePic);
+  // const [previewImage, setPreviewImage] = useState(user.profilePic);
 
-  const updatedUser = {...user, profilePic: {profileImage}}
   const handleSelection = (event) => {
-    // console.log('target', event.target.files[0])
+    console.log('this is selection user', user)
     const file = event.target.files[0]
     setProfileImage(file)
-    setUser(updatedUser)
 
     const reader = new FileReader();
 
     reader.onload = (e) => {
-      // console.log(profileImage)
       setPreviewImage(e.target.result);
     };
     reader.readAsDataURL(file);
@@ -25,6 +23,26 @@ const ProfilePicture = ({user, setUser}) => {
   const handlePicClick = () => {
     document.getElementById('profile-picture-upload').click()
   };
+
+
+  const updateDB = async () => {
+    // console.log('pre form user', )
+    const updatedUser = {...user, profilePic: previewImage}
+    // console.log('db update', updatedUser)
+    setUser(updatedUser);
+    try {
+      console.log('user id', updatedUser)
+      await controllers.updateUser(updatedUser.id, updatedUser)
+    }catch(err){
+      console.log('this is profile pic error', err)
+    }
+  }
+
+  useEffect(() => {
+    // console.log('this is preview',  previewImage)
+    updateDB()
+  }, [previewImage])
+
 
   return (
     <div>

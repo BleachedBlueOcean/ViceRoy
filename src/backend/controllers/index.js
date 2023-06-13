@@ -61,7 +61,7 @@ const controllers =  {
             obj = await helpers.transformCreateUser(obj, userCred.user.uid);
             try{
                 const useColRef = collection(db, "users")
-                console.log('ref' ,useColRef);
+                // console.log('ref' ,useColRef);
                 await addDoc(useColRef, obj);
             } catch(err){
                 console.error(err)
@@ -77,7 +77,7 @@ const controllers =  {
         try{
             const docRef = doc(db, "users", uid);
             await updateDoc(docRef, obj);
-            // console.log('fuck u')
+            console.log('fuck u', obj)
             // getUser(obj.email, )
         } catch(err){
             console.error(err)

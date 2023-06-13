@@ -9,7 +9,7 @@ const helpers = {
             availableCash: 500,
             totalAssets: 0,
             coinsOwned: [],
-            profilePic: ''
+            profilePic: {}
 
         }
     }

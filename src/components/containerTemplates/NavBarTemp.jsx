@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem, Select} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
@@ -8,11 +8,11 @@ import AdbIcon from '@mui/icons-material/Adb';
 
 
 const pages = ['LeaderBoard', 'All Badges'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Dashboard', 'Logout'];
 
 
 
-function NavBarTemp({signedIn, setSignedIn, user}) {
+function NavBarTemp({signedIn, setSignedIn, setView, previewImage, setPreviewImage}) {
   const [anchorNav, setAnchorNav] = useState(null);
   const [anchorUser, setAnchorUser] = useState(null);
 
@@ -25,11 +25,14 @@ function NavBarTemp({signedIn, setSignedIn, user}) {
 
   const handleCloseNavMenu = () => {
     setAnchorNav(null);
+
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (e) => {
+    console.log('navbar', e.currentTarget)
     setAnchorUser(null);
   };
+
 
   return (
     <AppBar position="static">
@@ -124,7 +127,7 @@ function NavBarTemp({signedIn, setSignedIn, user}) {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src={user.profilePic} />
+                <Avatar alt="Profile Picture" src={previewImage} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -141,8 +144,7 @@ function NavBarTemp({signedIn, setSignedIn, user}) {
                 horizontal: 'right',
               }}
               open={Boolean(anchorUser)}
-              onClose={handleCloseUserMenu}
-            >
+              onClose={handleCloseUserMenu}>
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
