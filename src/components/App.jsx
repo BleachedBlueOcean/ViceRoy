@@ -4,32 +4,20 @@ import '../css/App.css'
 import InitialPage from './initial_page/InitialPage.jsx';
 import UserProfile from './user_profile/UserProfile.jsx';
 // import controllers from '../backend/controllers'
-import axios from 'axios';
-import dns from 'dns'
+// import axios from 'axios';
+// import dns from 'dns'
 
-import NavBarTemp from './containerTemplates/NavBarTemp.jsx';
-import GraphNavTemp from './containerTemplates/GraphNavTemp.jsx';
-import LeftColTemp from './containerTemplates/LeftColTemp.jsx';
-import CryptoBuySellTemp from './containerTemplates/CryptoBuySellTemp.jsx';
+// import NavBarTemp from './containerTemplates/NavBarTemp.jsx';
+// import GraphNavTemp from './containerTemplates/GraphNavTemp.jsx';
+// import LeftColTemp from './containerTemplates/LeftColTemp.jsx';
+// import CryptoBuySellTemp from './containerTemplates/CryptoBuySellTemp.jsx';
 
+export const Context = React.createContext();
 
 function App(props) {
-
-  // const addUser = async() =>{
-  //   try {
-  //     const docRef = await addDoc(collection(db, "users"), {
-  //       first: "Alan",
-  //       middle: "Mathison",
-  //       last: "Turing",
-  //       born: 1912
-  //     });
-
-  //     console.log("Document written with ID: ", docRef.id);
-  //   } catch (e) {
-  //     console.error("Error adding document: ", e);
-  //   }
-  // }
   const [view, setView] = useState("default");
+  const [signedIn, setSignedIn] = useState(false);
+  const [user, setUser] = useState({});
 
 
   const getUsers= async ()=> {
@@ -76,14 +64,16 @@ function App(props) {
     }
   }
 
-  useEffect(()=>{},[])
+ 
 
   const renderView = () => {
+    console.log('view is:', view);
+    console.log('user is', user)
     switch (view) {
       case "default":
         return (
           <div>
-            <InitialPage />
+            <InitialPage setView={setView} setUser={setUser} setSignedIn={setSignedIn}/>
           </div>
         );
       case "trading":
@@ -101,16 +91,23 @@ function App(props) {
     }
   };
 
+  useEffect(()=>{
+    if(signedIn === true){
+      setView('trading');
+      renderView();
+    }
+  },[signedIn])
+
   return (
     <>
 
-      <p>kkk</p>
-      <UserProfile />
+      <p>ViceRoy</p>
+      {/* <UserProfile /> */}
       {/* <NavBarTemp /> */}
       {/* <GraphNavTemp /> */}
       {/* <LeftColTemp /> */}
       {/* <CryptoBuySellTemp /> */}
-      {/* {renderView()} */}
+      {renderView()}
 
     </>
   )

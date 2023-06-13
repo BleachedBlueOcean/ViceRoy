@@ -1,7 +1,3 @@
-
-
-
-
 const helpers = {
     transformCreateUser: (user, uid)=> {
         console.log(user, uid)

@@ -21,7 +21,7 @@ const style = {
     p: 4,
 }
 
-function InitialPage() {
+function InitialPage({setView, setUser, setSignedIn}) {
     const [open, setOpen] = useState(false);
     const [signInEmail, setSignInEmail] = useState('');
     const [signInPassword, setSignInPassword] = useState('');
@@ -44,9 +44,14 @@ function InitialPage() {
 
     const getUser = async (signInEmail, signInPassword) => {
         try {
-            const userData = await controllers.getUser(signInEmail, signInPassword)
+            const userData = await controllers.getUser(signInEmail, signInPassword);
+            if(!userData.code){
+                setSignedIn(true);
+                setUser(userData);
+            }
             console.log('User Data: ', userData);
         } catch(error) {
+            setSignedIn(false);
             console.log(error);
         }
     }
