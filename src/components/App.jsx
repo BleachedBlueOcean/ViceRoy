@@ -79,13 +79,13 @@ function App(props) {
       case "trading":
         return (
           <div className="trading">
-            <Trading setView={setView}/>
+            <Trading setView={setView} user={user} signedIn={signedIn}/>
           </div>
         );
       case "user_profile":
         return (
           <div className="user_profile">
-            <UserProfile setView={setView}/>
+            <UserProfile setView={setView} user={user} signedIn={signedIn}/>
           </div>
         )
     }
