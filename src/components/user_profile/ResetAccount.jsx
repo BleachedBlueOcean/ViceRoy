@@ -8,58 +8,38 @@ import controllers from '../../backend/controllers/index.js'
 
 const ResetAccount = ({user, setUser}) => {
   const [open, setOpen] = useState(false);
-  // const [resetAcc, setResetAcc] = useState(user);
 
 
-  const resetAccount = async () => {
+  const confirmReset = async () => {
+    const form = {...user, coinsOwned: ['dsajhfgadksjfhgs'], totalAssets: 7457650}
+    setUser(form);
     try{
-    const data = await setUser((prevacc) => {
-      return {...prevacc, coinsOwned: ['jhgfj', 'qwkedhgjk'], totalAssets: 234230000}
-    });
-
-    console.log('teting', user)
-    // console.log('reste acc', user)
-
-     await controllers.updateUser(user.id, user);
-    //  const userData = await controllers.getUser(user.email)
+      await controllers.updateUser(form.id, form);
     }catch(err){
       console.log('error', err)
     }
-
   };
 
-//this is fine
   const handleOpen = () => {
     setOpen(true);
-    // console.log(user)
   };
 
 
-  const handleClose = (e) => {
-    // console.log(e.target.id)
+  const handleClose = async (e) => {
     const confirmation = e.target.id;
-
       if(confirmation === 'no') {
         console.log('account is open')
       } else {
         console.log('account is closed')
-        //reset db code here
-        resetAccount()
-        // console.log('POST CLOSE', user)
+        confirmReset()
       }
       setOpen(false);
-      controllers.getAllUsers()
+      try{
+        const data = await controllers.getUserById(user.id)
+        return data;
 
+      }catch(err) {console.log('reset errr', err)}
   };
-  // useEffect(() => {
-  //   // console.log('acc', acc)
-  // }, [open])
-
-
-
-
-
-
 
   return (
     <div>
