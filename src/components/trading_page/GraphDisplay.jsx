@@ -3,14 +3,15 @@ import LineChart from './LineGraph.jsx';
 import CandleChart from './CandleGraph.jsx';
 import GraphNavTemp from '../containerTemplates/GraphNavTemp.jsx';
 
-function GraphDisplay() {
-  const [coin, setCoin] = useState('bitcoin')
-  const [interval, setInterval] = useState('d1')
-  const [view, setView] = useState('candle')
+function GraphDisplay({coinOptions}) {
+  const [coin, setCoin] = useState('BTC')
+  const [interval, setInterval] = useState('day')
+  const [view, setView] = useState('line')
   return(
     <div>
-      <GraphNavTemp interval={interval} setInterval={setInterval} coin={coin} setCoin={setCoin}/>
+      <GraphNavTemp coinOptions={coinOptions} interval={interval} setInterval={setInterval} coin={coin} setCoin={setCoin} view ={view} setView={setView} />
       {view === 'candle' && <CandleChart interval={interval} coin={coin} />}
+      {view === 'line' && <LineChart interval={interval} coin={coin} />}
     </div>
 
   )

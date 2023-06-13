@@ -8,7 +8,7 @@ function CandleChart({coin, interval}) {
   const [chartData, setChartData] = useState(undefined)
 
   useEffect(() => {
-    axios(`https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=USD&limit=100`)
+    axios(`https://min-api.cryptocompare.com/data/v2/histo${interval}?fsym=${coin}&tsym=USD&limit=100`)
     .then((result) => {
       // console.log(result.data.Data.Data)
       return result.data.Data.Data
@@ -24,7 +24,7 @@ function CandleChart({coin, interval}) {
       setChartData(data)
     })
     .catch((err) => console.log('Did not get info from API', err))
-  }, [coin])
+  }, [coin, interval])
 
   const options = {
     title: `${coin.toUpperCase()} Candles`,
