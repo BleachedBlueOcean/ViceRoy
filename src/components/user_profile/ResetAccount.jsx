@@ -13,7 +13,7 @@ const ResetAccount = ({user, setUser}) => {
   const confirmReset = async () => {
     const form = {...user, coinsOwned: ['asdlfkasjdhkj'], totalAssets: 598700, availableCash: 509780}
     setUser(form);
-    // console.log('this is form', form.id)
+    console.log('this is form', form.id)
     try{
       // console.log('this is form id', form.id)
       await controllers.updateUser(form.id, form);

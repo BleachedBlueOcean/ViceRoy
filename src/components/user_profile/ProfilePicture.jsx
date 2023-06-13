@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Avatar, IconButton, Typography} from '@mui/material';
-import controllers from '../../backend/controllers/index.js'
+import controllers from '../../backend/controllers/index.js';
+import imageCompression from 'browser-image-compression'
 
 
 const ProfilePicture = ({user, setUser, previewImage, setPreviewImage}) => {
@@ -18,6 +19,7 @@ const ProfilePicture = ({user, setUser, previewImage, setPreviewImage}) => {
       setPreviewImage(e.target.result);
     };
     reader.readAsDataURL(file);
+    updateDB()
   };
 
   const handlePicClick = () => {
@@ -27,21 +29,28 @@ const ProfilePicture = ({user, setUser, previewImage, setPreviewImage}) => {
 
   const updateDB = async () => {
     // console.log('pre form user', )
-    const updatedUser = {...user, profilePic: previewImage}
+    const compressed = profileImage;
+    const compressionOptions = {
+      maxSizeMB: 1
+    };
     // console.log('db update', updatedUser)
-    setUser(updatedUser);
     try {
-      console.log('user id', updatedUser)
+      const compFile = await imageCompression(compressed, compressionOptions)
+      const updatedUser = {...user, profilePic: compFile}
+      setUser(updatedUser);
+
+      console.log('user object', typeof updatedUser.profilePic)
+      // console.log('user id', updatedUser.id)
       await controllers.updateUser(updatedUser.id, updatedUser)
     }catch(err){
       console.log('this is profile pic error', err)
     }
   }
 
-  useEffect(() => {
-    // console.log('this is preview',  previewImage)
-    updateDB()
-  }, [previewImage])
+  // useEffect(() => {
+  //   // console.log('this is preview',  previewImage)
+  //   updateDB()
+  // }, [previewImage])
 
 
   return (
@@ -49,7 +58,7 @@ const ProfilePicture = ({user, setUser, previewImage, setPreviewImage}) => {
       <input
         id="profile-picture-upload"
         type="file"
-        accept="image/*"
+        accept="image/jpeg, image/png"
         style={{ display: 'none' }}
         onChange={handleSelection}
       />
