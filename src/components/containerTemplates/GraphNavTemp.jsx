@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {AppBar, Toolbar, Typography, Box, MenuItem, Select, TextField, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
-const GraphNavTemp = ({props}) =>{
+const GraphNavTemp = ({coin, interval, setCoin, setInterval}) =>{
 
   return (
     <AppBar position="static">
@@ -13,7 +13,27 @@ const GraphNavTemp = ({props}) =>{
         <Box sx={{ minWidth: 120, mr: 2 }}>
           <Select value="" displayEmpty>
             <MenuItem value="" disabled>
-              Select Graph
+              Select Interval
+            </MenuItem>
+            <MenuItem value={1}>Graph 1</MenuItem>
+            <MenuItem value={2}>Graph 2</MenuItem>
+            <MenuItem value={3}>Graph 3</MenuItem>
+          </Select>
+        </Box>
+        <Box sx={{ minWidth: 120, mr: 2 }}>
+          <Select value="" displayEmpty>
+            <MenuItem value="" disabled>
+              Select Coin
+            </MenuItem>
+            <MenuItem value={1}>Graph 1</MenuItem>
+            <MenuItem value={2}>Graph 2</MenuItem>
+            <MenuItem value={3}>Graph 3</MenuItem>
+          </Select>
+        </Box>
+        <Box sx={{ minWidth: 120, mr: 2 }}>
+          <Select value="" displayEmpty>
+            <MenuItem value="" disabled>
+              Select Graph Style
             </MenuItem>
             <MenuItem value={1}>Graph 1</MenuItem>
             <MenuItem value={2}>Graph 2</MenuItem>
