@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react'
 import Trading from './trading_page/Trading.jsx'
 import '../css/App.css'
 import InitialPage from './initial_page/InitialPage.jsx';
-import UserProfile from './user_profile/UserProfile.jsx';
+
 // import controllers from '../backend/controllers'
 // import axios from 'axios';
 // import dns from 'dns'
+
 
 // import NavBarTemp from './containerTemplates/NavBarTemp.jsx';
 // import GraphNavTemp from './containerTemplates/GraphNavTemp.jsx';
@@ -15,6 +16,8 @@ import UserProfile from './user_profile/UserProfile.jsx';
 export const Context = React.createContext();
 
 function App(props) {
+  //will remove
+  const [user, setUser] = useState({});
 
   const [view, setView] = useState("default");
   const [signedIn, setSignedIn] = useState(false);
@@ -23,8 +26,9 @@ function App(props) {
 
   const getUsers= async ()=> {
     try {
-      const data = await controllers.getUsers();
+      const data = await controllers.getAllUsers();
       console.log(data);
+      setUser(data[0])
     } catch (err){
       console.error(err);
     }
@@ -65,7 +69,6 @@ function App(props) {
     }
   }
 
- 
 
   const renderView = () => {
     console.log('view is:', view);
@@ -102,8 +105,10 @@ function App(props) {
   return (
     <>
 
+
       <p>ViceRoy</p>
-      {/* <UserProfile /> */}
+      {/* will need to have access to use data via use state */}
+      <UserProfile user={user} setUser={setUser}/>
       {/* <NavBarTemp /> */}
       {/* <GraphNavTemp /> */}
       {/* <LeftColTemp /> */}

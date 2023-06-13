@@ -7,14 +7,15 @@ import ResetAccount from './ResetAccount.jsx';
 import SefCoins_Values from './SelfCoins_Values.jsx'
 
 
-const UserProfile = () => {
-
+const UserProfile = ({user, setUser}) => {
 
 
   return (
     <div style={{display: "flex"}}>
       <ProfilePicture />
-      <ResetAccount />
+      {/* will ned to have access to user data via usestate */}
+      {/* <p>{user.firstName}</p> */}
+      <ResetAccount user={user} setUser={setUser}/>
 
       {/* <HistoricalData /> */}
       {/* <CompletedAchievements /> */}

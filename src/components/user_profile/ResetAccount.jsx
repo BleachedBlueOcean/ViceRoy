@@ -1,25 +1,44 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText} from '@mui/material';
 
-const ResetAccount = () => {
+
+import controllers from '../../backend/controllers/index.js'
+
+
+const ResetAccount = ({user, setUser}) => {
   const [open, setOpen] = useState(false);
-  const [resetAcc, setResetAcc] = useState({});
-  //should wipe out all coins and reset initial funds to 500
-  //wipe badges?
+
+
+  const confirmReset = async () => {
+    const form = {...user, coinsOwned: ['dsajhfgadksjfhgs'], totalAssets: 7457650}
+    setUser(form);
+    try{
+      await controllers.updateUser(form.id, form);
+    }catch(err){
+      console.log('error', err)
+    }
+  };
+
   const handleOpen = () => {
     setOpen(true);
   };
 
-  const handleClose = (e) => {
-    // console.log(e.target.id)
+
+  const handleClose = async (e) => {
     const confirmation = e.target.id;
-    setOpen(false);
-    if(confirmation === 'no') {
-      // console.log('account is open')
-    } else {
-      console.log('account is closed')
-      //reset db code here
-    }
+      if(confirmation === 'no') {
+        console.log('account is open')
+      } else {
+        console.log('account is closed')
+        confirmReset()
+      }
+      setOpen(false);
+      try{
+        const data = await controllers.getUserById(user.id)
+        return data;
+
+      }catch(err) {console.log('reset errr', err)}
   };
 
   return (
@@ -34,7 +53,7 @@ const ResetAccount = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} id='no'>No</Button>
-          <Button onClick={handleClose}>Yes</Button>
+          <Button onClick={handleClose} id='yes'>Yes</Button>
         </DialogActions>
       </Dialog>
     </div>
