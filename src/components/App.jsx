@@ -9,7 +9,7 @@ import UserProfile from './user_profile/UserProfile.jsx'
 // import dns from 'dns'
 
 
-// import NavBarTemp from './containerTemplates/NavBarTemp.jsx';
+import NavBarTemp from './containerTemplates/NavBarTemp.jsx';
 // import GraphNavTemp from './containerTemplates/GraphNavTemp.jsx';
 // import LeftColTemp from './containerTemplates/LeftColTemp.jsx';
 // import CryptoBuySellTemp from './containerTemplates/CryptoBuySellTemp.jsx';
@@ -19,10 +19,10 @@ export const Context = React.createContext();
 function App(props) {
   //will remove
   const [user, setUser] = useState({});
-
   const [view, setView] = useState("default");
   const [signedIn, setSignedIn] = useState(false);
-  // const [user, setUser] = useState({});
+
+   const [previewImage, setPreviewImage] = useState(user.profilePic);
 
 
   const getUsers= async ()=> {
@@ -52,7 +52,6 @@ function App(props) {
     }
   }
 
-
   const updateUser= async (id,obj)=> {
     try {
       const data = await controllers.updateUser(id,obj);
@@ -72,13 +71,11 @@ function App(props) {
 
 
   const renderView = () => {
-    // console.log('view is:', view);
-    // console.log('user is', user)
     switch (view) {
       case "default":
         return (
           <div>
-            <InitialPage setView={setView} setUser={setUser} setSignedIn={setSignedIn}/>
+            <InitialPage setView={setView} setUser={setUser} setSignedIn={setSignedIn} setPreviewImage={setPreviewImage}/>
           </div>
         );
       case "trading":
@@ -103,17 +100,22 @@ function App(props) {
     }
   },[signedIn])
 
+
   return (
     <>
-
-
+      <NavBarTemp signedIn={signedIn}
+        setSignedIn={setSignedIn}
+        user={user} previewImage={previewImage} setPreviewImage={setPreviewImage}
+        setView={setView}/>
       <p>ViceRoy</p>
       {/* will need to have access to use data via use state */}
-      <UserProfile user={user} setUser={setUser}/>
-      {/* <NavBarTemp /> */}
+      <UserProfile user={user} setUser={setUser}
+        previewImage={previewImage}
+        setPreviewImage={setPreviewImage} />
       {/* <GraphNavTemp /> */}
       {/* <LeftColTemp /> */}
       {/* <CryptoBuySellTemp /> */}
+
       {renderView()}
 
     </>

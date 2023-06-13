@@ -8,7 +8,7 @@ import DialogActions from '@mui/material/DialogActions';
 
 import controllers from '../../backend/controllers/index.js'
 
-function Register({ handleClose }) {
+function Register({ handleClose, getUser }) {
     const [registrationData, setRegistrationData] = useState({ response: {
         firstName: '',
         lastName: '',
@@ -34,7 +34,6 @@ function Register({ handleClose }) {
             const emailExists = userData.some((user) => {
                 return (user && user.email === registrationData.response.email)
             })
-            // console.log('emailExists: ', emailExists)
             if (emailExists) {
                 alert(`${registrationData.response.email} is already in use`);
                 return false;
@@ -67,6 +66,7 @@ function Register({ handleClose }) {
             await addUser();
             alert('Registration Complete');
             handleClose();
+            await getUser(registrationData.response.email, registrationData.response.password)
         } else {
             alert('Passwords do not match');
             return;
@@ -116,10 +116,10 @@ function Register({ handleClose }) {
                         }})
                     }}/>
                 </FormControl>
-            <DialogAction>
+            <DialogActions>
                 <Button type="submit">Register</Button>
                 <Button onClick={handleClose}>Cancel</Button>
-            </DialogAction>
+            </DialogActions>
             </form>
         </Box>
     )

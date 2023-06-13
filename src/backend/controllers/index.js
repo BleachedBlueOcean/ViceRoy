@@ -25,7 +25,7 @@ const controllers =  {
                 const docRef = collection(db, "users");
                 const q = query(docRef, where("uid", "==", user.uid));
                 const querySnapshot = await getDocs(q);
-                return querySnapshot.docs[0].data();
+                return {id: querySnapshot.docs[0].id, ...querySnapshot.docs[0].data()};
             } catch(err){
                 console.error(err)
                 return err;
@@ -42,7 +42,7 @@ const controllers =  {
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
                 console.log("Document data:", docSnap.data());
-                return docSnap.data();
+                return {id: id , ...docSnap.data()};
             } else {
             // docSnap.data() will be undefined in this case
                 console.log("No such document!");
@@ -54,14 +54,14 @@ const controllers =  {
 
     },
     createUser: async (obj) => {
-        console.log(obj)
+        console.log('create user', obj)
         try{
             const userCred = await createUserWithEmailAndPassword(auth, obj.response.email, obj.response.password)
             console.log(userCred)
             obj = await helpers.transformCreateUser(obj, userCred.user.uid);
             try{
                 const useColRef = collection(db, "users")
-                console.log('ref' ,useColRef);
+                // console.log('ref' ,useColRef);
                 await addDoc(useColRef, obj);
             } catch(err){
                 console.error(err)
@@ -73,11 +73,12 @@ const controllers =  {
             console.error(err.code, err.message)
         }
     },
-    updateUser: async (uid,obj) => {
+    //obj = {propToUpdate: updatedValue}
+    updateUser: async (id,obj) => {
         try{
-            const docRef = doc(db, "users", uid);
+            const docRef = doc(db, "users", id);
             await updateDoc(docRef, obj);
-            // console.log('fuck u')
+            console.log('fuck u', obj)
             // getUser(obj.email, )
         } catch(err){
             console.error(err)

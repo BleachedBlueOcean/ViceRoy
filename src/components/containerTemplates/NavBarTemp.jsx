@@ -1,16 +1,18 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem, Select} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
 
-// console.log("34, 89 AdbIcon change to ours")
-// console.log("123, Avatar src")
+// TODO("AdbIcon AdbIcon change to ours")
+// TODO("Avatar, Avatar src")
 
 
 const pages = ['LeaderBoard', 'All Badges'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Dashboard', 'Logout'];
 
-function NavBarTemp() {
+
+
+function NavBarTemp({signedIn, setSignedIn, setView, previewImage, setPreviewImage}) {
   const [anchorNav, setAnchorNav] = useState(null);
   const [anchorUser, setAnchorUser] = useState(null);
 
@@ -23,11 +25,14 @@ function NavBarTemp() {
 
   const handleCloseNavMenu = () => {
     setAnchorNav(null);
+
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (e) => {
+    console.log('navbar', e.currentTarget)
     setAnchorUser(null);
   };
+
 
   return (
     <AppBar position="static">
@@ -122,7 +127,7 @@ function NavBarTemp() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Profile Picture" src={previewImage} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -139,8 +144,7 @@ function NavBarTemp() {
                 horizontal: 'right',
               }}
               open={Boolean(anchorUser)}
-              onClose={handleCloseUserMenu}
-            >
+              onClose={handleCloseUserMenu}>
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>

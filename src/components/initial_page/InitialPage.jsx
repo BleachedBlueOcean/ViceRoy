@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Register from '../modals/Register.jsx';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
 import InputLabel from '@mui/material/InputLabel';
 import Input from '@mui/material/Input';
 import Typography from '@mui/material/Typography';
@@ -24,7 +23,7 @@ const style = {
     p: 4,
 }
 
-function InitialPage({setView, setUser, setSignedIn}) {
+function InitialPage({setView, setUser, setSignedIn, setPreviewImage}) {
     const [open, setOpen] = useState(false);
     const [signInEmail, setSignInEmail] = useState('');
     const [signInPassword, setSignInPassword] = useState('');
@@ -51,6 +50,8 @@ function InitialPage({setView, setUser, setSignedIn}) {
             if(!userData.code){
                 setSignedIn(true);
                 setUser(userData);
+                //added below
+                setPreviewImage(userData.profilePic);
             }
             console.log('User Data: ', userData);
         } catch(error) {
@@ -59,10 +60,28 @@ function InitialPage({setView, setUser, setSignedIn}) {
         }
     }
 
+    const guestUser = {
+        uid: null,
+        firstName: 'Guest',
+        lastName: null,
+        email: null,
+        totalAssets: null,
+        coinsOwned: null
+    }
+
+    const guestLogin = () => {
+        setSignedIn(true);
+        setUser(guestUser);
+        console.log(guestUser);
+    }
+
     return (
         <Box className="initialpage">
             <h1>Login</h1>
-            <form>
+            <form onSubmit={(e) => {
+                e.preventDefault();
+                getUser(signInEmail, signInPassword)
+                }}>
                 <div>
                     <InputLabel htmlFor="signInEmail">Email:</InputLabel>
                     <Input id="signInEmail" type="text" placeholder="E-mail" onChange={onEmailChange} />
@@ -72,17 +91,17 @@ function InitialPage({setView, setUser, setSignedIn}) {
                     <Input id="signInPassword" type="password" placeholder="Password" onChange={onPasswordChange} />
                 </div>
                 <div>
-                    <Button className="loginButton" onClick={() => {getUser(signInEmail, signInPassword)}}>Login</Button>
+                    <Button className="loginButton" type="submit">Login</Button>
                 </div>
                 <div className="loginoptions">
                     <Button className="registerButton" onClick={handleOpen}>Register</Button>
                     <Typography> or </Typography>
-                    <Button className="guestlogin">Continue as Guest</Button>
+                    <Button className="guest-login" onClick={guestLogin}>Continue as Guest</Button>
                 </div>
             </form>
             <Dialog open={open} aria-labelledby="dialog-title" sx={style}>
                 <DialogTitle id="dialog-title">Register</DialogTitle>
-                    <Register handleClose={handleClose} />
+                    <Register getUser={getUser} handleClose={handleClose}/>
                 <Box>
                 </Box>
             </Dialog>
@@ -91,7 +110,3 @@ function InitialPage({setView, setUser, setSignedIn}) {
 }
 
 export default InitialPage;
-
-{/* <div className="loginImage">
-            <img src="" alt="loginGraph"/>
-        </div> */}

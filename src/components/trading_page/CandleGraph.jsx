@@ -3,10 +3,12 @@ import axios from "axios"
 import { Chart } from 'react-google-charts'
 
 
-function CandleChart({ coin, interval }) {
+
+function CandleChart({coin, interval}) {
   const [chartData, setChartData] = useState(undefined)
+
   useEffect(() => {
-    axios(`https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=USD&limit=100`)
+    axios(`https://min-api.cryptocompare.com/data/v2/histo${interval}?fsym=${coin}&tsym=USD&limit=100`)
     .then((result) => {
       // console.log(result.data.Data.Data)
       return result.data.Data.Data
@@ -14,7 +16,7 @@ function CandleChart({ coin, interval }) {
     .then((result) => {
       // console.log('This is what setChartData sees ', result)
       let data = result.map((point) => {
-        let date = new Date(point.time)
+        let date = new Date(point.time * 1000)
         return [date, point.low, point.open, point.close, point.high]
       })
       data.unshift(["Date", "", "", "", ""])
@@ -22,14 +24,11 @@ function CandleChart({ coin, interval }) {
       setChartData(data)
     })
     .catch((err) => console.log('Did not get info from API', err))
-  }, [coin])
+  }, [coin, interval])
 
   const options = {
     title: `${coin.toUpperCase()} Candles`,
-    legend: {
-      position: "bottom",
-      textStyle: {color: "white"}
-    },
+    legend: "none",
     backgroundColor: "#32322C",
     colors:["#13C4A3"],
     explorer:{},
