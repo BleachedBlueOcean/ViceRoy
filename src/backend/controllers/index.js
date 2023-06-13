@@ -1,4 +1,5 @@
-import { addDoc, collection, getDocs, getDoc, doc, updateDoc, deleteDoc } from "firebase/firestore";
+
+import { addDoc, collection, getDocs, getDoc, doc, updateDoc, deleteDoc, query, where} from "firebase/firestore";
 import {app, db, auth} from "../../../firebase-config/config.js"
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
 import helpers from './helpers.js'
@@ -10,7 +11,6 @@ const controllers =  {
         const useColRef = collection(db, "users")
         try{
             const data = await getDocs(useColRef)
-            // console.log(data.docs.map((doc)=>{console.log(doc.data())}));
             return data.docs.map((doc)=> ({...doc.data(), id: doc.id }));
         } catch(err){
             return err;
@@ -20,18 +20,36 @@ const controllers =  {
         try{
             const userCred = await signInWithEmailAndPassword(auth, email, pw)
             const user = userCred.user;
-            // console.log('signed in as', user)
-                try{
-                    const docRef = doc(db, "users", user.uid);
-                    const docSnap = await getDoc(docRef);
-                    return docSnap.data()
-                } catch(err){
-                    return err;
-                }
+            console.log('signed in as', user)
+            try{
+                const docRef = collection(db, "users");
+                const q = query(docRef, where("uid", "==", user.uid));
+                const querySnapshot = await getDocs(q);
+                return querySnapshot.docs[0].data();
+            } catch(err){
+                console.error(err)
+                return err;
+            }
         } catch(err){
-            const errorCode = err.code;
-            const errorMessage = err.message;
             console.error(err.code, err.message);
+            return err;
+        }
+
+    },
+    getUserById: async (id) => {
+        try{
+            const docRef = doc(db, "users", id);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                console.log("Document data:", docSnap.data());
+                return docSnap.data();
+            } else {
+            // docSnap.data() will be undefined in this case
+            console.log("No such document!");
+            }
+        } catch(err){
+            console.error(err);
+            return err;
         }
 
     },
@@ -41,7 +59,6 @@ const controllers =  {
             const userCred = await createUserWithEmailAndPassword(auth, obj.response.email, obj.response.password)
             console.log(userCred)
             obj = await helpers.transformCreateUser(obj, userCred.user.uid);
-            // console.log(obj)
             try{
                 const useColRef = collection(db, "users")
                 console.log('ref' ,useColRef);
@@ -56,15 +73,14 @@ const controllers =  {
             console.error(err.code, err.message)
         }
     },
-    updateUser: async (id,obj) => {
-        console.log('UPDATE OBJ', obj)
+    updateUser: async (uid,obj) => {
         try{
-            const docRef = doc(db, "users", id);
+            const docRef = doc(db, "users", uid);
             await updateDoc(docRef, obj);
             // console.log('fuck u')
             // getUser(obj.email, )
         } catch(err){
-            console.log('error', err)
+            console.error(err)
             return err;
         }
     },

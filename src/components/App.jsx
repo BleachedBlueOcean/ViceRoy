@@ -112,11 +112,13 @@ function App(props) {
       <p>plez</p>
       {/* will need to have access to use data via use state */}
       <UserProfile user={user} setUser={setUser}/>
+      <p>kkk</p>
+      {/* <UserProfile /> */}
       {/* <NavBarTemp /> */}
       {/* <GraphNavTemp /> */}
       {/* <LeftColTemp /> */}
       {/* <CryptoBuySellTemp /> */}
-      {/* {renderView()} */}
+      {renderView()}
 
     </>
   )

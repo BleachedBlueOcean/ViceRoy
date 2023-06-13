@@ -5,9 +5,9 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import InputLabel from '@mui/material/InputLabel';
 import Input from '@mui/material/Input';
+import Typography from '@mui/material/Typography';
 
 import controllers from '../../backend/controllers/index.js'
-
 
 const style = {
     position: 'absolute',
@@ -42,9 +42,10 @@ function InitialPage() {
     // if login user matches, set view to trading
     // else return message that login doesnt match any account in database
 
-    const getUser = async () => {
+    const getUser = async (signInEmail, signInPassword) => {
         try {
-            console.log('Get user: ', await controllers.getUsers());
+            const userData = await controllers.getUser(signInEmail, signInPassword)
+            console.log('User Data: ', userData);
         } catch(error) {
             console.log(error);
         }
@@ -63,13 +64,12 @@ function InitialPage() {
                     <Input id="signInPassword" type="password" placeholder="Password" onChange={onPasswordChange} />
                 </div>
                 <div>
-                    <Button className="loginButton">Login</Button>
+                    <Button className="loginButton" onClick={() => {getUser(signInEmail, signInPassword)}}>Login</Button>
                 </div>
                 <div className="loginoptions">
                     <Button className="registerButton" onClick={handleOpen}>Register</Button>
-                    <div> or </div>
+                    <Typography> or </Typography>
                     <Button className="guestlogin">Continue as Guest</Button>
-                    <Button onClick={getUser}>Test</Button>
                 </div>
             </form>
             <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
