@@ -20,7 +20,7 @@ function App(props) {
   //will remove
   const [user, setUser] = useState({});
 
-  const [view, setView] = useState("trading");
+  const [view, setView] = useState("default");
   const [signedIn, setSignedIn] = useState(false);
   // const [user, setUser] = useState({});
 
@@ -72,8 +72,6 @@ function App(props) {
 
 
   const renderView = () => {
-    // console.log('view is:', view);
-    // console.log('user is', user)
     switch (view) {
       case "default":
         return (
