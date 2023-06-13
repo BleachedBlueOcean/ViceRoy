@@ -19,10 +19,8 @@ export const Context = React.createContext();
 function App(props) {
   //will remove
   const [user, setUser] = useState({});
-
   const [view, setView] = useState("default");
   const [signedIn, setSignedIn] = useState(false);
-  // const [user, setUser] = useState({});
 
 
   const getUsers= async ()=> {
@@ -103,8 +101,6 @@ function App(props) {
 
   return (
     <>
-
-
       <p>ViceRoy</p>
       {/* will need to have access to use data via use state */}
       <UserProfile user={user} setUser={setUser}/>

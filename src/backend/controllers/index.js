@@ -23,9 +23,9 @@ const controllers =  {
             console.log('signed in as', user)
             try{
                 const docRef = collection(db, "users");
-                const q = query(docRef, where("uid", "==", user.uid));
+                const q = query(docRef, where("uid", "==", user.uid));   
                 const querySnapshot = await getDocs(q);
-                return querySnapshot.docs[0].data();
+                return {id: querySnapshot.docs[0].id, ...querySnapshot.docs[0].data()};
             } catch(err){
                 console.error(err)
                 return err;
@@ -42,7 +42,7 @@ const controllers =  {
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
                 console.log("Document data:", docSnap.data());
-                return docSnap.data();
+                return {id: id , ...docSnap.data()};
             } else {
             // docSnap.data() will be undefined in this case
                 console.log("No such document!");
@@ -52,6 +52,9 @@ const controllers =  {
             return err;
         }
 
+    },
+    getCoin: (name) => {
+        
     },
     createUser: async (obj) => {
         console.log(obj)
