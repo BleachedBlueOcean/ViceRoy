@@ -73,12 +73,11 @@ const controllers =  {
             console.error(err.code, err.message)
         }
     },
-    updateUser: async (uid,obj) => {
+    //obj = {propToUpdate: updatedValue}
+    updateUser: async (id,obj) => {
         try{
-            const docRef = doc(db, "users", uid);
+            const docRef = doc(db, "users", id);
             await updateDoc(docRef, obj);
-            // console.log('fuck u')
-            // getUser(obj.email, )
         } catch(err){
             console.error(err)
             return err;
