@@ -1,22 +1,21 @@
 import React from 'react';
-import { Modal, Box, Button } from '@mui/material';
+import { Dialog, Box, Typography, DialogTitle } from '@mui/material';
 
 const PossibleBadge = ({ badgesData, achievedBadges, setShowBadgesModal }) => {
 
   return (
-    <Modal>
-      <Button onClick={() => setShowBadgesModal(false)}>Close</Button>
+    <Dialog >
+      <DialogTitle>Achievements</DialogTitle>
       {badgesData.map((badge, index) => {
-        const name = Object.keys(badge)[0];
         return (
           <Box key={index} >
-            <div>{badge.icon}</div>
-            <div>{name}</div>
-            <div>{badge.description}</div>
+            <Typography variant='body1'>{badge.icon}</Typography>
+            <Typography variant='body1'>{badge.title}</Typography>
+            <Typography variant='body1'>{badge.description}</Typography>
           </Box>
         )
       })}
-    </Modal>
+    </Dialog>
   );
 };
 
