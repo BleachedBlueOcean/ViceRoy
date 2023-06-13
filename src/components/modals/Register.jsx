@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Input from '@mui/material/Input';
-import DialogAction from '@mui/material/DialogAction';
+import DialogActions from '@mui/material/DialogActions';
 
 import controllers from '../../backend/controllers/index.js'
 
@@ -34,7 +34,7 @@ function Register({ handleClose }) {
             const emailExists = userData.some((user) => {
                 return (user && user.email === registrationData.response.email)
             })
-            console.log('emailExists: ', emailExists)
+            // console.log('emailExists: ', emailExists)
             if (emailExists) {
                 alert(`${registrationData.response.email} is already in use`);
                 return false;
@@ -58,7 +58,7 @@ function Register({ handleClose }) {
         e.preventDefault();
 
         const isUniqueUser = await checkUser();
-        console.log('is unique user:', isUniqueUser);
+        // console.log('is unique user:', isUniqueUser);
         if (!isUniqueUser) {
             return;
         }

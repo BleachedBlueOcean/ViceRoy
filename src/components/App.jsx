@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Trading from './trading_page/Trading.jsx'
 import '../css/App.css'
 import InitialPage from './initial_page/InitialPage.jsx';
+import UserProfile from './user_profile/UserProfile.jsx'
 
 // import controllers from '../backend/controllers'
 // import axios from 'axios';
@@ -21,13 +22,13 @@ function App(props) {
 
   const [view, setView] = useState("default");
   const [signedIn, setSignedIn] = useState(false);
-  const [user, setUser] = useState({});
+  // const [user, setUser] = useState({});
 
 
   const getUsers= async ()=> {
     try {
       const data = await controllers.getAllUsers();
-      console.log(data);
+      // console.log(data);
       setUser(data[0])
     } catch (err){
       console.error(err);
@@ -37,7 +38,7 @@ function App(props) {
   const getUserById= async (id)=> {
     try {
       const data = await controllers.getUserByID(id);
-      console.log(data);
+      // console.log(data);
     } catch (err){
       console.error(err);
     }
@@ -55,7 +56,7 @@ function App(props) {
   const updateUser= async (id,obj)=> {
     try {
       const data = await controllers.updateUser(id,obj);
-      console.log(data);
+      // console.log(data);
     } catch (err){
       console.error(err);
     }
@@ -63,7 +64,7 @@ function App(props) {
   const deleteUser = async (id) => {
     try {
       const data = await controllers.deleteUser(id);
-      console.log(data);
+      // console.log(data);
     } catch (err){
       console.log(err);
     }
@@ -71,8 +72,8 @@ function App(props) {
 
 
   const renderView = () => {
-    console.log('view is:', view);
-    console.log('user is', user)
+    // console.log('view is:', view);
+    // console.log('user is', user)
     switch (view) {
       case "default":
         return (
