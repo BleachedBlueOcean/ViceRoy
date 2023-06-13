@@ -6,11 +6,12 @@ const helpers = {
             firstName: user.response.firstName,
             lastName: user.response.lastName,
             email: user.response.email,
-            availableCash: 500,
+            profilePic: '',
             totalAssets: 0,
+            availableCash:0,
             coinsOwned: [],
-            profilePic: {}
-
+            achievements: [],
+            watchList: []
         }
     }
 }

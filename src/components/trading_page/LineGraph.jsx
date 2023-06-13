@@ -6,24 +6,25 @@ import { Chart } from 'react-google-charts'
 function LineChart({ coin, interval }) {
   const [chartData, setChartData] = useState(undefined)
   useEffect(() => {
-    axios(`https://api.coincap.io/v2/assets/${coin}/history?interval=${interval}`)
+    axios(`https://min-api.cryptocompare.com/data/v2/histo${interval}?fsym=${coin}&tsym=USD&limit=100`)
     .then((result) => {
       // console.log(result.data.data)
-      return result.data.data
+      return result.data.Data.Data
     })
     .then((result) => {
       // console.log('This is what setChartData sees ', result)
       let data = result.map((point) => {
-        return [point.date, Number(point.priceUsd)]
+
+        return [point.date, point.close]
       })
-      data.unshift(["date", `${coin.toUpperCase()}`])
+      data.unshift(["date", `${coin}`])
       // console.log('This is the data going to the chart', data)
       setChartData(data)
     })
-  }, [coin])
+  }, [coin, interval])
 
   const options = {
-    title: `${coin.toUpperCase()}`,
+    title: `${coin}`,
     curveType: "function",
     legend: {
       position: "bottom",

@@ -71,8 +71,6 @@ function App(props) {
 
 
   const renderView = () => {
-    // console.log('view is:', view);
-    // console.log('user is', user)
     switch (view) {
       case "default":
         return (
@@ -105,8 +103,6 @@ function App(props) {
 
   return (
     <>
-
-
       <NavBarTemp signedIn={signedIn}
         setSignedIn={setSignedIn}
         user={user} previewImage={previewImage} setPreviewImage={setPreviewImage}
