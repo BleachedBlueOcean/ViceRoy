@@ -3,7 +3,7 @@ import Trading from './trading_page/Trading.jsx'
 import '../css/App.css'
 import InitialPage from './initial_page/InitialPage.jsx';
 import UserProfile from './user_profile/UserProfile.jsx';
-// import controllers from '../backend/controllers'
+import controllers from '../backend/controllers'
 import axios from 'axios';
 import dns from 'dns'
 
@@ -14,6 +14,8 @@ import CryptoBuySellTemp from './containerTemplates/CryptoBuySellTemp.jsx';
 
 
 function App(props) {
+  //will remove
+  const [user, setUser] = useState({});
 
   // const addUser = async() =>{
   //   try {
@@ -34,8 +36,9 @@ function App(props) {
 
   const getUsers= async ()=> {
     try {
-      const data = await controllers.getUsers();
+      const data = await controllers.getAllUsers();
       console.log(data);
+      setUser(data[0])
     } catch (err){
       console.error(err);
     }
@@ -76,7 +79,9 @@ function App(props) {
     }
   }
 
-  useEffect(()=>{},[])
+  useEffect(()=>{
+    getUsers()
+  },[])
 
   const renderView = () => {
     switch (view) {
@@ -104,8 +109,9 @@ function App(props) {
   return (
     <>
 
-      <p>kkk</p>
-      <UserProfile />
+      <p>plez</p>
+      {/* will need to have access to use data via use state */}
+      <UserProfile user={user} setUser={setUser}/>
       {/* <NavBarTemp /> */}
       {/* <GraphNavTemp /> */}
       {/* <LeftColTemp /> */}

@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs, getDoc, doc, updateDoc, deleteDoc } from "firebase/firestore"; 
+import { addDoc, collection, getDocs, getDoc, doc, updateDoc, deleteDoc } from "firebase/firestore";
 import {app, db, auth} from "../../../firebase-config/config.js"
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
 import helpers from './helpers.js'
@@ -33,7 +33,7 @@ const controllers =  {
             const errorMessage = err.message;
             console.error(err.code, err.message);
         }
-     
+
     },
     createUser: async (obj) => {
         console.log(obj)
@@ -57,10 +57,14 @@ const controllers =  {
         }
     },
     updateUser: async (id,obj) => {
+        console.log('UPDATE OBJ', obj)
         try{
             const docRef = doc(db, "users", id);
             await updateDoc(docRef, obj);
+            // console.log('fuck u')
+            // getUser(obj.email, )
         } catch(err){
+            console.log('error', err)
             return err;
         }
     },
