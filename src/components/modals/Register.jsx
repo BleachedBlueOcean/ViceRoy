@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Input from '@mui/material/Input';
+import DialogAction from '@mui/material/DialogAction';
 
 import controllers from '../../backend/controllers/index.js'
 
@@ -73,8 +74,7 @@ function Register({ handleClose }) {
     }
 
     return (
-        <Box className="registrationForm" style={{color: 'black'}}>
-            <h2>Register</h2>
+        <Box className="registrationForm" style={{color: 'black', width: 400}}>
             <form style={style} onSubmit={handleSubmit}>
                 <FormControl sx={style}>
                     <InputLabel htmlFor="firstName">First Name</InputLabel>
@@ -116,8 +116,10 @@ function Register({ handleClose }) {
                         }})
                     }}/>
                 </FormControl>
-            <Button type="submit">Register</Button>
-            <Button onClick={handleClose}>Cancel</Button>
+            <DialogAction>
+                <Button type="submit">Register</Button>
+                <Button onClick={handleClose}>Cancel</Button>
+            </DialogAction>
             </form>
         </Box>
     )
