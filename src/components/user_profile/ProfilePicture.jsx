@@ -2,19 +2,21 @@ import React, {useState} from 'react';
 import {Avatar, IconButton, Typography} from '@mui/material';
 
 
-const ProfilePicture = () => {
-  const [profileImage, setProfileImage] = useState(null);
-  const [previewImage, setPreviewImage] = useState(null);
+const ProfilePicture = ({user, setUser}) => {
+  const [profileImage, setProfileImage] = useState(user.profilePic);
+  const [previewImage, setPreviewImage] = useState(user.profilePic);
 
-
+  const updatedUser = {...user, profilePic: {profileImage}}
   const handleSelection = (event) => {
     // console.log('target', event.target.files[0])
     const file = event.target.files[0]
     setProfileImage(file)
+    setUser(updatedUser)
+
     const reader = new FileReader();
 
     reader.onload = (e) => {
-      // console.log(e.target.value)
+      // console.log(profileImage)
       setPreviewImage(e.target.result);
     };
     reader.readAsDataURL(file);
