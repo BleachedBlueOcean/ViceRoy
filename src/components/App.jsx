@@ -1,3 +1,4 @@
+/* eslint-disable space-before-blocks */
 import React, { useState, useEffect } from 'react'
 import Trading from './trading_page/Trading.jsx'
 import '../css/App.css'
@@ -12,6 +13,9 @@ import GraphNavTemp from './containerTemplates/GraphNavTemp.jsx';
 import LeftColTemp from './containerTemplates/LeftColTemp.jsx';
 import CryptoBuySellTemp from './containerTemplates/CryptoBuySellTemp.jsx';
 
+// import global theme
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './theme.js';
 
 function App(props) {
   // const addUser = async() =>{
@@ -31,38 +35,38 @@ function App(props) {
   const [view, setView] = useState("default");
 
 
-  const getUsers= async ()=> {
+  const getUsers = async () => {
     try {
       const data = await controllers.getUsers();
       console.log(data);
-    } catch (err){
+    } catch (err) {
       console.error(err);
     }
   }
 
-  const getUserById= async (id)=> {
+  const getUserById = async (id) => {
     try {
       const data = await controllers.getUserByID(id);
       console.log(data);
-    } catch (err){
+    } catch (err) {
       console.error(err);
     }
   }
 
   const addUser = async (obj) => {
-    try{
+    try {
       await controllers.createUser(obj)
-    }catch(err){
+    } catch (err) {
       console.error(err);
     }
   }
 
 
-  const updateUser= async (id,obj)=> {
+  const updateUser = async (id, obj) => {
     try {
-      const data = await controllers.updateUser(id,obj);
+      const data = await controllers.updateUser(id, obj);
       console.log(data);
-    } catch (err){
+    } catch (err) {
       console.error(err);
     }
   }
@@ -70,12 +74,12 @@ function App(props) {
     try {
       const data = await controllers.deleteUser(id);
       console.log(data);
-    } catch (err){
+    } catch (err) {
       console.log(err);
     }
   }
 
-  useEffect(()=>{},[])
+  useEffect(() => { }, [])
 
   const renderView = () => {
     switch (view) {
@@ -88,30 +92,30 @@ function App(props) {
       case "trading":
         return (
           <div className="trading">
-            <Trading setView={setView}/>
+            <Trading setView={setView} />
           </div>
         );
-      case "user_profile":
+      case 'user_profile':
         return (
           <div className="user_profile">
-            <UserProfile setView={setView}/>
+            <UserProfile setView={setView} />
           </div>
         )
     }
   };
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
 
-      <p>kkk</p>
-      {/* <UserProfile /> */}
+      <p>ViceRoy</p>
+      <UserProfile />
       {/* <NavBarTemp /> */}
       {/* <GraphNavTemp /> */}
       {/* <LeftColTemp /> */}
       <CryptoBuySellTemp />
       {renderView()}
 
-    </>
+    </ThemeProvider>
   )
 
 }
