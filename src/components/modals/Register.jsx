@@ -34,7 +34,6 @@ function Register({ handleClose }) {
             const emailExists = userData.some((user) => {
                 return (user && user.email === registrationData.response.email)
             })
-            // console.log('emailExists: ', emailExists)
             if (emailExists) {
                 alert(`${registrationData.response.email} is already in use`);
                 return false;
@@ -116,10 +115,10 @@ function Register({ handleClose }) {
                         }})
                     }}/>
                 </FormControl>
-            <DialogAction>
+            <DialogActions>
                 <Button type="submit">Register</Button>
                 <Button onClick={handleClose}>Cancel</Button>
-            </DialogAction>
+            </DialogActions>
             </form>
         </Box>
     )
