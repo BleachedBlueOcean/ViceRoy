@@ -34,7 +34,6 @@ function Register({ handleClose }) {
             const emailExists = userData.some((user) => {
                 return (user && user.email === registrationData.response.email)
             })
-            // console.log('emailExists: ', emailExists)
             if (emailExists) {
                 alert(`${registrationData.response.email} is already in use`);
                 return false;
