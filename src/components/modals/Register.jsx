@@ -8,7 +8,7 @@ import DialogActions from '@mui/material/DialogActions';
 
 import controllers from '../../backend/controllers/index.js'
 
-function Register({ handleClose }) {
+function Register({ handleClose, getUser }) {
     const [registrationData, setRegistrationData] = useState({ response: {
         firstName: '',
         lastName: '',
@@ -66,6 +66,7 @@ function Register({ handleClose }) {
             await addUser();
             alert('Registration Complete');
             handleClose();
+            await getUser(registrationData.response.email, registrationData.response.password)
         } else {
             alert('Passwords do not match');
             return;

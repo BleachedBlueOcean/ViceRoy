@@ -99,7 +99,7 @@ function InitialPage({setView, setUser, setSignedIn}) {
             </form>
             <Dialog open={open} aria-labelledby="dialog-title" sx={style}>
                 <DialogTitle id="dialog-title">Register</DialogTitle>
-                    <Register handleClose={handleClose} />
+                    <Register getUser={getUser} handleClose={handleClose}/>
                 <Box>
                 </Box>
             </Dialog>
