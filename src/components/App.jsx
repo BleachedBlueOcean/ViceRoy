@@ -20,7 +20,7 @@ function App(props) {
   //will remove
   const [user, setUser] = useState({});
 
-  const [view, setView] = useState("default");
+  const [view, setView] = useState("trading");
   const [signedIn, setSignedIn] = useState(false);
   // const [user, setUser] = useState({});
 
