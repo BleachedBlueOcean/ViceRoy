@@ -8,17 +8,17 @@ function CandleChart({ coin, interval }) {
   useEffect(() => {
     axios(`https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=USD&limit=100`)
     .then((result) => {
-      console.log(result.data.Data.Data)
+      // console.log(result.data.Data.Data)
       return result.data.Data.Data
     })
     .then((result) => {
-      console.log('This is what setChartData sees ', result)
+      // console.log('This is what setChartData sees ', result)
       let data = result.map((point) => {
         let date = new Date(point.time)
         return [date, point.low, point.open, point.close, point.high]
       })
       data.unshift(["Date", "", "", "", ""])
-      console.log('This is the data going to the chart', data)
+      // console.log('This is the data going to the chart', data)
       setChartData(data)
     })
     .catch((err) => console.log('Did not get info from API', err))

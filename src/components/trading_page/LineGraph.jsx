@@ -8,16 +8,16 @@ function LineChart({ coin, interval }) {
   useEffect(() => {
     axios(`https://api.coincap.io/v2/assets/${coin}/history?interval=${interval}`)
     .then((result) => {
-      console.log(result.data.data)
+      // console.log(result.data.data)
       return result.data.data
     })
     .then((result) => {
-      console.log('This is what setChartData sees ', result)
+      // console.log('This is what setChartData sees ', result)
       let data = result.map((point) => {
         return [point.date, Number(point.priceUsd)]
       })
       data.unshift(["date", `${coin.toUpperCase()}`])
-      console.log('This is the data going to the chart', data)
+      // console.log('This is the data going to the chart', data)
       setChartData(data)
     })
   }, [coin])
