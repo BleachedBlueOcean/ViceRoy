@@ -15,6 +15,7 @@ const PossibleBadge = ({ badgesData, achievedBadges, setShowBadgesModal }) => {
           </Box>
         )
       })}
+
     </Dialog>
   );
 };

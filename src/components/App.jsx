@@ -22,6 +22,8 @@ function App(props) {
   const [view, setView] = useState("default");
   const [signedIn, setSignedIn] = useState(false);
 
+   const [previewImage, setPreviewImage] = useState(user.profilePic);
+
 
   const getUsers= async ()=> {
     try {
@@ -50,7 +52,6 @@ function App(props) {
     }
   }
 
-
   const updateUser= async (id,obj)=> {
     try {
       const data = await controllers.updateUser(id,obj);
@@ -74,7 +75,7 @@ function App(props) {
       case "default":
         return (
           <div>
-            <InitialPage setView={setView} setUser={setUser} setSignedIn={setSignedIn}/>
+            <InitialPage setView={setView} setUser={setUser} setSignedIn={setSignedIn} setPreviewImage={setPreviewImage}/>
           </div>
         );
       case "trading":
@@ -99,14 +100,18 @@ function App(props) {
     }
   },[signedIn])
 
+
   return (
     <>
       <NavBarTemp signedIn={signedIn}
         setSignedIn={setSignedIn}
-        user={user}/>
+        user={user} previewImage={previewImage} setPreviewImage={setPreviewImage}
+        setView={setView}/>
       <p>ViceRoy</p>
       {/* will need to have access to use data via use state */}
-      <UserProfile user={user} setUser={setUser}/>
+      <UserProfile user={user} setUser={setUser}
+        previewImage={previewImage}
+        setPreviewImage={setPreviewImage} />
       {/* <GraphNavTemp /> */}
       {/* <LeftColTemp /> */}
       {/* <CryptoBuySellTemp /> */}

@@ -23,7 +23,7 @@ const controllers =  {
             console.log('signed in as', user)
             try{
                 const docRef = collection(db, "users");
-                const q = query(docRef, where("uid", "==", user.uid));   
+                const q = query(docRef, where("uid", "==", user.uid));
                 const querySnapshot = await getDocs(q);
                 return {id: querySnapshot.docs[0].id, ...querySnapshot.docs[0].data()};
             } catch(err){
@@ -53,9 +53,6 @@ const controllers =  {
         }
 
     },
-    getCoin: (name) => {
-        
-    },
     createUser: async (obj) => {
         console.log('create user', obj)
         try{
@@ -64,7 +61,7 @@ const controllers =  {
             obj = await helpers.transformCreateUser(obj, userCred.user.uid);
             try{
                 const useColRef = collection(db, "users")
-                console.log('ref' ,useColRef);
+                // console.log('ref' ,useColRef);
                 await addDoc(useColRef, obj);
             } catch(err){
                 console.error(err)
@@ -81,6 +78,8 @@ const controllers =  {
         try{
             const docRef = doc(db, "users", id);
             await updateDoc(docRef, obj);
+            console.log('fuck u', obj)
+            // getUser(obj.email, )
         } catch(err){
             console.error(err)
             return err;

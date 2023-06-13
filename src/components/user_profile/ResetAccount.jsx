@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText} from '@mui/material';
 
 
@@ -11,10 +11,11 @@ const ResetAccount = ({user, setUser}) => {
 
 
   const confirmReset = async () => {
-    const form = {...user, coinsOwned: ['dsajhfgadksjfhgs'], totalAssets: 7457650}
+    const form = {...user, coinsOwned: ['asdlfkasjdhkj'], totalAssets: 598700, availableCash: 509780}
     setUser(form);
-    // console.log('this is form', )
+    console.log('this is form', form.id)
     try{
+      // console.log('this is form id', form.id)
       await controllers.updateUser(form.id, form);
     }catch(err){
       console.log('error', err)
