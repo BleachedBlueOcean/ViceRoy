@@ -23,7 +23,7 @@ const style = {
     p: 4,
 }
 
-function InitialPage({setView, setUser, setSignedIn, setPreviewImage}) {
+function InitialPage({setView, setUser, setGuest, setSignedIn, setPreviewImage}) {
     const [open, setOpen] = useState(false);
     const [signInEmail, setSignInEmail] = useState('');
     const [signInPassword, setSignInPassword] = useState('');
@@ -50,7 +50,6 @@ function InitialPage({setView, setUser, setSignedIn, setPreviewImage}) {
             if(!userData.code){
                 setSignedIn(true);
                 setUser(userData);
-                //added below
                 setPreviewImage(userData.profilePic);
             }
             console.log('User Data: ', userData);
@@ -60,17 +59,19 @@ function InitialPage({setView, setUser, setSignedIn, setPreviewImage}) {
         }
     }
 
-    const guestUser = {
-        uid: null,
-        firstName: 'Guest',
-        lastName: null,
-        email: null,
-        totalAssets: null,
-        coinsOwned: null
-    }
+    // const guestUser = {
+    //     uid: null,
+    //     firstName: 'Guest',
+    //     lastName: null,
+    //     email: null,
+    //     totalAssets: null,
+    //     coinsOwned: null
+    // }
 
-    const guestLogin = () => {
-        setSignedIn(true);
+    const guestLogin = async () => {
+        const guestUser = await controllers.getUserById();
+        console.log(guestUser)
+        setGuest(true);
         setUser(guestUser);
         console.log(guestUser);
     }

@@ -36,7 +36,7 @@ const controllers =  {
         }
 
     },
-    getUserById: async (id) => {
+    getUserById: async (id="Zuj99WhbQffX6FKHzD4X") => {
         try{
             const docRef = doc(db, "users", id);
             const docSnap = await getDoc(docRef);

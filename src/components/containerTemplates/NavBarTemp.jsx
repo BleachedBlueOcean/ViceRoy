@@ -12,7 +12,7 @@ const pages = ['LeaderBoard', 'All Badges'];
 const settings = ['Profile', 'Logout'];
 
 
-function NavBarTemp({signedIn, setSignedIn, setView, previewImage, setPreviewImage, setShowBadgesModal, user}) {
+function NavBarTemp({signedIn, setSignedIn, setView, previewImage, setPreviewImage, setShowBadgesModal, user, guest, setGuest}) {
   const [anchorNav, setAnchorNav] = useState(null);
   const [anchorUser, setAnchorUser] = useState(null);
   //NavBar Pages
@@ -39,7 +39,11 @@ const handleSetting = (e) => {
   console.log(name)
   if(name === 'Logout') {
     console.log('logged out')
-    setSignedIn(false)
+    if(signedIn){
+      setSignedIn(false)
+    } else if(guest){
+      setGuest(false)
+    }
   }
   if(name === `Profile`) {
     setView('user_profile')
