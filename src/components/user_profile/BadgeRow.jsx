@@ -1,10 +1,12 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 
-const BadgeRow = ({ badge }) => {
+const BadgeRow = ({ badge, iconComponents }) => {
+  const IconComponent = iconComponents[badge.icon];
+
   return (
     <Box>
-      <Typography>{badge.icon}</Typography>
+      <IconComponent />
       <Typography>{badge.name}</Typography>
     </Box>
   );

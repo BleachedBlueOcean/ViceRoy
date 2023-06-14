@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {Card, CardContent, CardActions, Typography} from '@mui/material';
-const AccountTotal = ({user}) => {
 
+
+const AccountTotal = ({user}) => {
 
     return (
       <Card>
@@ -18,7 +19,6 @@ const AccountTotal = ({user}) => {
         </CardContent>
       </Card>
     )
-
 }
 
 export default AccountTotal

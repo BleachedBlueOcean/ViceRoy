@@ -1,10 +1,12 @@
 import React from 'react';
 import {Container, Paper} from '@mui/material';
 
-const LeftColTemp = ({props}) => (
-  <Container maxWidth="lg">
-    <Paper sx={{ padding: 2, marginTop: 16 }}>{props}
-      <p>each individual box for any given page aside fro mgraphs</p>
+import AccountTotal from '../modals/AccountTotal.jsx'
+
+const LeftColTemp = ({user}) => (
+  <Container maxWidth="xs">
+    <Paper sx={{ padding: 2, marginTop: 16 }}>
+      <AccountTotal user={user}/>
     </Paper>
   </Container>
 )
