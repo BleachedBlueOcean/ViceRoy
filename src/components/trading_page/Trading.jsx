@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import GraphDisplay from './GraphDisplay.jsx'
-import News from './News.jsx';
 import NewsList from './NewsList.jsx';
 import axios from "axios"
+import WatchList from './WatchList.jsx';
+import DynamicGraph from './DynamicGraph.jsx';
 
 function Trading({user, setUser}){
     const [coinOptions, setCoinOptions] = useState([
@@ -407,7 +408,7 @@ function Trading({user, setUser}){
             "Zilliqa"
         ]
     ])
-
+    const [dynamicCoin, setDynamicCoin] = useState('ETH')
     // useEffect(() => {
     //     axios(`https://min-api.cryptocompare.com/data/top/totalvolfull?limit=100&tsym=USD`)
     //     .then((result) => {
@@ -428,10 +429,13 @@ function Trading({user, setUser}){
     return(
         <>
         {/* <LineChart coin={'bitcoin'} interval={'d1'}/> */}
-        <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser} />
-        {/* <GraphDisplay coinOptions={coinOptions} user={user}/> */}
-        {/* <News/> */}
-        {/* <NewsList/> */}
+
+        <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser}/>
+        <div className='dynamic-graph'>
+        <DynamicGraph coinOptions={coinOptions} user={user} dynamicCoin={dynamicCoin}/>
+        </div>
+        <NewsList/>
+        <WatchList coinOptions={coinOptions} user={user} setDynamicCoin={setDynamicCoin}/>
         </>
     )
 
