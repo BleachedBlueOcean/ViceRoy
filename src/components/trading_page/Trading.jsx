@@ -5,7 +5,7 @@ import axios from "axios"
 import WatchList from './WatchList.jsx';
 import DynamicGraph from './DynamicGraph.jsx';
 
-function Trading({user}){
+function Trading({user, setUser}){
     const [coinOptions, setCoinOptions] = useState([
         [
             "BTC",
@@ -429,7 +429,8 @@ function Trading({user}){
     return(
         <>
         {/* <LineChart coin={'bitcoin'} interval={'d1'}/> */}
-        <GraphDisplay coinOptions={coinOptions} user={user}/>
+
+        <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser}/>
         <div className='dynamic-graph'>
         <DynamicGraph coinOptions={coinOptions} user={user} dynamicCoin={dynamicCoin}/>
         </div>
