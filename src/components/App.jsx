@@ -21,7 +21,7 @@ function App(props) {
   const [user, setUser] = useState({});
   const [view, setView] = useState("default");
   const [signedIn, setSignedIn] = useState(false);
-
+  const [guest, setGuest] = useState(false);
   const [previewImage, setPreviewImage] = useState(user.profilePic);
   const [showBadgesModal, setShowBadgesModal] = useState(false);
 
@@ -75,7 +75,7 @@ function App(props) {
       case "default":
         return (
           <div>
-            <InitialPage setView={setView} setUser={setUser} setSignedIn={setSignedIn} setPreviewImage={setPreviewImage}/>
+            <InitialPage setView={setView} setUser={setUser} setGuest={setGuest} setSignedIn={setSignedIn} setPreviewImage={setPreviewImage}/>
           </div>
         );
       case "trading":
@@ -85,7 +85,7 @@ function App(props) {
             <NavBarTemp signedIn={signedIn}
             setSignedIn={setSignedIn}
             user={user} previewImage={previewImage} setPreviewImage={setPreviewImage}
-            setView={setView}
+            setView={setView} guest={guest} setGuest={setGuest}
             setShowBadgesModal={setShowBadgesModal}
             />
             {/* <LeftColTemp user={user}/> */}
@@ -106,9 +106,8 @@ function App(props) {
           />
           {/* <LeftColTemp user={user}/> */}
           <div className="user_profile">
-            <UserProfile setView={setView} user={user}
-            setUser={setUser} signedIn={signedIn} previewImage={previewImage}
-            setView={setView}
+
+            <UserProfile setView={setView} user={user} setUser={setUser} signedIn={signedIn} previewImage={previewImage}
             setPreviewImage={setPreviewImage}
             showBadgesModal={showBadgesModal}
             setShowBadgesModal={setShowBadgesModal}/>
@@ -118,18 +117,19 @@ function App(props) {
     }
   };
 
+  useEffect(() => {
+    renderView()
+  }, [view])
+
   useEffect(()=>{
-    if(signedIn === true){
+    if(signedIn || guest ){
       setView('trading');
     } else {
       console.log('signed in use effect triggered')
       setView('default');
     }
-  },[signedIn])
 
-  useEffect(() => {
-    renderView()
-  }, [view])
+  },[signedIn, guest])
 
 
   return (

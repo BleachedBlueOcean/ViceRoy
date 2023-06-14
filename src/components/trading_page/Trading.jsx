@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import GraphDisplay from './GraphDisplay.jsx'
-import News from './News.jsx';
 import NewsList from './NewsList.jsx';
 import axios from "axios"
+import WatchList from './WatchList.jsx';
 
 function Trading({user}){
     const [coinOptions, setCoinOptions] = useState([
@@ -429,8 +429,8 @@ function Trading({user}){
         <>
         {/* <LineChart coin={'bitcoin'} interval={'d1'}/> */}
         <GraphDisplay coinOptions={coinOptions} user={user}/>
-        {/* <News/> */}
-        {/* <NewsList/> */}
+        <NewsList/>
+        <WatchList/>
         </>
     )
 
