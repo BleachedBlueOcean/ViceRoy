@@ -124,7 +124,7 @@ function App(props) {
       setView('default');
     }
     renderView();
-  },[signedIn])
+  },[signedIn, view])
 
 
   return (
