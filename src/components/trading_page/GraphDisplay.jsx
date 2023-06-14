@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import LineChart from './LineGraph.jsx';
 import CandleChart from './CandleGraph.jsx';
 import GraphNavTemp from '../containerTemplates/GraphNavTemp.jsx';
+import CryptoBuySellTemp from '../containerTemplates/CryptoBuySellTemp.jsx';
 
 function GraphDisplay({coinOptions}) {
   const [coin, setCoin] = useState('BTC')
@@ -10,8 +11,11 @@ function GraphDisplay({coinOptions}) {
   return(
     <div>
       <GraphNavTemp coinOptions={coinOptions} interval={interval} setInterval={setInterval} coin={coin} setCoin={setCoin} view ={view} setView={setView} />
-      {view === 'candle' && <CandleChart interval={interval} coin={coin} />}
-      {view === 'line' && <LineChart interval={interval} coin={coin} />}
+      <div className="graph">
+         {view === 'candle' && <CandleChart interval={interval} coin={coin} height={"400px"}/>}
+        {view === 'line' && <LineChart interval={interval} coin={coin} height={"400px"}/>}
+        <CryptoBuySellTemp />
+      </div>
     </div>
 
   )
