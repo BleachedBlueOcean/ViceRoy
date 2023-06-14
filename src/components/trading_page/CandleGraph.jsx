@@ -4,7 +4,7 @@ import { Chart } from 'react-google-charts'
 
 
 
-function CandleChart({coin, interval}) {
+function CandleChart({coin, interval, height}) {
   const [chartData, setChartData] = useState(undefined)
 
   useEffect(() => {
@@ -54,7 +54,7 @@ function CandleChart({coin, interval}) {
       { chartData !== undefined && <Chart
       chartType="CandlestickChart"
       width="100%"
-      height="400px"
+      height={height}
       data={chartData}
       options={options}
     />}

@@ -3,7 +3,7 @@ import axios from "axios"
 import { Chart } from 'react-google-charts'
 
 
-function LineChart({ coin, interval }) {
+function LineChart({ coin, interval, height }) {
   const [chartData, setChartData] = useState(undefined)
   useEffect(() => {
     axios(`https://min-api.cryptocompare.com/data/v2/histo${interval}?fsym=${coin}&tsym=USD&limit=100`)
@@ -50,7 +50,7 @@ function LineChart({ coin, interval }) {
       { chartData !== undefined && <Chart
       chartType="LineChart"
       width="100%"
-      height="400px"
+      height={height}
       data={chartData}
       options={options}
     />}

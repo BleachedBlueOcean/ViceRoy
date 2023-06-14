@@ -13,6 +13,21 @@ const CryptoBuySellTemp = ({props}) => {
     setSellAmt(e.target.value)
   ]
 
+  const handleBuyClick = (e) => {
+    e.preventDefault()
+    // grab current balance and purchase price
+    // if current balance and purchase price don't allow for sale refuse transaction
+    // if good proceed and update user profile
+
+  }
+
+  const handleSellClick = (e) => {
+    e.preventDefault()
+    // grab current profile and coin balances
+    // if coin balances do not allow for transaction refuse.
+    // if good proceed and update user profile
+  }
+
   return (
     <Container maxWidth="xs">
       <Paper sx={{ padding: 2, marginTop: 16 }}>{props}
