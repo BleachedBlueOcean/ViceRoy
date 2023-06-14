@@ -12,6 +12,7 @@ import AccountTotal from '../modals/AccountTotal.jsx';
 
 const UserProfile = ({user, setUser, previewImage, setPreviewImage, setShowBadgesModal, showBadgesModal, setView}) => {
 
+  const [unrealizedGains, setUnrealizedGains] = useState([]);
 
   return (
     <div style={{display: "flex"}}>
