@@ -4,8 +4,8 @@ import CandleChart from './CandleGraph.jsx';
 import GraphNavTemp from '../containerTemplates/GraphNavTemp.jsx';
 import CryptoBuySellTemp from '../containerTemplates/CryptoBuySellTemp.jsx';
 
-function GraphDisplay({coinOptions}) {
-  const [coin, setCoin] = useState('BTC')
+function GraphDisplay({coinOptions, user, setUser }) {
+  const [coin, setCoin] = useState(['BTC', 'Bitcoin'])
   const [interval, setInterval] = useState('day')
   const [view, setView] = useState('line')
   return(
@@ -14,7 +14,7 @@ function GraphDisplay({coinOptions}) {
       <div className="graph">
          {view === 'candle' && <CandleChart interval={interval} coin={coin} height={"400px"}/>}
         {view === 'line' && <LineChart interval={interval} coin={coin} height={"400px"}/>}
-        <CryptoBuySellTemp />
+        <CryptoBuySellTemp coin={coin} user={user} setUser={setUser}/>
       </div>
     </div>
 

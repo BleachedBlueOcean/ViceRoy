@@ -91,7 +91,7 @@ function App(props) {
             <LeftColTemp user={user}/>
           </>
             <div className="trading">
-              <Trading setView={setView} user={user} signedIn={signedIn}/>
+              <Trading setView={setView} user={user} setUser={setUser} signedIn={signedIn}/>
             </div>
           </>
         );
