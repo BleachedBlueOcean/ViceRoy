@@ -3,8 +3,9 @@ import {Line} from 'react-chartjs-2';
 import {Typography} from '@mui/material'
 
 //<Line data={}, options={}/>
-const HistoricalData = () => {
-  const [cryptoCoins, setCryptoCoins] = useState([]);
+const HistoricalData = ({user}) => {
+  //pass down user,
+  // const [cryptoCoins, setCryptoCoins] = useState([]);
 
   const getCurrentMargin = (prop) => {
     //pass down current coin value, prbly sync with trading page

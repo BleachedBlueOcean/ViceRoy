@@ -20,13 +20,11 @@ const ProfilePicture = ({user, setUser, previewImage, setPreviewImage}) => {
         setPreviewImage(e.target.result);
       };
       reader.readAsDataURL(file);
-      // updateDB()
   };
 
   const handlePicClick = () => {
     document.getElementById('profile-picture-upload').click()
   };
-
 
   // const updateDB = async () => {
   //   // console.log('pre form user', )
@@ -54,8 +52,8 @@ const ProfilePicture = ({user, setUser, previewImage, setPreviewImage}) => {
 
     axios.post("https://api.cloudinary.com/v1_1/doryckkpf/image/upload", formData)
     .then((response) => {
-      const updatedUser = {...user, profilePic: response.data.secure_url};
-      setUser(updatedUser);
+      const updatedUser = {...user, profilePic: response.data.secure_url}
+      setUser(updatedUser)
       controllers.updateUser(updatedUser.id, updatedUser)
     })
     .catch((error) => {
@@ -81,7 +79,10 @@ const ProfilePicture = ({user, setUser, previewImage, setPreviewImage}) => {
       <IconButton onClick={handlePicClick}>
         <Avatar src={previewImage} alt="Profile Picture" sx={{width: 200, height: 200}}/>
       </IconButton>
-      <Typography>Click above to set profile picture</Typography>
+      <Typography variant='subtitle2'>Click above to set profile picture</Typography>
+      <Typography variant='h6'>
+        {user.firstName} {user.lastName}
+      </Typography>
     </div>
   );
 }

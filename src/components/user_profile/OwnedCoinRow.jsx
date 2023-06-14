@@ -2,8 +2,8 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 
 const OwnedCoinRow = ({ coin }) => {
-
-  // https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH&tsyms=USD,EUR
+//apoi call for current coin prices
+// https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH&tsyms=USD,EUR
 
   return (
     <Box>

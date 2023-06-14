@@ -12,7 +12,7 @@ function NewsList () {
   const getNews = () => {
 
       return axios(`http://127.0.0.1:5173/api/?auth_token=${import.meta.env.VITE_NEWS_API}&kind=news&filter=hot&public=true&currencies=${coin}`)
-      .then((result) => {console.log('result :', result.data.results); setArticles(result.data.results)})
+      .then((result) => {setArticles(result.data.results)})
       .catch((err) => {console.log('fetch error: ', err)})
 
   }
@@ -20,18 +20,22 @@ function NewsList () {
   useEffect(()=>{getNews();}, [])
 
   const style = {
-    width: '100%',
+    width: '80%',
     bgcolor: 'white',
+    display: 'flex',
+    flexWrap: 'wrap',
+    margin: '5%',
+    borderRadius: '10px'
   };
 
   return (
-      <div className='newslist'>
+      <div className='newslist' style={{height: '600px', overflowY: 'auto', borderRadius: '10px', backgroundColor: '#13C4A3'}}>
         <List sx={style}>
           {articles.map((article) =>
-            <div key={article.title}>
-              <Divider>
+            <div style={{borderBottom: 'solid gray', width: '100%'}}key={article.title}>
+              {/* <Divider> */}
                 <NewsEntry article={article}/>
-              </Divider>
+              {/* </Divider> */}
             </div>
           )}
         </List>
