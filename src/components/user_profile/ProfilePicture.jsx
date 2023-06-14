@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Avatar, IconButton, Typography} from '@mui/material';
 import controllers from '../../backend/controllers/index.js';
 import imageCompression from 'browser-image-compression'
+import axios from 'axios';
 
 
 const ProfilePicture = ({user, setUser, previewImage, setPreviewImage}) => {
@@ -9,17 +10,17 @@ const ProfilePicture = ({user, setUser, previewImage, setPreviewImage}) => {
   // const [previewImage, setPreviewImage] = useState(user.profilePic);
 
   const handleSelection = (event) => {
-    console.log('this is selection user', user)
-    const file = event.target.files[0]
-    setProfileImage(file)
+      console.log('this is selection user', user)
+      const file = event.target.files[0]
+      setProfileImage(file)
 
-    const reader = new FileReader();
+      const reader = new FileReader();
 
-    reader.onload = (e) => {
-      setPreviewImage(e.target.result);
-    };
-    reader.readAsDataURL(file);
-    updateDB()
+      reader.onload = (e) => {
+        setPreviewImage(e.target.result);
+      };
+      reader.readAsDataURL(file);
+      // updateDB()
   };
 
   const handlePicClick = () => {
@@ -27,31 +28,46 @@ const ProfilePicture = ({user, setUser, previewImage, setPreviewImage}) => {
   };
 
 
-  const updateDB = async () => {
-    // console.log('pre form user', )
-    const compressed = profileImage;
-    const compressionOptions = {
-      maxSizeMB: 1
-    };
-    // console.log('db update', updatedUser)
-    try {
-      const compFile = await imageCompression(compressed, compressionOptions)
-      const updatedUser = {...user, profilePic: compFile}
-      setUser(updatedUser);
+  // const updateDB = async () => {
+  //   // console.log('pre form user', )
+  //   const compressed = profileImage;
+  //   const compressionOptions = {
+  //     maxSizeMB: 1
+  //   };
+  //   // console.log('db update', updatedUser)
+  //   try {
+  //     const compFile = await imageCompression(compressed, compressionOptions)
+  //     const updatedUser = {...user, profilePic: compFile}
+  //     setUser(updatedUser);
 
-      console.log('user object', typeof updatedUser.profilePic)
-      // console.log('user id', updatedUser.id)
-      await controllers.updateUser(updatedUser.id, updatedUser)
-    }catch(err){
-      console.log('this is profile pic error', err)
-    }
+  //     console.log('user object', typeof updatedUser.profilePic)
+  //     // console.log('user id', updatedUser.id)
+  //     await controllers.updateUser(updatedUser.id, updatedUser)
+  //   }catch(err){
+  //     console.log('this is profile pic error', err)
+  //   }
+  // }
+  const updateDB = () => {
+    const formData = new FormData();
+    formData.append("file", profileImage);
+    formData.append("upload_preset", "ebqmycin")
+
+    axios.post("https://api.cloudinary.com/v1_1/doryckkpf/image/upload", formData)
+    .then((response) => {
+      const updatedUser = {...user, profilePic: response.data.secure_url}
+      setUser(updatedUser)
+      controllers.updateUser(updatedUser.id, updatedUser)
+    })
+    .catch((error) => {
+      console.log('Profile pic error: ', error.response);
+    })
   }
 
-  // useEffect(() => {
-  //   // console.log('this is preview',  previewImage)
-  //   updateDB()
-  // }, [previewImage])
-
+  useEffect(() => {
+    if (profileImage) {
+      updateDB()
+    }
+  }, [profileImage])
 
   return (
     <div>
