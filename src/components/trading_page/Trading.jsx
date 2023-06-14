@@ -3,8 +3,9 @@ import GraphDisplay from './GraphDisplay.jsx'
 import NewsList from './NewsList.jsx';
 import axios from "axios"
 import WatchList from './WatchList.jsx';
+import controllers from '../../backend/controllers/index.js';
 
-function Trading({user, setUser}){
+function Trading({user, setUser, guest}){
     const [coinOptions, setCoinOptions] = useState([
         [
             "BTC",
@@ -408,17 +409,33 @@ function Trading({user, setUser}){
         ]
     ])
     const [dynamicCoin, setDynamicCoin] = useState(['ETH', 'Ethereum'])
-
+    const [watched, setWatched] = useState(['BTC'])
+    const getWatched = () => {
+        setWatched(user.watchList)
+    }
+    useEffect(()=>{getWatched()}, [])
+    useEffect(()=>{if (guest === false) {controllers.updateUser(user.id, {watchList: watched})}}, [watched])
     return(
         <>
         {/* <LineChart coin={'bitcoin'} interval={'d1'}/> */}
-
-        <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser}/>
-        <div className='dynamic-graph'>
-        <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser}/>
+        <div className='trading-page' style={{display: 'flex', flexDirection: 'row'}}>
+            <div className='trading-leftcol' style={{width: '30%'}}>
+                <NewsList watched={watched}/>
+                <WatchList coinOptions={coinOptions} user={user} setDynamicCoin={setDynamicCoin} watched={watched} setWatched={setWatched}/>
+            </div>
+            <div className='trading-rightcol'>
+                <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser} dynamic={false} dynamicCoin={dynamicCoin}/>
+                <div className='dynamic-graph'>
+                <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser} dynamic={true} dynamicCoin={dynamicCoin}/>
+                </div>
+            </div>
         </div>
-        <NewsList/>
-        <WatchList coinOptions={coinOptions} user={user} setDynamicCoin={setDynamicCoin}/>
+        {/* <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser} dynamic={false} dynamicCoin={dynamicCoin}/>
+        <div className='dynamic-graph'>
+        <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser} dynamic={true} dynamicCoin={dynamicCoin}/>
+        </div> */}
+        {/* <NewsList watched={watched}/>
+        <WatchList coinOptions={coinOptions} user={user} setDynamicCoin={setDynamicCoin} watched={watched} setWatched={setWatched}/> */}
         </>
     )
 
