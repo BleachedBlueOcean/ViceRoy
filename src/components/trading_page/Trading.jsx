@@ -3,7 +3,6 @@ import GraphDisplay from './GraphDisplay.jsx'
 import NewsList from './NewsList.jsx';
 import axios from "axios"
 import WatchList from './WatchList.jsx';
-import DynamicGraph from './DynamicGraph.jsx';
 
 function Trading({user, setUser}){
     const [coinOptions, setCoinOptions] = useState([
@@ -408,23 +407,7 @@ function Trading({user, setUser}){
             "Zilliqa"
         ]
     ])
-    const [dynamicCoin, setDynamicCoin] = useState('ETH')
-    // useEffect(() => {
-    //     axios(`https://min-api.cryptocompare.com/data/top/totalvolfull?limit=100&tsym=USD`)
-    //     .then((result) => {
-    //       console.log('coinOptions data', result.data.Data)
-    //       return result.data.Data
-    //     })
-    //     .then((result) => {
-    //       // console.log('This is what setChartData sees ', result)
-    //       let data = result.map((point, index) => {
-    //         return [index, point]
-    //       })
-    //       // console.log('This is the data going to the chart', data)
-    //       setCoinOptions(data)
-    //     })
-    //     .catch((err) => console.log('Did not get info from API', err))
-    //   }, [])
+    const [dynamicCoin, setDynamicCoin] = useState(['ETH', 'Ethereum'])
 
     return(
         <>
@@ -432,7 +415,7 @@ function Trading({user, setUser}){
 
         <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser}/>
         <div className='dynamic-graph'>
-        <DynamicGraph coinOptions={coinOptions} user={user} dynamicCoin={dynamicCoin}/>
+        <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser}/>
         </div>
         <NewsList/>
         <WatchList coinOptions={coinOptions} user={user} setDynamicCoin={setDynamicCoin}/>

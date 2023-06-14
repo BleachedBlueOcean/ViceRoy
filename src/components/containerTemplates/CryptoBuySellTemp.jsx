@@ -9,20 +9,20 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser }) => {
   const [sellAmt, setSellAmt] = useState('');
   const [price, setPrice] = useState('');
 
-  // useEffect(() => {
-  //   let updatePrice = () => {
-  //     axios.get(`https://min-api.cryptocompare.com/data/price?fsym=${coin[0]}&tsyms=USD`)
-  //       .then((result) => {
-  //         console.log('This is what the buy click gets for current value ', result.data.USD)
-  //         setPrice(result.data.USD)
-  //       }
-  //     )
-  //   }
-  //   updatePrice()
-  //   let intervalId = setInterval(updatePrice, 10000);
-  //   return () => clearInterval(intervalId)
-  //   },
-  // [coin])
+  useEffect(() => {
+    let updatePrice = () => {
+      axios.get(`https://min-api.cryptocompare.com/data/price?fsym=${coin[0]}&tsyms=USD`)
+        .then((result) => {
+          console.log('This is what the buy click gets for current value ', result.data.USD)
+          setPrice(result.data.USD)
+        }
+      )
+    }
+    updatePrice()
+    let intervalId = setInterval(updatePrice, 10000);
+    return () => clearInterval(intervalId)
+    },
+  [coin])
 
   const handleBuy = (e) => {
     setBuyAmt(e.target.value)
