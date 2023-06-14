@@ -1,3 +1,4 @@
+/* eslint-disable space-before-blocks */
 import React, { useState, useEffect } from 'react'
 import Trading from './trading_page/Trading.jsx'
 import '../css/App.css'
@@ -14,7 +15,13 @@ import LeftColTemp from './containerTemplates/LeftColTemp.jsx'
 // import LeftColTemp from './containerTemplates/LeftColTemp.jsx';
 // import CryptoBuySellTemp from './containerTemplates/CryptoBuySellTemp.jsx';
 
+<<<<<<< HEAD
 export const Context = React.createContext();
+=======
+// import global theme
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './theme.js';
+>>>>>>> globalStyles
 
 function App(props) {
   //will remove
@@ -25,50 +32,79 @@ function App(props) {
   const [previewImage, setPreviewImage] = useState(user.profilePic);
   const [showBadgesModal, setShowBadgesModal] = useState(false);
 
-  const getUsers= async ()=> {
+  const getUsers = async () => {
     try {
+<<<<<<< HEAD
       const data = await controllers.getAllUsers();
       // console.log(data);
       setUser(data[0])
     } catch (err){
+=======
+      const data = await controllers.getUsers();
+      console.log(data);
+    } catch (err) {
+>>>>>>> globalStyles
       console.error(err);
     }
   }
 
-  const getUserById= async (id)=> {
+  const getUserById = async (id) => {
     try {
       const data = await controllers.getUserByID(id);
+<<<<<<< HEAD
       // console.log(data);
     } catch (err){
+=======
+      console.log(data);
+    } catch (err) {
+>>>>>>> globalStyles
       console.error(err);
     }
   }
 
   const addUser = async (obj) => {
-    try{
+    try {
       await controllers.createUser(obj)
-    }catch(err){
+    } catch (err) {
       console.error(err);
     }
   }
 
+<<<<<<< HEAD
   const updateUser= async (id,obj)=> {
     try {
       const data = await controllers.updateUser(id,obj);
       // console.log(data);
     } catch (err){
+=======
+
+  const updateUser = async (id, obj) => {
+    try {
+      const data = await controllers.updateUser(id, obj);
+      console.log(data);
+    } catch (err) {
+>>>>>>> globalStyles
       console.error(err);
     }
   }
   const deleteUser = async (id) => {
     try {
       const data = await controllers.deleteUser(id);
+<<<<<<< HEAD
       // console.log(data);
     } catch (err){
+=======
+      console.log(data);
+    } catch (err) {
+>>>>>>> globalStyles
       console.log(err);
     }
   }
 
+<<<<<<< HEAD
+=======
+  useEffect(() => { }, [])
+>>>>>>> globalStyles
 
   const renderView = () => {
     switch (view) {
@@ -80,6 +116,7 @@ function App(props) {
         );
       case "trading":
         return (
+<<<<<<< HEAD
           <>
           <>
             <NavBarTemp signedIn={signedIn}
@@ -94,8 +131,13 @@ function App(props) {
               <Trading setView={setView} user={user} signedIn={signedIn}/>
             </div>
           </>
+=======
+          <div className="trading">
+            <Trading setView={setView} />
+          </div>
+>>>>>>> globalStyles
         );
-      case "user_profile":
+      case 'user_profile':
         return (
         <>
           <NavBarTemp signedIn={signedIn}
@@ -106,10 +148,14 @@ function App(props) {
           />
           <LeftColTemp user={user}/>
           <div className="user_profile">
+<<<<<<< HEAD
             <UserProfile setView={setView} user={user} signedIn={signedIn} previewImage={previewImage}
             setPreviewImage={setPreviewImage}
             showBadgesModal={showBadgesModal}
             setShowBadgesModal={setShowBadgesModal}/>
+=======
+            <UserProfile setView={setView} />
+>>>>>>> globalStyles
           </div>
         </>
         )
@@ -128,21 +174,27 @@ function App(props) {
 
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
 
+<<<<<<< HEAD
       {/* <p>ViceRoy</p> */}
       {/* will need to have access to use data via use state */}
       {/* <UserProfile user={user} setUser={setUser}
         previewImage={previewImage}
         setPreviewImage={setPreviewImage}
         setShowBadgesModal={setShowBadgesModal} showBadgesModal={showBadgesModal} /> */}
+=======
+      <p>ViceRoy</p>
+      <UserProfile />
+      {/* <NavBarTemp /> */}
+>>>>>>> globalStyles
       {/* <GraphNavTemp /> */}
       {/* <LeftColTemp /> */}
       {/* <CryptoBuySellTemp /> */}
 
       {renderView()}
 
-    </>
+    </ThemeProvider>
   )
 
 }
