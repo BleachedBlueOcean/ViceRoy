@@ -106,7 +106,7 @@ function App(props) {
           />
           {/* <LeftColTemp user={user}/> */}
           <div className="user_profile">
-            <UserProfile setView={setView} user={user} signedIn={signedIn} previewImage={previewImage}
+            <UserProfile setView={setView} user={user} setUser={setUser} signedIn={signedIn} previewImage={previewImage}
             setPreviewImage={setPreviewImage}
             showBadgesModal={showBadgesModal}
             setShowBadgesModal={setShowBadgesModal}/>
