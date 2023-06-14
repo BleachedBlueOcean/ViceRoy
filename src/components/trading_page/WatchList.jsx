@@ -63,7 +63,7 @@ function WatchList () {
           ))}
         </Select>
       </FormControl>
-      <div>CoinList
+      <div>
         {watched.map((watchedcoin) => <WatchEntry coinname={watchedcoin} key={watchedcoin}/>)}
       </div>
     </div>

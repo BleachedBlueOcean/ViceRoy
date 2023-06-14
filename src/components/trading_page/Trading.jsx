@@ -3,7 +3,6 @@ import GraphDisplay from './GraphDisplay.jsx'
 import News from './News.jsx';
 import NewsList from './NewsList.jsx';
 import axios from "axios"
-
 import WatchContainer from './WatchContainer.jsx';
 
 function Trading(){
@@ -431,8 +430,9 @@ function Trading(){
         <>
         {/* <LineChart coin={'bitcoin'} interval={'d1'}/> */}
         <GraphDisplay coinOptions={coinOptions} />
-        {/* <News/> */}
+        <News/>
         {/* <NewsList/> */}
+        <WatchContainer/>
         </>
     )
 
