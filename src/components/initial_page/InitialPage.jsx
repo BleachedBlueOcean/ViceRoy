@@ -114,6 +114,6 @@ function InitialPage({setView, setUser, setGuest, setSignedIn, setPreviewImage})
       </Dialog>
     </Box>
   );
-};
+}
 
 export default InitialPage;
