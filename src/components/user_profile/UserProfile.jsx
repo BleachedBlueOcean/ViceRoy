@@ -10,18 +10,19 @@ import AccountTotal from '../modals/AccountTotal.jsx';
 
 const UserProfile = ({user, setUser, previewImage, setPreviewImage, setShowBadgesModal, showBadgesModal}) => {
 
+  const [unrealizedGains, setUnrealizedGains] = useState([]);
 
   return (
     <div style={{display: "flex"}}>
       <ProfilePicture user={user} setUser={setUser} previewImage={previewImage} setPreviewImage={setPreviewImage}/>
       {/* <p>{user.firstName}</p> */}
-      <AccountTotal user={user}/>
+      <AccountTotal user={user} />
       {/* will ned to have access to user data via usestate */}
       <ResetAccount user={user} setUser={setUser}/>
 
       {/* <HistoricalData /> */}
       <CompletedAchievements achievedBadges={user.achievements} setShowBadgesModal={setShowBadgesModal} showBadgesModal={showBadgesModal} />
-      {/* <SelfCoins_Values ownedCoins={user.coinsOwned} /> */}
+      <SelfCoins_Values ownedCoins={user.coinsOwned} />
     </div>
 
   );
