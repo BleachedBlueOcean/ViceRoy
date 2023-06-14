@@ -104,7 +104,7 @@ function App(props) {
             setView={setView}
             setShowBadgesModal={setShowBadgesModal}
           />
-          <LeftColTemp user={user}/>
+          {/* <LeftColTemp user={user}/> */}
           <div className="user_profile">
             <UserProfile setView={setView} user={user} signedIn={signedIn} previewImage={previewImage}
             setPreviewImage={setPreviewImage}
@@ -124,7 +124,12 @@ function App(props) {
       setView('default');
     }
     renderView();
-  },[signedIn, view])
+  },[signedIn])
+
+  useEffect(() => {
+    renderView()
+
+  }, [view])
 
 
   return (

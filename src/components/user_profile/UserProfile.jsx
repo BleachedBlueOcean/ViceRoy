@@ -14,9 +14,9 @@ const UserProfile = ({user, setUser, previewImage, setPreviewImage, setShowBadge
   return (
     <div style={{display: "flex"}}>
       <ProfilePicture user={user} setUser={setUser} previewImage={previewImage} setPreviewImage={setPreviewImage}/>
+      {/* <p>{user.firstName}</p> */}
       <AccountTotal user={user}/>
       {/* will ned to have access to user data via usestate */}
-      {/* <p>{user.firstName}</p> */}
       <ResetAccount user={user} setUser={setUser}/>
 
       {/* <HistoricalData /> */}
