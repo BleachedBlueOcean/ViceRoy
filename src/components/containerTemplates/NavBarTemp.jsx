@@ -1,8 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import PossibleBadge from '../modals/PossibleBadge';
-import {AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem, Select} from '@mui/material';
+import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem, Select, SvgIcon } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
+// import Logo
+import { ReactComponent as Logo } from '../../../icons/ViceRoySVG.svg';
 
 import LeaderBoard from '../modals/LeaderBoard.jsx';
 
@@ -10,6 +12,7 @@ import LeaderBoard from '../modals/LeaderBoard.jsx';
 // TODO("Avatar, Avatar src")
 const pages = ['LeaderBoard', 'All Badges'];
 const settings = ['Profile', 'Logout'];
+
 
 
 function NavBarTemp({signedIn, setSignedIn, setView, previewImage, setPreviewImage, setShowBadgesModal, user, guest, setGuest}) {
@@ -32,6 +35,7 @@ function NavBarTemp({signedIn, setSignedIn, setView, previewImage, setPreviewIma
     // console.log('testing menu', e.target)
     setAnchorUser(null);
   };
+
 // FOR Settings
 const handleSetting = (e) => {
   console.log('testing 2', e.target.innerHTML)
@@ -52,12 +56,12 @@ const handleSetting = (e) => {
 
   //For Pages
   const openDialog = (page) => {
-    setPage(page)
-    setDialogOpen(true)
+    setPage(page);
+    setDialogOpen(true);
   };
   const closeDialog = () => {
-    setDialogOpen(false)
-  }
+    setDialogOpen(false);
+  };
 
 
   return (
@@ -65,7 +69,10 @@ const handleSetting = (e) => {
       <AppBar position="static">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+            <SvgIcon>
+              <Logo />
+            </SvgIcon>
+            {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
             <Typography
               variant="h6"
               noWrap
@@ -120,7 +127,10 @@ const handleSetting = (e) => {
                 ))}
               </Menu>
             </Box>
-            <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+            <SvgIcon>
+              <Logo />
+            </SvgIcon>
+            {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
             <Typography
               variant="h5"
               noWrap
@@ -185,25 +195,25 @@ const handleSetting = (e) => {
       {
         dialogOpen && (
           <>
-          {
-            page === 'LeaderBoard' && (
-              <LeaderBoard dialogOpen={dialogOpen}
-                closeDialog={closeDialog}
-                page={page}/>
-            )
-          }
-          {
-            page ==='All Badges' && (
-              <PossibleBadge
-                achievedBadges={user.achievements}
-                dialogOpen={dialogOpen}
-                closeDialog={closeDialog}/>
-            )
-          }
+            {
+              page === 'LeaderBoard' && (
+                <LeaderBoard dialogOpen={dialogOpen}
+                  closeDialog={closeDialog}
+                  page={page} />
+              )
+            }
+            {
+              page === 'All Badges' && (
+                <PossibleBadge
+                  achievedBadges={user.achievements}
+                  dialogOpen={dialogOpen}
+                  closeDialog={closeDialog} />
+              )
+            }
           </>
         )
       }
     </div>
   );
-}
+};
 export default NavBarTemp;
