@@ -5,7 +5,7 @@ import NewsList from './NewsList.jsx';
 import axios from "axios"
 import WatchContainer from './WatchContainer.jsx';
 
-function Trading(){
+function Trading({user}){
     const [coinOptions, setCoinOptions] = useState([
         [
             "BTC",
@@ -429,8 +429,8 @@ function Trading(){
     return(
         <>
         {/* <LineChart coin={'bitcoin'} interval={'d1'}/> */}
-        <GraphDisplay coinOptions={coinOptions} />
-        <News/>
+        <GraphDisplay coinOptions={coinOptions} user={user}/>
+        {/* <News/> */}
         {/* <NewsList/> */}
         <WatchContainer/>
         </>
