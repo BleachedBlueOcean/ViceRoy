@@ -99,26 +99,6 @@ const App = (props) => {
             </div>
           </>
       );
-<<<<<<< HEAD
-    case 'user_profile':
-      return (
-          <>
-            <NavBarTemp signedIn={signedIn}
-
-            setSignedIn={setSignedIn}
-            user={user} previewImage={previewImage} setPreviewImage={setPreviewImage}
-            setView={setView} guest={guest} setGuest={setGuest}
-            setShowBadgesModal={setShowBadgesModal}
-            />
-            {/* <LeftColTemp user={user}/> */}
-
-            <div className="trading">
-              <Trading setView={setView} user={user} setUser={setUser} signedIn={signedIn}/>
-            </div>
-          </>
-        );
-=======
->>>>>>> dc8a9aeb9f4098c921a6b2bb4c9b74a612093b00
       case "user_profile":
         return (
         <>
