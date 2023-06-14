@@ -8,8 +8,8 @@ import UserProfile from './user_profile/UserProfile.jsx'
 // import axios from 'axios';
 // import dns from 'dns'
 
-
 import NavBarTemp from './containerTemplates/NavBarTemp.jsx';
+import LeftColTemp from './containerTemplates/LeftColTemp.jsx'
 // import GraphNavTemp from './containerTemplates/GraphNavTemp.jsx';
 // import LeftColTemp from './containerTemplates/LeftColTemp.jsx';
 // import CryptoBuySellTemp from './containerTemplates/CryptoBuySellTemp.jsx';
@@ -22,8 +22,8 @@ function App(props) {
   const [view, setView] = useState("default");
   const [signedIn, setSignedIn] = useState(false);
 
-   const [previewImage, setPreviewImage] = useState(user.profilePic);
-
+  const [previewImage, setPreviewImage] = useState(user.profilePic);
+  const [showBadgesModal, setShowBadgesModal] = useState(false);
 
   const getUsers= async ()=> {
     try {
@@ -80,15 +80,38 @@ function App(props) {
         );
       case "trading":
         return (
-          <div className="trading">
-            <Trading setView={setView} user={user} signedIn={signedIn}/>
-          </div>
+          <>
+          <>
+            <NavBarTemp signedIn={signedIn}
+            setSignedIn={setSignedIn}
+            user={user} previewImage={previewImage} setPreviewImage={setPreviewImage}
+            setView={setView}
+            setShowBadgesModal={setShowBadgesModal}
+            />
+            <LeftColTemp user={user}/>
+          </>
+            <div className="trading">
+              <Trading setView={setView} user={user} signedIn={signedIn}/>
+            </div>
+          </>
         );
       case "user_profile":
         return (
+        <>
+          <NavBarTemp signedIn={signedIn}
+            setSignedIn={setSignedIn}
+            user={user} previewImage={previewImage} setPreviewImage={setPreviewImage}
+            setView={setView}
+            setShowBadgesModal={setShowBadgesModal}
+          />
+          <LeftColTemp user={user}/>
           <div className="user_profile">
-            <UserProfile setView={setView} user={user} signedIn={signedIn}/>
+            <UserProfile setView={setView} user={user} signedIn={signedIn} previewImage={previewImage}
+            setPreviewImage={setPreviewImage}
+            showBadgesModal={showBadgesModal}
+            setShowBadgesModal={setShowBadgesModal}/>
           </div>
+        </>
         )
     }
   };
@@ -96,22 +119,23 @@ function App(props) {
   useEffect(()=>{
     if(signedIn === true){
       setView('trading');
-      renderView();
+    } else {
+      console.log('signed in use effect triggered')
+      setView('default');
     }
+    renderView();
   },[signedIn])
 
 
   return (
     <>
-      <NavBarTemp signedIn={signedIn}
-        setSignedIn={setSignedIn}
-        user={user} previewImage={previewImage} setPreviewImage={setPreviewImage}
-        setView={setView}/>
-      <p>ViceRoy</p>
+
+      {/* <p>ViceRoy</p> */}
       {/* will need to have access to use data via use state */}
-      <UserProfile user={user} setUser={setUser}
+      {/* <UserProfile user={user} setUser={setUser}
         previewImage={previewImage}
-        setPreviewImage={setPreviewImage} />
+        setPreviewImage={setPreviewImage}
+        setShowBadgesModal={setShowBadgesModal} showBadgesModal={showBadgesModal} /> */}
       {/* <GraphNavTemp /> */}
       {/* <LeftColTemp /> */}
       {/* <CryptoBuySellTemp /> */}

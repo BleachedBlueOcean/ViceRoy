@@ -19,7 +19,7 @@ const ProfilePicture = ({user, setUser, previewImage, setPreviewImage}) => {
       setPreviewImage(e.target.result);
     };
     reader.readAsDataURL(file);
-    updateDB()
+    // updateDB()
   };
 
   const handlePicClick = () => {
