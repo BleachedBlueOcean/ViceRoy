@@ -15,14 +15,18 @@ const UserProfile = ({user, setUser, previewImage, setPreviewImage, setShowBadge
 
   return (
     <div style={{display: "flex"}}>
+      <div>
       <ProfilePicture user={user} setUser={setUser} previewImage={previewImage} setPreviewImage={setPreviewImage}/>
       <AccountTotal user={user}/>
-
+      <CompletedAchievements achievedBadges={user.achievements} setShowBadgesModal={setShowBadgesModal} showBadgesModal={showBadgesModal} />
+      </div>
+      <div style={{display: 'inline'}}>
       <Button variant="contained" color="primary"
         onClick={() => setView('trading')}>Trading Page</Button>
       <ResetAccount user={user} setUser={setUser}/>
-      {/* <HistoricalData user={user}/> */}
-      <CompletedAchievements achievedBadges={user.achievements} setShowBadgesModal={setShowBadgesModal} showBadgesModal={showBadgesModal} />
+      </div>
+
+      <HistoricalData user={user}/>
       <SelfCoins_Values ownedCoins={user.coinsOwned} />
     </div>
 
