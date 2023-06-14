@@ -24,7 +24,7 @@ const App = (props) => {
   const [user, setUser] = useState({});
   const [view, setView] = useState('default');
   const [signedIn, setSignedIn] = useState(false);
-
+  const [guest, setGuest] = useState(false);
   const [previewImage, setPreviewImage] = useState(user.profilePic);
   const [showBadgesModal, setShowBadgesModal] = useState(false);
 
@@ -78,7 +78,8 @@ const App = (props) => {
     case 'default':
       return (
           <div>
-            <InitialPage setView={setView} setUser={setUser} setSignedIn={setSignedIn} setPreviewImage={setPreviewImage} />
+
+            <InitialPage setView={setView} setUser={setUser} setGuest={setGuest} setSignedIn={setSignedIn} setPreviewImage={setPreviewImage}/>
           </div>
       );
     case 'trading':
@@ -102,32 +103,56 @@ const App = (props) => {
       return (
           <>
             <NavBarTemp signedIn={signedIn}
-              setSignedIn={setSignedIn}
-              user={user} previewImage={previewImage} setPreviewImage={setPreviewImage}
-              setView={setView}
-              setShowBadgesModal={setShowBadgesModal}
+
+            setSignedIn={setSignedIn}
+            user={user} previewImage={previewImage} setPreviewImage={setPreviewImage}
+            setView={setView} guest={guest} setGuest={setGuest}
+            setShowBadgesModal={setShowBadgesModal}
             />
-            <LeftColTemp user={user} />
-            <div className="user_profile">
-              <UserProfile setView={setView} user={user} signedIn={signedIn} previewImage={previewImage}
-                setPreviewImage={setPreviewImage}
-                showBadgesModal={showBadgesModal}
-                setShowBadgesModal={setShowBadgesModal} />
+            {/* <LeftColTemp user={user}/> */}
+          </>
+            <div className="trading">
+              <Trading setView={setView} user={user} setUser={setUser} signedIn={signedIn}/>
             </div>
           </>
-      );
+        );
+      case "user_profile":
+        return (
+        <>
+          <NavBarTemp signedIn={signedIn}
+            setSignedIn={setSignedIn}
+            user={user} previewImage={previewImage} setPreviewImage={setPreviewImage}
+            setView={setView}
+            setShowBadgesModal={setShowBadgesModal}
+          />
+          {/* <LeftColTemp user={user}/> */}
+          <div className="user_profile">
+
+            <UserProfile setView={setView} user={user} setUser={setUser} signedIn={signedIn} previewImage={previewImage}
+            setPreviewImage={setPreviewImage}
+            showBadgesModal={showBadgesModal}
+            setShowBadgesModal={setShowBadgesModal}/>
+          </div>
+        </>
+        )
     }
   };
 
   useEffect(() => {
-    if (signedIn === true) {
+
+    renderView()
+  }, [view])
+
+  useEffect(()=>{
+    if(signedIn || guest ){
       setView('trading');
     } else {
       console.log('signed in use effect triggered');
       setView('default');
     }
-    renderView();
-  }, [signedIn, view]);
+
+
+  },[signedIn, guest])
 
 
   return (

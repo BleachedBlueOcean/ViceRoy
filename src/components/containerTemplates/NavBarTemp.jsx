@@ -14,7 +14,8 @@ const pages = ['LeaderBoard', 'All Badges'];
 const settings = ['Profile', 'Logout'];
 
 
-const NavBarTemp = ({ signedIn, setSignedIn, setView, previewImage, setPreviewImage, setShowBadgesModal, user }) => {
+
+function NavBarTemp({signedIn, setSignedIn, setView, previewImage, setPreviewImage, setShowBadgesModal, user, guest, setGuest}) {
   const [anchorNav, setAnchorNav] = useState(null);
   const [anchorUser, setAnchorUser] = useState(null);
   //NavBar Pages
@@ -34,16 +35,24 @@ const NavBarTemp = ({ signedIn, setSignedIn, setView, previewImage, setPreviewIm
     // console.log('testing menu', e.target)
     setAnchorUser(null);
   };
-  // FOR Settings
-  const handleSetting = (e) => {
-    console.log('testing 2', e.target.innerHTML);
-    let name = e.target.innerHTML;
-    console.log(name);
-    if (name === 'Logout') {
-      console.log('logged out');
-      setSignedIn(false);
+
+// FOR Settings
+const handleSetting = (e) => {
+  console.log('testing 2', e.target.innerHTML)
+  let name = e.target.innerHTML;
+  console.log(name)
+  if(name === 'Logout') {
+    console.log('logged out')
+    if(signedIn){
+      setSignedIn(false)
+    } else if(guest){
+      setGuest(false)
     }
-  };
+  }
+  if(name === `Profile`) {
+    setView('user_profile')
+  }
+}
 
   //For Pages
   const openDialog = (page) => {

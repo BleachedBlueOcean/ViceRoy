@@ -25,10 +25,11 @@ const style = {
   p: 4,
 };
 
-const InitialPage = ({ setView, setUser, setSignedIn, setPreviewImage }) => {
-  const [open, setOpen] = useState(false);
-  const [signInEmail, setSignInEmail] = useState('');
-  const [signInPassword, setSignInPassword] = useState('');
+
+function InitialPage({setView, setUser, setGuest, setSignedIn, setPreviewImage}) {
+    const [open, setOpen] = useState(false);
+    const [signInEmail, setSignInEmail] = useState('');
+    const [signInPassword, setSignInPassword] = useState('');
 
   const handleOpen = () => {
     setOpen(true);
@@ -46,36 +47,40 @@ const InitialPage = ({ setView, setUser, setSignedIn, setPreviewImage }) => {
   // if login user matches, set view to trading
   // else return message that login doesnt match any account in database
 
-  const getUser = async (signInEmail, signInPassword) => {
-    try {
-      const userData = await controllers.getUser(signInEmail, signInPassword);
-      if (!userData.code) {
-        setSignedIn(true);
-        setUser(userData);
-        //added below
-        setPreviewImage(userData.profilePic);
-      }
-      console.log('User Data: ', userData);
-    } catch (error) {
-      setSignedIn(false);
-      console.log(error);
+
+    const getUser = async (signInEmail, signInPassword) => {
+        try {
+            const userData = await controllers.getUser(signInEmail, signInPassword);
+            if(!userData.code){
+                setSignedIn(true);
+                setUser(userData);
+                setPreviewImage(userData.profilePic);
+            }
+            console.log('User Data: ', userData);
+        } catch(error) {
+            setSignedIn(false);
+            console.log(error);
+        }
     }
   };
 
-  const guestUser = {
-    uid: null,
-    firstName: 'Guest',
-    lastName: null,
-    email: null,
-    totalAssets: null,
-    coinsOwned: null
-  };
 
-  const guestLogin = () => {
-    setSignedIn(true);
-    setUser(guestUser);
-    console.log(guestUser);
-  };
+    // const guestUser = {
+    //     uid: null,
+    //     firstName: 'Guest',
+    //     lastName: null,
+    //     email: null,
+    //     totalAssets: null,
+    //     coinsOwned: null
+    // }
+
+    const guestLogin = async () => {
+        const guestUser = await controllers.getUserById();
+        console.log(guestUser)
+        setGuest(true);
+        setUser(guestUser);
+        console.log(guestUser);
+    }
 
   return (
     <Box className="initialpage">
