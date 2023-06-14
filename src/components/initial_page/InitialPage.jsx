@@ -117,14 +117,14 @@ function InitialPage({setView, setUser, setGuest, setSignedIn, setPreviewImage})
           <InputLabel htmlFor="signInEmail">Email:</InputLabel>
           <OutlinedInput id="signInEmail" type="text" placeholder="E-mail" onChange={onEmailChange} />
         </div>
-        {showEmailMessage && (<div>Invalid E-Mail Address</div>)}
-        {showInvalidEmail && (<div>E-Mail Address Not Found</div>)}
+        {showEmailMessage && (<div className="error">Invalid E-Mail Address</div>)}
+        {showInvalidEmail && (<div className="error">E-Mail Address Not Found</div>)}
         <div>
           <InputLabel htmlFor="signInPassword">Password:</InputLabel>
           <OutlinedInput id="signInPassword" type="password" placeholder="Password" onChange={onPasswordChange} />
         </div>
-        {showMissingPass && (<div>Invalid Password</div>)}
-        {showPasswordMessage && (<div>Incorrect Password</div>)}
+        {showMissingPass && (<div className="error">Invalid Password</div>)}
+        {showPasswordMessage && (<div className="error">Incorrect Password</div>)}
         <div>
           <Button className="loginButton" type="submit" variant="contained">Login</Button>
         </div>
