@@ -36,7 +36,7 @@ const LeaderBoard = ({dialogOpen, closeDialog, page}) => {
         <CloseIcon />
       </IconButton> */}
       <DialogContent>
-        <DialogContentText>
+        {/* <DialogContentText> */}
           <Table>
             <TableHead>
               <TableRow>
@@ -54,7 +54,7 @@ const LeaderBoard = ({dialogOpen, closeDialog, page}) => {
               })}
             </TableBody>
           </Table>
-        </DialogContentText>
+        {/* </DialogContentText> */}
       </DialogContent>
     </Dialog>
     </>
