@@ -5,22 +5,23 @@ import { Chart } from 'react-google-charts'
 
 function LineChart({ coin, interval, height }) {
   const [chartData, setChartData] = useState(undefined)
-  // useEffect(() => {
-  //   axios(`https://min-api.cryptocompare.com/data/v2/histo${interval}?fsym=${coin[0]}&tsym=USD&limit=100`)
-  //   .then((result) => {
-  //     // console.log(result.data.data)
-  //     return result.data.Data.Data
-  //   })
-  //   .then((result) => {
-  //     // console.log('This is what setChartData sees ', result)
-  //     let data = result.map((point) => {
-  //       return [point.date, point.close]
-  //     })
-  //     data.unshift(["date", `${coin}`])
-  //     // console.log('This is the data going to the chart', data)
-  //     setChartData(data)
-  //   })
-  // }, [coin, interval])
+  useEffect(() => {
+    axios.get(`https://min-api.cryptocompare.com/data/v2/histo${interval}?fsym=${coin[0]}&tsym=USD&limit=100`)
+    .then((result) => {
+      // console.log(result.data.data)
+      return result.data.Data.Data
+    })
+    .then((result) => {
+      // console.log('This is what setChartData sees ', result)
+      let data = result.map((point) => {
+        let date = new Date(point.time * 1000)
+        return [date, point.close]
+      })
+      data.unshift(["date", `${coin}`])
+      // console.log('This is the data going to the chart', data)
+      setChartData(data)
+    })
+  }, [coin, interval])
 
   const options = {
     title: `${coin}`,

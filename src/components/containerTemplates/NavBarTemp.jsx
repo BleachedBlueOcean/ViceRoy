@@ -12,6 +12,7 @@ import LeaderBoard from '../modals/LeaderBoard.jsx';
 // TODO("Avatar, Avatar src")
 const pages = ['LeaderBoard', 'All Badges'];
 const settings = ['Profile', 'Logout'];
+const guestSettings = ['Register', 'Logout'];
 
 
 
@@ -40,12 +41,12 @@ function NavBarTemp({signedIn, setSignedIn, setView, previewImage, setPreviewIma
 const handleSetting = (e) => {
   console.log('testing 2', e.target.innerHTML)
   let name = e.target.innerHTML;
-  console.log(name)
   if(name === 'Logout') {
-    console.log('logged out')
+    console.log(guest)
     if(signedIn){
       setSignedIn(false)
     } else if(guest){
+      console.log('here setting guest to false');
       setGuest(false)
     }
   }
@@ -62,7 +63,6 @@ const handleSetting = (e) => {
   const closeDialog = () => {
     setDialogOpen(false);
   };
-
 
   return (
     <div>
@@ -147,7 +147,7 @@ const handleSetting = (e) => {
                 textDecoration: 'none',
               }}
             >
-              LOGO GOES GOES HERE
+              LOGO GOES GOES HERE 
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {pages.map((page) => (
@@ -181,12 +181,19 @@ const handleSetting = (e) => {
                 }}
                 open={Boolean(anchorUser)}
                 onClose={handleCloseUserMenu}>
-                {settings.map((setting) => (
+                {guest ? 
+                guestSettings.map((setting) => (
                   <MenuItem key={setting} value={setting}
                     onClick={handleSetting}>
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
-                ))}
+                )) :settings.map((setting) => (
+                    <MenuItem key={setting} value={setting}
+                      onClick={handleSetting}>
+                      <Typography textAlign="center">{setting}</Typography>
+                    </MenuItem>
+                  ))
+                }
               </Menu>
             </Box>
           </Toolbar>

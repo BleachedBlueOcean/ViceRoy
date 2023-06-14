@@ -10,9 +10,12 @@ const OwnedCoinRow = ({ coin }) => {
       <Typography variant='body1'>{coin.icon}</Typography>
       <Typography variant='body1'>{coin.name}</Typography>
       <Typography variant='body1'>{coin.quantity}</Typography>
-      <Typography variant='body1'>{coin.price}</Typography>
+      <Typography variant='body1'>{coin.avgBuyVal}</Typography>
+      <Typography variant='body1'>{/*average market price*/}</Typography>
+      <Typography variant='body1'>{/*Unrealized gain and losses: coin.quantity*market_price - coin.quantity*coin.avgBuyVal   */}</Typography>
     </Box>
   );
 };
 
 export default OwnedCoinRow;
+//

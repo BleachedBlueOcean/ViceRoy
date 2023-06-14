@@ -5,7 +5,7 @@ import GraphNavTemp from '../containerTemplates/GraphNavTemp.jsx';
 import CryptoBuySellTemp from '../containerTemplates/CryptoBuySellTemp.jsx';
 
 function GraphDisplay({coinOptions, user, setUser }) {
-  const [coin, setCoin] = useState(['BTC', 'Bitcoin'])
+  const [coin, setCoin] = useState([`BTC`,`Bitcoin`])
   const [interval, setInterval] = useState('day')
   const [view, setView] = useState('line')
   return(
