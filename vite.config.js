@@ -4,6 +4,8 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  title: 'Title of the site',
+  description: 'Description of the site',
   plugins: [react()],
   server: {
     cors: { origin: "*" },
