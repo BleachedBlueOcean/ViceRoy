@@ -78,7 +78,6 @@ const App = (props) => {
     case 'default':
       return (
           <div>
-
             <InitialPage setView={setView} setUser={setUser} setGuest={setGuest} setSignedIn={setSignedIn} setPreviewImage={setPreviewImage}/>
           </div>
       );
@@ -109,7 +108,6 @@ const App = (props) => {
             setShowBadgesModal={setShowBadgesModal}/>
           {/* <LeftColTemp user={user}/> */}
           <div className="user_profile">
-
             <UserProfile setView={setView} user={user} setUser={setUser} signedIn={signedIn} previewImage={previewImage}
             setPreviewImage={setPreviewImage}
             showBadgesModal={showBadgesModal}
@@ -121,7 +119,6 @@ const App = (props) => {
   };
 
   useEffect(() => {
-
     renderView()
   }, [view])
 
