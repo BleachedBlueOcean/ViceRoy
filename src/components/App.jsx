@@ -88,7 +88,7 @@ function App(props) {
             setView={setView}
             setShowBadgesModal={setShowBadgesModal}
             />
-            <LeftColTemp user={user}/>
+            {/* <LeftColTemp user={user}/> */}
           </>
             <div className="trading">
               <Trading setView={setView} user={user} signedIn={signedIn}/>
@@ -106,7 +106,8 @@ function App(props) {
           />
           {/* <LeftColTemp user={user}/> */}
           <div className="user_profile">
-            <UserProfile setView={setView} user={user} signedIn={signedIn} previewImage={previewImage}
+            <UserProfile setView={setView} user={user}
+            setUser={setUser} signedIn={signedIn} previewImage={previewImage}
             setPreviewImage={setPreviewImage}
             showBadgesModal={showBadgesModal}
             setShowBadgesModal={setShowBadgesModal}/>
@@ -123,12 +124,10 @@ function App(props) {
       console.log('signed in use effect triggered')
       setView('default');
     }
-    renderView();
   },[signedIn])
 
   useEffect(() => {
     renderView()
-
   }, [view])
 
 

@@ -4,6 +4,13 @@ import {Card, CardContent, CardActions, Typography} from '@mui/material';
 
 const AccountTotal = ({user}) => {
 
+  const calcAssets = () => {
+   const result = user.coinsOwned.reduce((acc, user) => {
+    return (acc + (user.quantity * user.avgBuyVal))
+    }, user.availableCash)
+    return result.toFixed(2)
+  }
+
     return (
       <Card>
         <CardContent>
@@ -11,10 +18,10 @@ const AccountTotal = ({user}) => {
             Account Summary for {user.firstName} {user.lastName}
           </Typography>
           <Typography>
-            Available Purchasing Power: {user.availableCash}
+            Available Purchasing Power: ${user.availableCash}
           </Typography>
           <Typography>
-            Total Assets: {user.totalAssets}
+            Total Assets: ${calcAssets()}
           </Typography>
         </CardContent>
       </Card>
@@ -22,3 +29,6 @@ const AccountTotal = ({user}) => {
 }
 
 export default AccountTotal
+
+
+
