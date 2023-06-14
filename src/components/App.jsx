@@ -108,6 +108,7 @@ function App(props) {
           <div className="user_profile">
             <UserProfile setView={setView} user={user}
             setUser={setUser} signedIn={signedIn} previewImage={previewImage}
+            setView={setView}
             setPreviewImage={setPreviewImage}
             showBadgesModal={showBadgesModal}
             setShowBadgesModal={setShowBadgesModal}/>
