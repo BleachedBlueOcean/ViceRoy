@@ -110,7 +110,7 @@ const App = (props) => {
             setShowBadgesModal={setShowBadgesModal}
             />
             {/* <LeftColTemp user={user}/> */}
-          </>
+
             <div className="trading">
               <Trading setView={setView} user={user} setUser={setUser} signedIn={signedIn}/>
             </div>
