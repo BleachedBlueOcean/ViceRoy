@@ -33,8 +33,8 @@ function WatchList () {
   useEffect(()=>{getTopCoins()}, [])
   return (
     <div style={{marginTop: '15px'}}onClick={()=>{console.log('top coins: ', topcoins, 'watched :', watched)}}>Watch List
-      <FormControl sx={{ m: 1, width: 300, bgcolor: 'white', borderRadius: '5px'}}>
-        <InputLabel sx={{color: 'black'}} id='watch-list-label'>Watched Coins</InputLabel>
+      <FormControl sx={{ m: 1, width: 300, bgcolor: 'gray', borderRadius: '5px'}}>
+        <InputLabel sx={{color: 'white'}} id='watch-list-label'>Watched Coins</InputLabel>
         <Select
           labelId = 'watch-list-label'
           id = 'watch-list-chip'
@@ -44,7 +44,7 @@ function WatchList () {
           onChange={handleChange}
           input={<OutlinedInput id='select-multiple-chip' label='Watched Coins' sx={{bgcolor: 'black'}}/>}
           renderValue={(selected) => (
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, bgcolor: 'white'}}>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, bgcolor: 'gray'}}>
               {selected.map((val) => (
                 <Chip key={val} label={val} sx={{color: 'white', bgcolor: 'black'}}/>
               ))}
