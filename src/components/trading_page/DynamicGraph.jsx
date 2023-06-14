@@ -14,7 +14,7 @@ function DynamicGraph({coinOptions, dynamicCoin}) {
       <div className="graph">
          {view === 'candle' && <CandleChart interval={interval} coin={dynamicCoin} height={"400px"}/>}
         {view === 'line' && <LineChart interval={interval} coin={dynamicCoin} height={"400px"}/>}
-        <CryptoBuySellTemp />
+        {/* <CryptoBuySellTemp /> */}
       </div>
     </div>
 
