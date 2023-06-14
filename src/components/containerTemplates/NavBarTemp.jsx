@@ -41,6 +41,9 @@ const handleSetting = (e) => {
     console.log('logged out')
     setSignedIn(false)
   }
+  if(name === `Profile`) {
+    setView('user_profile')
+  }
 }
 
   //For Pages

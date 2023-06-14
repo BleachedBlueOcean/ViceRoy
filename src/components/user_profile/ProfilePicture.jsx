@@ -54,12 +54,12 @@ const ProfilePicture = ({user, setUser, previewImage, setPreviewImage}) => {
 
     axios.post("https://api.cloudinary.com/v1_1/doryckkpf/image/upload", formData)
     .then((response) => {
-      const updatedUser = {...user, profilePic: response.data.secure_url}
-      setUser(updatedUser)
+      const updatedUser = {...user, profilePic: response.data.secure_url};
+      setUser(updatedUser);
       controllers.updateUser(updatedUser.id, updatedUser)
     })
     .catch((error) => {
-      console.log('Profile pic error: ', error.response);
+      console.log('Profile pic error: ', error);
     })
   }
 
