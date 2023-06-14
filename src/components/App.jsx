@@ -89,7 +89,7 @@ const App = (props) => {
               <NavBarTemp signedIn={signedIn}
                 setSignedIn={setSignedIn}
                 user={user} previewImage={previewImage} setPreviewImage={setPreviewImage}
-                setView={setView}
+                setView={setView} guest={guest} setGuest={setGuest}
                 setShowBadgesModal={setShowBadgesModal}
               />
               <LeftColTemp user={user} />
@@ -132,7 +132,6 @@ const App = (props) => {
       console.log('signed in use effect triggered');
       setView('default');
     }
-
 
   },[signedIn, guest])
 
