@@ -78,7 +78,7 @@ const controllers =  {
         try{
             const docRef = doc(db, "users", id);
             await updateDoc(docRef, obj);
-            console.log('fuck u', obj)
+            // console.log('fuck u', obj)
             // getUser(obj.email, )
         } catch(err){
             console.error(err)
