@@ -9,7 +9,7 @@ const SelfCoins_Values = ({ ownedCoins }) => {
       <Box>
         <Typography variant='h3'>Owned Coins</Typography>
       </Box>
-      {ownedCoins.map((coin, i) => <OwnedCoinRow key={i} coin={coin} />)}
+      {/* {ownedCoins.map((coin, i) => <OwnedCoinRow key={i} coin={coin} />)} */}
     </Box>
   );
 }

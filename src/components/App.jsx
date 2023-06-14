@@ -99,6 +99,7 @@ const App = (props) => {
             </div>
           </>
       );
+<<<<<<< HEAD
     case 'user_profile':
       return (
           <>
@@ -116,6 +117,8 @@ const App = (props) => {
             </div>
           </>
         );
+=======
+>>>>>>> dc8a9aeb9f4098c921a6b2bb4c9b74a612093b00
       case "user_profile":
         return (
         <>
@@ -123,8 +126,7 @@ const App = (props) => {
             setSignedIn={setSignedIn}
             user={user} previewImage={previewImage} setPreviewImage={setPreviewImage}
             setView={setView}
-            setShowBadgesModal={setShowBadgesModal}
-          />
+            setShowBadgesModal={setShowBadgesModal}/>
           {/* <LeftColTemp user={user}/> */}
           <div className="user_profile">
 
@@ -157,15 +159,6 @@ const App = (props) => {
 
   return (
     <ThemeProvider theme={theme}>
-
-      <p>ViceRoy</p>
-      <UserProfile user={user} setUser={setUser}
-        previewImage={previewImage}
-        setPreviewImage={setPreviewImage}
-        setShowBadgesModal={setShowBadgesModal} showBadgesModal={showBadgesModal} />
-      {/* <GraphNavTemp /> */}
-      {/* <LeftColTemp /> */}
-      {/* <CryptoBuySellTemp /> */}
 
       {renderView()}
 

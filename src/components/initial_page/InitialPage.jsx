@@ -48,22 +48,20 @@ function InitialPage({setView, setUser, setGuest, setSignedIn, setPreviewImage})
   // else return message that login doesnt match any account in database
 
 
-    const getUser = async (signInEmail, signInPassword) => {
-        try {
-            const userData = await controllers.getUser(signInEmail, signInPassword);
-            if(!userData.code){
-                setSignedIn(true);
-                setUser(userData);
-                setPreviewImage(userData.profilePic);
-            }
-            console.log('User Data: ', userData);
-        } catch(error) {
-            setSignedIn(false);
-            console.log(error);
-        }
-    }
-  };
-
+  const getUser = async (signInEmail, signInPassword) => {
+      try {
+          const userData = await controllers.getUser(signInEmail, signInPassword);
+          if(!userData.code){
+              setSignedIn(true);
+              setUser(userData);
+              setPreviewImage(userData.profilePic);
+          }
+          console.log('User Data: ', userData);
+      } catch(error) {
+          setSignedIn(false);
+          console.log(error);
+      }
+  }
 
     // const guestUser = {
     //     uid: null,
@@ -109,8 +107,8 @@ function InitialPage({setView, setUser, setGuest, setSignedIn, setPreviewImage})
       <Dialog open={open} aria-labelledby="dialog-title" sx={style}>
         <DialogTitle id="dialog-title">Register</DialogTitle>
         <Register getUser={getUser} handleClose={handleClose} />
-        <Box>
-        </Box>
+        {/* <Box>
+        </Box> */}
       </Dialog>
     </Box>
   );
