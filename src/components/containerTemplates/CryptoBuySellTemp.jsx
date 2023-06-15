@@ -126,7 +126,7 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser }) => {
   }
 
   return (
-    <Container maxWidth="xs">
+    <Container className="buySell">
       <Paper sx={{ padding: 2, marginTop: 16 }}>{props}
         <TableContainer>
           <Table>

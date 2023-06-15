@@ -18,17 +18,19 @@ function NewsList ({watched}) {
   useEffect(()=>{getNews();}, [watched])
 
   const style = {
-    width: '80%',
+    width: '86%',
     bgcolor: 'white',
     display: 'flex',
     flexWrap: 'wrap',
-    margin: '5%',
+    marginLeft: '1rem',
+    marginTop: '1rem',
+    marginBottom: '1rem',
     borderRadius: '10px'
   };
 
   return (
       <Box className='newslist' sx={{
-        height: '600px',
+        height: '10rem',
         overflowY: 'auto',
         borderRadius: '10px',
         backgroundColor: '#13C4A3'

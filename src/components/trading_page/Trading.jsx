@@ -5,6 +5,7 @@ import axios from "axios"
 import WatchList from './WatchList.jsx';
 import AccountTotal from '../modals/AccountTotal.jsx'
 import controllers from '../../backend/controllers/index.js';
+import { Box } from '@mui/material'
 function Trading({user, setUser, guest, unrealizedGains}){
     const [coinOptions, setCoinOptions] = useState([
         [
@@ -418,17 +419,18 @@ function Trading({user, setUser, guest, unrealizedGains}){
     return(
         <>
         <div className='trading-page' style={{display: 'flex', flexDirection: 'row'}}>
-            <div className='trading-leftcol' style={{width: '24%'}} sx={{
+            <Box className='trading-leftcol' sx={{
+                  width: '24%',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '1rem',
                   marginLeft: '1rem',
-                  marginTop: '1rem'
+                  marginTop: '1rem',
             }}>
                 <AccountTotal user={user} unrealizedGains={unrealizedGains}/>
                 <NewsList watched={watched}/>
                 <WatchList coinOptions={coinOptions} user={user} setDynamicCoin={setDynamicCoin} watched={watched} setWatched={setWatched}/>
-            </div>
+            </Box>
             <div className='trading-rightcol'>
               <GraphDisplay className="Graphtopbar" coinOptions={coinOptions} user={user} setUser={setUser} dynamic={false} dynamicCoin={dynamicCoin}/>
               <div className='dynamic-graph'>

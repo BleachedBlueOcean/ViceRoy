@@ -5,7 +5,7 @@ import SearchIcon from '@mui/icons-material/Search';
 const GraphNavTemp = ({coinOptions, coin, interval, setCoin, setInterval, view, setView}) =>{
 
   return (
-    <AppBar position="static" sx={{
+    <AppBar className="GraphNavBar" position="static" sx={{
       borderRadius: '36px 36px 0px 0px'
     }}>
       <Toolbar>
