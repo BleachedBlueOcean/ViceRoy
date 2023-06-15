@@ -247,7 +247,7 @@ const handleSetting = (e) => {
       }
       <Dialog open={open} aria-labelledby="dialog-title" sx={style}>
         <DialogTitle id="dialog-title">Register</DialogTitle>
-        <Register handleOpen={handleOpen} handleClose={handleClose} getUser={getUser}/>
+        <Register handleOpen={handleOpen} handleClose={handleClose} getUser={getUser} setGuest={setGuest}/>
       </Dialog>
     </div>
   );

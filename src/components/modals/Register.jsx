@@ -70,6 +70,7 @@ function Register({ handleClose, getUser, setView, setSignedIn, setGuest }) {
             await addUser();
             alert('Registration Complete');
             await handleClose();
+            await setGuest(false);
             await getUser(registrationData.response.email, registrationData.response.password)
             setPassMinError(false);
         } else {

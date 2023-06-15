@@ -91,14 +91,13 @@ const InitialPage = ({ handleOpen, handleClose, open, setView, setUser, setGuest
             justifyContent: 'space-around',
           }}>
             <Button className="registerButton" onClick={handleOpen}>Register</Button>
-            {/* <Typography> or </Typography> */}
             <Button className="guest-login" onClick={guestLogin}>Guest Login</Button>
             </Box>
         </Box>
       </form>
       <Dialog open={open} aria-labelledby="dialog-title" sx={style}>
         <DialogTitle id="dialog-title">Register</DialogTitle>
-        <Register getUser={getUser} handleClose={handleClose} />
+        <Register getUser={getUser} handleClose={handleClose} setGuest={setGuest}/>
       </Dialog>
     </Box>
   );
