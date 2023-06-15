@@ -5,7 +5,9 @@ import SearchIcon from '@mui/icons-material/Search';
 const GraphNavTemp = ({coinOptions, coin, interval, setCoin, setInterval, view, setView}) =>{
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{
+      borderRadius: '36px 36px 0px 0px'
+    }}>
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           MyApp

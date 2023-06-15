@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Line} from 'react-chartjs-2';
-import {Typography} from '@mui/material'
+import {Box, Typography} from '@mui/material';
+import LineChart from '../trading_page/LineGraph.jsx';
 
 //<Line data={}, options={}/>
 const HistoricalData = ({user}) => {
@@ -54,14 +55,18 @@ const HistoricalData = ({user}) => {
 
 
   return (
-    <div>
+    <Box className="historicalData" sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      width: '70vw',
+    }}>
       <Typography>
         Historical Profit/Loss Graph
       </Typography>
       {/* <Line data={graphData} options={chartOptions} /> */}
-
-    </div>
+      <LineChart coin={['ETH']} height={'70vh'} interval={'day'}/>
+    </Box>
   );
-}
+};
 
 export default HistoricalData;
