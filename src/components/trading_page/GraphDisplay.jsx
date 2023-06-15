@@ -12,7 +12,7 @@ const GraphDisplay = ({coinOptions, user, setUser, dynamic, dynamicCoin, guest }
   if (dynamic) {
     return (
       <Box className="second-graph">
-        <GraphNavTemp coinOptions={[[dynamicCoin]]} interval={interval} setInterval={setInterval} coin={dynamicCoin} setCoin={setCoin} view ={view} setView={setView} />
+        <GraphNavTemp coinOptions={[dynamicCoin]} interval={interval} setInterval={setInterval} coin={dynamicCoin} setCoin={setCoin} view ={view} setView={setView} />
         <div className="graph">
           {view === 'candle' && <CandleChart interval={interval} coin={dynamicCoin} height={"400px"}/>}
           {view === 'line' && <LineChart interval={interval} coin={dynamicCoin} height={"400px"}/>}
