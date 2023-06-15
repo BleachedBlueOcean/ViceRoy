@@ -12,6 +12,7 @@ import LeaderBoard from '../modals/LeaderBoard.jsx';
 // TODO("Avatar, Avatar src")
 const pages = ['LeaderBoard', 'All Badges'];
 const settings = ['Profile', 'Logout'];
+const guestSettings = ['Register', 'Logout'];
 
 
 
@@ -37,20 +38,16 @@ const NavBarTemp = ({signedIn, setSignedIn, setView, previewImage, setPreviewIma
   };
 
 // FOR Settings
-  const handleSetting = (e) => {
-    console.log('testing 2', e.target.innerHTML);
-    let name = e.target.innerHTML;
-    console.log(name);
-    if(name === 'Logout') {
-      console.log('logged out');
-      if(signedIn) {
-        setSignedIn(false);
-      } else if(guest) {
-        setGuest(false);
-      }
-    }
-    if(name === `Profile`) {
-      setView('user_profile');
+const handleSetting = (e) => {
+  console.log('testing 2', e.target.innerHTML)
+  let name = e.target.innerHTML;
+  if(name === 'Logout') {
+    console.log(guest)
+    if(signedIn){
+      setSignedIn(false)
+    } else if(guest){
+      console.log('here setting guest to false');
+      setGuest(false)
     }
   };
 
@@ -62,7 +59,6 @@ const NavBarTemp = ({signedIn, setSignedIn, setView, previewImage, setPreviewIma
   const closeDialog = () => {
     setDialogOpen(false);
   };
-
 
   return (
     <div className="navbar">
@@ -189,12 +185,19 @@ const NavBarTemp = ({signedIn, setSignedIn, setView, previewImage, setPreviewIma
                 }}
                 open={Boolean(anchorUser)}
                 onClose={handleCloseUserMenu}>
-                {settings.map((setting) => (
+                {guest ? 
+                guestSettings.map((setting) => (
                   <MenuItem key={setting} value={setting}
                     onClick={handleSetting}>
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
-                ))}
+                )) :settings.map((setting) => (
+                    <MenuItem key={setting} value={setting}
+                      onClick={handleSetting}>
+                      <Typography textAlign="center">{setting}</Typography>
+                    </MenuItem>
+                  ))
+                }
               </Menu>
             </Box>
           </Toolbar>

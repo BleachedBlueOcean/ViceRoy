@@ -115,13 +115,15 @@ const App = (props) => {
               <NavBarTemp signedIn={signedIn}
                 setSignedIn={setSignedIn}
                 user={user} previewImage={previewImage} setPreviewImage={setPreviewImage}
-                setView={setView}
+                setView={setView} guest={guest} setGuest={setGuest}
                 setShowBadgesModal={setShowBadgesModal}
               />
               <LeftColTemp user={user} />
             </>
             <div className="trading">
-              <Trading setView={setView} user={user} signedIn={signedIn} />
+
+              <Trading setView={setView} user={user} signedIn={signedIn} guest={guest} setUser={setUser}/>
+
             </div>
           </>
       );
@@ -159,8 +161,8 @@ const App = (props) => {
       setView('default');
     }
 
-
   },[signedIn, guest]);
+
 
 
   return (
