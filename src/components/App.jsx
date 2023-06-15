@@ -123,7 +123,7 @@ const App = (props) => {
             </>
             <div className="trading">
               <AccountTotal user={user} unrealizedGains={unrealizedGains}/>
-              <Trading setView={setView} user={user} signedIn={signedIn} guest={guest}/>
+              <Trading setView={setView} setUser={setUser} user={user} signedIn={signedIn} guest={guest}/>
             </div>
           </>
       );
