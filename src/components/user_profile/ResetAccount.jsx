@@ -23,18 +23,18 @@ const ResetAccount = ({user, setUser, setUnrealizedGains}) => {
     }
   };
 
-  const handleOpen = () => { 
+  const handleOpen = () => {
     setOpen(true);
   };
 
 
-  const handleClose = async (e) => { 
-    const confirmation = e.target.id; 
+  const handleClose = async (e) => {
+    const confirmation = e.target.id;
       if(confirmation === 'no') {
-        console.log('account is open') 
+        console.log('account is open')
       } else {
-        console.log('account is closed') 
-        confirmReset()  
+        console.log('account is closed')
+        confirmReset()
       }
       setOpen(false);
       try{
@@ -46,7 +46,7 @@ const ResetAccount = ({user, setUser, setUnrealizedGains}) => {
 
   return (
     <div>
-      <Button variant="contained" color="primary" onClick={handleOpen}>Reset Account</Button>
+      <Button variant="contained" color="error" onClick={handleOpen}>Reset Account</Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Reset Account</DialogTitle>
         <DialogContent>
