@@ -3,22 +3,23 @@ import LineChart from './LineGraph.jsx';
 import CandleChart from './CandleGraph.jsx';
 import GraphNavTemp from '../containerTemplates/GraphNavTemp.jsx';
 import CryptoBuySellTemp from '../containerTemplates/CryptoBuySellTemp.jsx';
+import { Box } from '@mui/material';
 
-function GraphDisplay({coinOptions, user, setUser, dynamic, dynamicCoin }) {
+const GraphDisplay = ({coinOptions, user, setUser, dynamic, dynamicCoin }) => {
   const [coin, setCoin] = useState([`BTC`,`Bitcoin`])
   const [interval, setInterval] = useState('day')
   const [view, setView] = useState('line')
   if (dynamic) {
     return (
       <div>
-      <GraphNavTemp coinOptions={[[dynamicCoin]]} interval={interval} setInterval={setInterval} coin={dynamicCoin} setCoin={setCoin} view ={view} setView={setView} />
-      <div className="graph">
-         {view === 'candle' && <CandleChart interval={interval} coin={dynamicCoin} height={"400px"}/>}
-        {view === 'line' && <LineChart interval={interval} coin={dynamicCoin} height={"400px"}/>}
-        <CryptoBuySellTemp coin={dynamicCoin} user={user} setUser={setUser}/>
+        <GraphNavTemp coinOptions={[[dynamicCoin]]} interval={interval} setInterval={setInterval} coin={dynamicCoin} setCoin={setCoin} view ={view} setView={setView} />
+        <div className="graph">
+          {view === 'candle' && <CandleChart interval={interval} coin={dynamicCoin} height={"400px"}/>}
+          {view === 'line' && <LineChart interval={interval} coin={dynamicCoin} height={"400px"}/>}
+          <CryptoBuySellTemp coin={dynamicCoin} user={user} setUser={setUser}/>
+        </div>
       </div>
-    </div>
-    )
+    );
   }
   return (
     <div>
@@ -30,6 +31,6 @@ function GraphDisplay({coinOptions, user, setUser, dynamic, dynamicCoin }) {
       </div>
     </div>
 
-  )
-}
+  );
+};
 export default GraphDisplay;

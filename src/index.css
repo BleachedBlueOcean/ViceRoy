@@ -47,6 +47,11 @@ body {
   -webkit-text-stroke: 1px black;
 }
 
+.trading-rightcol {
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+
 /* initialPage logo
   position: absolute;
   height: 50vh;
@@ -69,6 +74,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+
+.graph {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  border-style: solid;
+  border-color: #39A0ED;
+  border-radius: 8px;
+}
+
+.
 
 /* a {
   font-weight: 500;

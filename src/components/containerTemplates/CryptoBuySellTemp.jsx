@@ -161,7 +161,14 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser }) => {
           </Table>
         </TableContainer>
 
-        <Stack spacing={2} direction="row">
+        <Stack sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          paddingLeft: '1rem',
+          paddingRight: '1rem',
+          paddingTop: '4px',
+        }}>
           {/* <Button variant="contained">ExecuteOrder</Button> */}
           <Button variant="contained" onClick={handleBuyClick}>Buy</Button>
           <Button variant="contained" onClick={handleSellClick}>Sell</Button>
