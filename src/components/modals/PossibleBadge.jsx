@@ -70,33 +70,48 @@ const PossibleBadge = ({ achievedBadges, dialogOpen, closeDialog }) => {
   }
 
   return (
-    <Dialog onClose={closeDialog} open={dialogOpen}>
-      <DialogTitle>Achievements</DialogTitle>
-      {badgesData.map((badge, index) => {
-        const IconComponent = iconComponents[badge.icon];
-        console.log('achieved badges', achievedBadges);
-        const isAchieved = achievedBadges.filter((achievedBadge => achievedBadge.name === badge.title));
-        return (
-          <Box key={index} >
-            <IconComponent />
-            <Typography
-              variant='body1'
-              sx={isAchieved.length
-                ? { textDecoration: 'line-through', textDecorationColor: '#d9d9d9' }
-                : {}} >
-              {badge.title}
-            </Typography>
-            <Typography
-              variant='body1'
-              sx={isAchieved.length
-                ? { textDecoration: 'line-through', textDecorationColor: '#d9d9d9' }
-                : {}} >
-              {badge.description}
-            </Typography>
-          </Box>
-        )
-      })}
-      <Button onClick={closeDialog}>Close</Button>
+    <Dialog onClose={closeDialog} open={dialogOpen} maxWidth={'lg'} >
+      <DialogTitle sx={{ fontSize: '2rem', textDecoration: 'underline' }}>Achievements</DialogTitle>
+      <Box sx={{ display: 'flex' }}>
+        <Box sx={{ flexGrow: '1' }}>
+          {badgesData.map((badge, index) => {
+            const IconComponent = iconComponents[badge.icon];
+            console.log('achieved badges', achievedBadges);
+            const isAchieved = achievedBadges.filter((achievedBadge => achievedBadge.name === badge.title));
+
+            return (
+              <Box key={index} sx={{ display: 'flex', marginTop: '0.5rem' }} >
+                <IconComponent sx={{ marginRight: '1rem' }} />
+                <Typography
+                  variant='body1'
+                  sx={isAchieved.length
+                    ? { textDecoration: 'line-through', textDecorationColor: '#d9d9d9', whiteSpace: 'nowrap', flexGrow: '1' }
+                    : { whiteSpace: 'nowrap', flexGrow: '1' }} >
+                  {badge.title}
+                </Typography>
+              </Box>
+            )
+          })}
+        </Box>
+        <Box sx={{ flexGrow: '1' }}>
+          {badgesData.map((badge, index) => {
+            const isAchieved = achievedBadges.filter((achievedBadge => achievedBadge.name === badge.title));
+
+            return (
+              <Box key={index} sx={{ display: 'flex', marginTop: '0.5rem' }} >
+                <Typography
+                variant='body1'
+                sx={isAchieved.length
+                  ? { textDecoration: 'line-through', textDecorationColor: '#d9d9d9', marginLeft: '3rem', whiteSpace: 'nowrap', flexGrow: '1' }
+                  : { marginLeft: '3rem', whiteSpace: 'nowrap', flexGrow: '1' }} >
+                {badge.description}
+                </Typography>
+              </Box>
+            )
+          })}
+        </Box>
+      </Box>
+      <Button onClick={closeDialog} sx={{ width: '25%', marginTop: '2rem', marginLeft: 'auto' }}>Close</Button>
     </Dialog>
   );
 };

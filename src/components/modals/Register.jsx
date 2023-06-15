@@ -9,6 +9,7 @@ import DialogActions from '@mui/material/DialogActions';
 import controllers from '../../backend/controllers/index.js'
 
 function Register({ handleClose, getUser }) {
+    const [passMinError, setPassMinError] = useState(false);
     const [registrationData, setRegistrationData] = useState({ response: {
         firstName: '',
         lastName: '',
@@ -61,12 +62,16 @@ function Register({ handleClose, getUser }) {
         if (!isUniqueUser) {
             return;
         }
-
+        if ((registrationData.response.password.length) < 6 || (registrationData.response.confirmPass < 6)) {
+            setPassMinError(true);
+            return;
+        }
         if (registrationData.response.password === registrationData.response.confirmPass) {
             await addUser();
             alert('Registration Complete');
             handleClose();
             await getUser(registrationData.response.email, registrationData.response.password)
+            setPassMinError(false);
         } else {
             alert('Passwords do not match');
             return;
@@ -116,6 +121,7 @@ function Register({ handleClose, getUser }) {
                         }})
                     }}/>
                 </FormControl>
+                {passMinError && (<p style={{fontStyle: 'italic'}}> * password minimum length of 6 characters </p>) }
             <DialogActions>
                 <Button type="submit">Register</Button>
                 <Button onClick={handleClose}>Cancel</Button>

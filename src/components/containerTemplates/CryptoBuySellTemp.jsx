@@ -9,20 +9,27 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser }) => {
   const [sellAmt, setSellAmt] = useState('');
   const [price, setPrice] = useState('');
 
-  // useEffect(() => {
-  //   let updatePrice = () => {
-  //     axios.get(`https://min-api.cryptocompare.com/data/price?fsym=${coin[0]}&tsyms=USD`)
-  //       .then((result) => {
-  //         console.log('This is what the buy click gets for current value ', result.data.USD)
-  //         setPrice(result.data.USD)
-  //       }
-  //     )
-  //   }
-  //   updatePrice()
-  //   let intervalId = setInterval(updatePrice, 10000);
-  //   return () => clearInterval(intervalId)
-  //   },
-  // [coin])
+  useEffect(() => {
+    let updatePrice = () => {
+      axios.get(`https://min-api.cryptocompare.com/data/price?fsym=${coin[0]}&tsyms=USD`)
+        .then((result) => {
+          console.log('This is what the buy click gets for current value ', result.data.USD)
+          setPrice(result.data.USD)
+        }
+      )
+    }
+    updatePrice()
+    let intervalId = setInterval(updatePrice, 10000);
+    return () => clearInterval(intervalId)
+    },
+  [coin])
+
+  const updating = (form) => {
+      setUser(form);
+      console.log('this is form', form.id)
+      // console.log('this is form id', form.id)
+     controllers.updateUser(form.id, form);
+    }
 
   const handleBuy = (e) => {
     setBuyAmt(e.target.value)
@@ -33,6 +40,7 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser }) => {
 
   const handleBuyClick = (e) => {
     e.preventDefault()
+
     if((buyAmt * price) > user.availableCash) {
       console.log("Sorry, you don't seem to have enough funds for this trade at this time")
     } else {
@@ -41,26 +49,43 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser }) => {
       let currentCoin = null;
       let newBalance = user.availableCash - (buyAmt * price)
       for(var i = 0; i < user.coinsOwned.length; i++ ) {
-        if(user.coinsOwned[i].icon === coin) {
+        console.log('This is what is being evaluateed in user.coinsOwned', user.coinsOwned[i])
+        if(user.coinsOwned[i].icon === coin[0]) {
           currentCoinIdx = i
-          currentCoin = user.coinsOwned[i]
+          currentCoin = user.coinsOwned
         }
       }
       if(currentCoin === null) {
+        console.log('This is the first purchase of this coin')
         currentCoin = {
           name: coin[1],
           icon: coin[0],
-          quantity: buyAmt,
+          quantity: Number(buyAmt),
           avgBuyVal: price,
           favorite: false
         }
-        currentCoinIdx = 0;
+        let update = user.coinsOwned
+        update.push(currentCoin)
+        const form = {...user, coinsOwned: update, availableCash: newBalance};
+        updating(form);
+      } else {
+        console.log('This is the currentCoin', currentCoin)
+        console.log('currentCoinIdx', currentCoinIdx)
+        console.log('This is the currentCoin[currentCoinIdx]', currentCoin[currentCoinIdx])
+        console.log('This is the (currentCoin[currentCoinIdx].quantity + Number(buyAmt))', (currentCoin[currentCoinIdx].quantity + Number(buyAmt)))
+        console.log('This is the ((currentCoin[currentCoinIdx].quantity * currentCoin[currentCoinIdx].avgBuyVal) + (Number(buyAmt) * price))', ((currentCoin[currentCoinIdx].quantity * currentCoin[currentCoinIdx].avgBuyVal) + (Number(buyAmt) * price)))
+        let newAvgBuyVal = ((currentCoin[currentCoinIdx].quantity * currentCoin[currentCoinIdx].avgBuyVal) + (Number(buyAmt) * price))/(currentCoin[currentCoinIdx].quantity + Number(buyAmt));
+        let updateCurrCoin = {
+          ...currentCoin[currentCoinIdx],
+          avgBuyVal: newAvgBuyVal,
+          quantity: Number(Number(currentCoin[currentCoinIdx].quantity) + Number(buyAmt)),
+        }
+        console.log('This is NOT the first purchase of this coin')
+        let update = user.coinsOwned
+        update[currentCoinIdx] = updateCurrCoin
+        const form = {...user, coinsOwned: update, availableCash: newBalance};
+        updating(form);
       }
-      const form = {...user, coinsOwned: [currentCoin], availableCash: newBalance}
-      setUser(form);
-      console.log('this is form', form.id)
-        // console.log('this is form id', form.id)
-       controllers.updateUser(form.id, form);
     }
     // grab current balance and purchase price
     // if current balance and purchase price don't allow for sale refuse transaction
@@ -73,6 +98,31 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser }) => {
     // grab current profile and coin balances
     // if coin balances do not allow for transaction refuse.
     // if good proceed and update user profile
+    let coinOwned = false;
+    let coinOwnedIdx = null;
+    for(var i = 0; i < user.coinsOwned.length; i++) {
+      if(user.coinsOwned[i].icon === coin[0]) {
+        console.log('You own ', user.coinsOwned[i].icon)
+        coinOwned = true;
+        coinOwnedIdx = i
+      }
+    }
+    if(coinOwned && user.coinsOwned[coinOwnedIdx].quantity >= sellAmt) {
+      console.log('Congrats you have enough to sell')
+      console.log('This is the currentCoin', user.coinsOwned)
+      console.log('coinOwnedIdx', coinOwnedIdx)
+      console.log('This is the currentCoin[currentCoinIdx]', user.coinsOwned[coinOwnedIdx])
+      let updateCurrCoin = {
+        ...user.coinsOwned[coinOwnedIdx],
+        quantity: Number(user.coinsOwned[coinOwnedIdx].quantity) - Number(sellAmt)
+      }
+      let newBalance = user.availableCash + (sellAmt * price)
+      let update = user.coinsOwned
+      update[coinOwnedIdx] = updateCurrCoin
+      const form = {...user, coinsOwned: update, availableCash: newBalance};
+      console.log('This is what we are about to update the user to ', form)
+      updating(form);
+    }
   }
 
   return (
