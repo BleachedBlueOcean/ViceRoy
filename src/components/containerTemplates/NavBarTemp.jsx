@@ -147,7 +147,7 @@ const handleSetting = (e) => {
                 textDecoration: 'none',
               }}
             >
-              LOGO GOES GOES HERE 
+              LOGO GOES GOES HERE
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {pages.map((page) => (
@@ -181,7 +181,7 @@ const handleSetting = (e) => {
                 }}
                 open={Boolean(anchorUser)}
                 onClose={handleCloseUserMenu}>
-                {guest ? 
+                {guest ?
                 guestSettings.map((setting) => (
                   <MenuItem key={setting} value={setting}
                     onClick={handleSetting}>

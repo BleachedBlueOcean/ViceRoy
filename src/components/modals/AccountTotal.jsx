@@ -5,14 +5,6 @@ import {Card, CardContent, CardActions, Typography} from '@mui/material';
 // https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH&tsyms=USD
 const AccountTotal = ({user, unrealizedGains}) => {
 
-  // const [currPrice, setCurrPrice] = useState(undefined)
-
-
-  // const getCurrent = () => {
-  //   //grab list of coins
-  // }
-
-
   const calcAssets = () => {
     //set to unrealized gain/loss
     const buyIn = unrealizedGains.reduce((acc, user) => acc + user, 0)
