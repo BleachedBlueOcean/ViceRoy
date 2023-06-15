@@ -22,7 +22,7 @@ const AccountTotal = ({user, unrealizedGains}) => {
             Account Summary for {user.firstName} {user.lastName}
           </Typography>
           <Typography>
-            Available Purchasing Power: ${user.availableCash}
+            Available Purchasing Power: ${user.availableCash.toFixed(2)}
           </Typography>
           <Typography>
             Unrealized Gain/Loss: ${calcAssets()}

@@ -28,13 +28,12 @@ const style = {
   p: 4,
 };
 
-const NavBarTemp = ({signedIn, setSignedIn, setView, previewImage, setPreviewImage, setShowBadgesModal, user, guest, setGuest}) => {
+const NavBarTemp = ({signedIn, setSignedIn, setView, previewImage, setPreviewImage, setShowBadgesModal, user, guest, setGuest, open, handleOpen, handleClose, getUser}) => {
   const [anchorNav, setAnchorNav] = useState(null);
   const [anchorUser, setAnchorUser] = useState(null);
   //NavBar Pages
   const [dialogOpen, setDialogOpen] = useState(false);
   const [page, setPage] = useState('');
-  const [guestRegister, setGuestRegister] = useState(false);
 
   const handleOpenNavMenu = (event) => {
     setAnchorNav(event.currentTarget);
@@ -62,7 +61,7 @@ const handleSetting = (e) => {
   } else if(name === `Profile`) {
     setView('user_profile')
   } else if (name === `Register`) {
-    setGuestRegister(true);
+    handleOpen();
   }
 }
 
@@ -246,9 +245,9 @@ const handleSetting = (e) => {
           </>
         )
       }
-      <Dialog open={guestRegister} aria-labelledby="dialog-title" sx={style}>
+      <Dialog open={open} aria-labelledby="dialog-title" sx={style}>
         <DialogTitle id="dialog-title">Register</DialogTitle>
-        <Register setView={setView} setGuest={setGuest} setSignedIn={setSignedIn}/>
+        <Register handleOpen={handleOpen} handleClose={handleClose} getUser={getUser}/>
       </Dialog>
     </div>
   );
