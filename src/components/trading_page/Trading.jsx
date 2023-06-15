@@ -3,8 +3,9 @@ import GraphDisplay from './GraphDisplay.jsx'
 import NewsList from './NewsList.jsx';
 import axios from "axios"
 import WatchList from './WatchList.jsx';
+import DynamicGraph from './DynamicGraph.jsx';
+import AccountTotal from '../modals/AccountTotal.jsx'
 import controllers from '../../backend/controllers/index.js';
-
 function Trading({user, setUser, guest}){
     const [coinOptions, setCoinOptions] = useState([
         [
@@ -417,17 +418,16 @@ function Trading({user, setUser, guest}){
     useEffect(()=>{if (guest === false) {controllers.updateUser(user.id, {watchList: watched})}}, [watched])
     return(
         <>
-        {/* <LineChart coin={'bitcoin'} interval={'d1'}/> */}
         <div className='trading-page' style={{display: 'flex', flexDirection: 'row'}}>
             <div className='trading-leftcol' style={{width: '30%'}}>
                 <NewsList watched={watched}/>
                 <WatchList coinOptions={coinOptions} user={user} setDynamicCoin={setDynamicCoin} watched={watched} setWatched={setWatched}/>
             </div>
             <div className='trading-rightcol'>
-                <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser} dynamic={false} dynamicCoin={dynamicCoin}/>
-                <div className='dynamic-graph'>
+              <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser} dynamic={false} dynamicCoin={dynamicCoin}/>
+              <div className='dynamic-graph'>
                 <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser} dynamic={true} dynamicCoin={dynamicCoin}/>
-                </div>
+              </div>
             </div>
         </div>
         {/* <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser} dynamic={false} dynamicCoin={dynamicCoin}/>

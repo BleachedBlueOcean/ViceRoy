@@ -1,24 +1,18 @@
 import React, {useState, useEffect} from 'react';
-import axios from 'axios'
 import {Card, CardContent, CardActions, Typography} from '@mui/material';
 
 // https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH&tsyms=USD
 const AccountTotal = ({user, unrealizedGains}) => {
 
-  // const [currPrice, setCurrPrice] = useState(undefined)
-
-
-  // const getCurrent = () => {
-  //   //grab list of coins
-  // }
-
-
   const calcAssets = () => {
-    //set to unrealized gain/loss
-    const buyIn = unrealizedGains.reduce((acc, user) => acc + user, 0)
-
-    // const sellAll =
-    return buyIn.toFixed(2)
+    if(unrealizedGains.length > 0) {
+    const arryL = unrealizedGains?.length
+    const usage = unrealizedGains?.slice(0, (arryL/2))
+    const buyIn = usage?.reduce((acc, user) => acc + user, 0)
+    const val = buyIn?.toFixed(2)
+    return buyIn?.toFixed(2)
+    }
+    return 0
   }
 
     return (
@@ -31,7 +25,7 @@ const AccountTotal = ({user, unrealizedGains}) => {
             Available Purchasing Power: ${user.availableCash}
           </Typography>
           <Typography>
-            {/* Unrealized Gain/Loss: ${calcAssets()} */}
+            Unrealized Gain/Loss: ${calcAssets()}
           </Typography>
         </CardContent>
       </Card>
