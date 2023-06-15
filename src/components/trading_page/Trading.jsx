@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import GraphDisplay from './GraphDisplay.jsx';
 import NewsList from './NewsList.jsx';
-import axios from 'axios';
-import WatchList from './WatchList.jsx';
+import axios from "axios"
+import WatchList from './WatchList.jsx';;
+import AccountTotal from '../modals/AccountTotal.jsx'
 import controllers from '../../backend/controllers/index.js';
-import LeftColTemp from '../containerTemplates/LeftColTemp.jsx';
-import { Box } from '@mui/material';
-
-const Trading = ({user, setUser, guest}) => {
-  const [coinOptions, setCoinOptions] = useState([
+function Trading({user, setUser, guest}){
+    const [coinOptions, setCoinOptions] = useState([
         [
             "BTC",
             "Bitcoin"
@@ -419,7 +417,6 @@ const Trading = ({user, setUser, guest}) => {
     useEffect(()=>{if (guest === false) {controllers.updateUser(user.id, {watchList: watched});}}, [watched]);
     return(
         <>
-        {/* <LineChart coin={'bitcoin'} interval={'d1'}/> */}
         <div className='trading-page' style={{display: 'flex', flexDirection: 'row'}}>
             <div className='trading-leftcol' style={{width: '30%'}}>
                 <LeftColTemp user={user} />
@@ -427,10 +424,10 @@ const Trading = ({user, setUser, guest}) => {
                 <WatchList coinOptions={coinOptions} user={user} setDynamicCoin={setDynamicCoin} watched={watched} setWatched={setWatched}/>
             </div>
             <div className='trading-rightcol'>
-                <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser} dynamic={false} dynamicCoin={dynamicCoin}/>
-                <div className='dynamic-graph'>
+              <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser} dynamic={false} dynamicCoin={dynamicCoin}/>
+              <div className='dynamic-graph'>
                 <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser} dynamic={true} dynamicCoin={dynamicCoin}/>
-                </div>
+              </div>
             </div>
         </div>
         {/* <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser} dynamic={false} dynamicCoin={dynamicCoin}/>

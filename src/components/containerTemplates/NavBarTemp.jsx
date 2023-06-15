@@ -48,12 +48,24 @@ const handleSetting = (e) => {
     } else if(guest){
       console.log('here setting guest to false');
       setGuest(false)
+=========
+  const handleSetting = (e) => {
+    console.log('testing 2', e.target.innerHTML);
+    let name = e.target.innerHTML;
+    console.log(name);
+    if(name === 'Logout') {
+      console.log('logged out');
+      if(signedIn) {
+        setSignedIn(false);
+      } else if(guest) {
+        setGuest(false);
+      }
+>>>>>>>>> Temporary merge branch 2
     }
-  }
-  if(name === `Profile`) {
-    setView('user_profile')
-  }
-}
+    if(name === `Profile`) {
+      setView('user_profile');
+    }
+  };
 
   //For Pages
   const openDialog = (page) => {

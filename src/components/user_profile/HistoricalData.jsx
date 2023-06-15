@@ -7,12 +7,13 @@ const HistoricalData = ({user}) => {
   //pass down user,
   // const [cryptoCoins, setCryptoCoins] = useState([]);
 
-  const getCurrentMargin = (prop) => {
+  // const getCurrentMargin = () => {
+    // let avgAsset = user.
     //pass down current coin value, prbly sync with trading page
     //given coin name, find price
     //prop.value * prop.quant || aka coin.quant
     //pull quant from own data
-  }
+  // }
 
   //USE TO CALC PROFIT/LOSS FOR EACH COIN
 

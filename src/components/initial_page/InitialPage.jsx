@@ -147,12 +147,12 @@ const InitialPage = ({setView, setUser, setGuest, setSignedIn, setPreviewImage})
           </InputLabel>
           <OutlinedInput id="signInPassword" type="password" placeholder="Password" onChange={onPasswordChange} />
         </div>
-        {showMissingPass && (<div className="error">Invalid Password</div>)}
-        {showPasswordMessage && (<div className="error">Incorrect Password</div>)}
         <Box sx={{
           margin: '2rem',
         }}
         >
+        {showMissingPass && (<div className="error">Invalid Password</div>)}
+        {showPasswordMessage && (<div className="error">Incorrect Password</div>)}
           <Button className="loginButton" type="submit" variant="contained">Login</Button>
         </Box>
         <Box className="loginoptions">
