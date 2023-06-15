@@ -43,14 +43,10 @@ const handleSetting = (e) => {
   let name = e.target.innerHTML;
   if(name === 'Logout') {
     console.log(guest)
-    if(signedIn){
-      setSignedIn(false)
-    } else if(guest){
-      console.log('here setting guest to false');
-      setGuest(false)
-    }
-  }
-  if(name === `Profile`) {
+    setSignedIn(false)
+    setGuest(false)
+    setView('default');
+  } else if(name === `Profile`) {
     setView('user_profile')
   }
 }

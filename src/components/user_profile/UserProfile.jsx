@@ -5,49 +5,46 @@ import axios from 'axios'
 import CompletedAchievements from './CompletedAchievements.jsx';
 import ProfilePicture from './ProfilePicture.jsx';
 import ResetAccount from './ResetAccount.jsx';
-
 import SelfCoins_Values from './SelfCoins_Values.jsx';
 import AccountTotal from '../modals/AccountTotal.jsx';
 
 
-const UserProfile = ({user, setUser, previewImage, setPreviewImage, setShowBadgesModal, showBadgesModal, setView}) => {
+const UserProfile = ({user, setUser, previewImage, setPreviewImage, setShowBadgesModal, showBadgesModal, setView, unrealizedGains, setUnrealizedGains}) => {
 
-  const [unrealizedGains, setUnrealizedGains] = useState([]);
-  
-  const [coins, setCoins] = useState(null);
 
-  const getAPI = () => {
-    const icons = [(user.coinsOwned).map(coin=>coin.icon)]
-    axios(`https://min-api.cryptocompare.com/data/pricemulti?fsyms=${icons.join('')}&tsyms=USD`)
-    .then((result) => {
-      console.log(result.data);
-      setCoins(result.data);
-    }).catch((err) => console.log('Did not get info from API', err))
+  //const [unrealizedGains, setUnrealizedGains] = useState([]);
+  // console.log('inside UserPorfile', setAccountTotal);
+
+  const updateUnrealizedGains =  async (val)=>{
+    // console.log('this is updated gains:', unrealizedGains);
+    
+    console.log('value calculated is', val);
+    const newVal = [...unrealizedGains, val];
+    console.log('newVal', newVal)
+    await setUnrealizedGains((prevGain) => {
+      return [...prevGain, val]
+    });
   }
-
-  useEffect(() => {
-    getAPI();
-    const interval = setInterval(() => {
-      getAPI();
-    }, 100000)
-    return () => clearInterval(interval);
-  }, [])
-
-
+  // useEffect(()=>{
+    
+  // },[])
+ 
   return (
     <div style={{display: "flex"}}>
       <div>
       <ProfilePicture user={user} setUser={setUser} previewImage={previewImage} setPreviewImage={setPreviewImage}/>
-      <AccountTotal user={user}/>
+      {/* {unrealizedGains.length > 0 ? <AccountTotal setAccountTotal={setAccountTotal} user={user} unrealizedGains={unrealizedGains}/> : <p>no value</p>} */}
+      <AccountTotal user={user} unrealizedGains={unrealizedGains}/>
       <CompletedAchievements achievedBadges={user.achievements} setShowBadgesModal={setShowBadgesModal} showBadgesModal={showBadgesModal} />
       </div>
       <div style={{display: 'inline'}}>
       <Button variant="contained" color="primary"
         onClick={() => setView('trading')}>Trading Page</Button>
-      <ResetAccount user={user} setUser={setUser}/>
-      </div>
+      <ResetAccount user={user} setUser={setUser} setUnrealizedGains={setUnrealizedGains}/>
+     </div>
       <HistoricalData user={user}/>
-      {coins? <SelfCoins_Values ownedCoins={user.coinsOwned} liveCoins={coins} unrealizedGains={unrealizedGains} setUnrealizedGains={setUnrealizedGains}/> : null} 
+      <SelfCoins_Values ownedCoins={user.coinsOwned} 
+      updateUnrealizedGains={updateUnrealizedGains}/> 
     </div>
   );
 }
