@@ -36,7 +36,6 @@ const LeaderBoard = ({dialogOpen, closeDialog, page}) => {
         <CloseIcon />
       </IconButton> */}
       <DialogContent>
-        <DialogContentText>
           <Table>
             <TableHead>
               <TableRow>
@@ -54,7 +53,6 @@ const LeaderBoard = ({dialogOpen, closeDialog, page}) => {
               })}
             </TableBody>
           </Table>
-        </DialogContentText>
       </DialogContent>
     </Dialog>
     </>
