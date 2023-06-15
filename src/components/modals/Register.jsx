@@ -8,7 +8,7 @@ import DialogActions from '@mui/material/DialogActions';
 
 import controllers from '../../backend/controllers/index.js'
 
-function Register({ handleClose, getUser }) {
+function Register({ handleClose, getUser, setView, setSignedIn, setGuest }) {
     const [passMinError, setPassMinError] = useState(false);
     const [registrationData, setRegistrationData] = useState({ response: {
         firstName: '',
@@ -69,7 +69,10 @@ function Register({ handleClose, getUser }) {
         if (registrationData.response.password === registrationData.response.confirmPass) {
             await addUser();
             alert('Registration Complete');
-            handleClose();
+            await setView('default');
+            setSignedIn(false);
+            setGuest(false);
+            await handleClose();
             await getUser(registrationData.response.email, registrationData.response.password)
             setPassMinError(false);
         } else {

@@ -5,7 +5,7 @@ import GraphNavTemp from '../containerTemplates/GraphNavTemp.jsx';
 import CryptoBuySellTemp from '../containerTemplates/CryptoBuySellTemp.jsx';
 import { Box } from '@mui/material';
 
-const GraphDisplay = ({coinOptions, user, setUser, dynamic, dynamicCoin }) => {
+const GraphDisplay = ({coinOptions, user, setUser, dynamic, dynamicCoin, guest }) => {
   const [coin, setCoin] = useState([`BTC`,`Bitcoin`])
   const [interval, setInterval] = useState('day')
   const [view, setView] = useState('line')
@@ -28,7 +28,7 @@ const GraphDisplay = ({coinOptions, user, setUser, dynamic, dynamicCoin }) => {
       <div className="graph">
          {view === 'candle' && <CandleChart interval={interval} coin={coin} height={"400px"}/>}
         {view === 'line' && <LineChart interval={interval} coin={coin} height={"400px"}/>}
-        <CryptoBuySellTemp coin={coin} user={user} setUser={setUser}/>
+        <CryptoBuySellTemp coin={coin} user={user} setUser={setUser} guest={guest}/>
       </div>
     </Box>
 

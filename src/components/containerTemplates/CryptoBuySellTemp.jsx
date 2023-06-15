@@ -4,7 +4,7 @@ import axios from 'axios';
 import controllers from '../../backend/controllers/index.js'
 
 //consider just using a single execute order button
-const CryptoBuySellTemp = ({ props, coin, user, setUser }) => {
+const CryptoBuySellTemp = ({ props, coin, user, setUser, guest }) => {
   const [buyAmt, setBuyAmt] = useState('');
   const [sellAmt, setSellAmt] = useState('');
   const [price, setPrice] = useState('');
@@ -170,8 +170,8 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser }) => {
           paddingTop: '4px',
         }}>
           {/* <Button variant="contained">ExecuteOrder</Button> */}
-          <Button variant="contained" onClick={handleBuyClick}>Buy</Button>
-          <Button variant="contained" onClick={handleSellClick}>Sell</Button>
+          {!guest && <Button variant="contained" onClick={handleBuyClick}>Buy</Button>}
+          {!guest && <Button variant="contained" onClick={handleSellClick}>Sell</Button>}
         </Stack>
       </Paper>
     </Container>

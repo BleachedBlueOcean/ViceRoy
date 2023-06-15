@@ -27,7 +27,7 @@ function CandleChart({coin, interval, height}) {
   }, [coin, interval])
 
   const options = {
-    title: `${coin.toUpperCase()} Candles`,
+    title: `${coin[0].toUpperCase()} ${coin[1].toUpperCase()} Candles`,
     legend: "none",
     backgroundColor: "#32322C",
     colors:["#13C4A3"],
