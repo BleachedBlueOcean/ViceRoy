@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import NewsEntry from './NewsEntry.jsx';
-import { List, Divider } from '@mui/material';
+import { Box, List, Divider } from '@mui/material';
 import LeftColTemp from '../containerTemplates/LeftColTemp.jsx'
 
 function NewsList ({watched}) {
@@ -28,7 +28,12 @@ function NewsList ({watched}) {
   };
 
   return (
-      <div className='newslist' style={{height: '600px', overflowY: 'auto', borderRadius: '10px', backgroundColor: '#13C4A3'}}>
+      <Box className='newslist' sx={{
+        height: '600px',
+        overflowY: 'auto',
+        borderRadius: '10px',
+        backgroundColor: '#13C4A3'
+      }}>
         <List sx={style}>
           {articles.map((article) =>
             <div style={{borderBottom: 'solid gray', width: '100%'}}key={article.title}>
@@ -36,7 +41,7 @@ function NewsList ({watched}) {
             </div>
           )}
         </List>
-      </div>
+      </Box>
   )
 }
 

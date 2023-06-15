@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import GraphDisplay from './GraphDisplay.jsx'
+import GraphDisplay from './GraphDisplay.jsx';
 import NewsList from './NewsList.jsx';
-import axios from "axios"
+import axios from 'axios';
 import WatchList from './WatchList.jsx';
 import controllers from '../../backend/controllers/index.js';
+import LeftColTemp from '../containerTemplates/LeftColTemp.jsx';
+import { Box } from '@mui/material';
 
-function Trading({user, setUser, guest}){
-    const [coinOptions, setCoinOptions] = useState([
+const Trading = ({user, setUser, guest}) => {
+  const [coinOptions, setCoinOptions] = useState([
         [
             "BTC",
             "Bitcoin"
@@ -407,19 +409,20 @@ function Trading({user, setUser, guest}){
             "ZIL",
             "Zilliqa"
         ]
-    ])
-    const [dynamicCoin, setDynamicCoin] = useState(['ETH', 'Ethereum'])
-    const [watched, setWatched] = useState(['BTC'])
+    ]);
+    const [dynamicCoin, setDynamicCoin] = useState(['ETH', 'Ethereum']);
+    const [watched, setWatched] = useState(['BTC']);
     const getWatched = () => {
-        setWatched(user.watchList)
-    }
-    useEffect(()=>{getWatched()}, [])
-    useEffect(()=>{if (guest === false) {controllers.updateUser(user.id, {watchList: watched})}}, [watched])
+        setWatched(user.watchList);
+    };
+    useEffect(()=>{getWatched();}, []);
+    useEffect(()=>{if (guest === false) {controllers.updateUser(user.id, {watchList: watched});}}, [watched]);
     return(
         <>
         {/* <LineChart coin={'bitcoin'} interval={'d1'}/> */}
         <div className='trading-page' style={{display: 'flex', flexDirection: 'row'}}>
             <div className='trading-leftcol' style={{width: '30%'}}>
+                <LeftColTemp user={user} />
                 <NewsList watched={watched}/>
                 <WatchList coinOptions={coinOptions} user={user} setDynamicCoin={setDynamicCoin} watched={watched} setWatched={setWatched}/>
             </div>
@@ -437,8 +440,8 @@ function Trading({user, setUser, guest}){
         {/* <NewsList watched={watched}/>
         <WatchList coinOptions={coinOptions} user={user} setDynamicCoin={setDynamicCoin} watched={watched} setWatched={setWatched}/> */}
         </>
-    )
+    );
 
-}
+};
 
 export default Trading;

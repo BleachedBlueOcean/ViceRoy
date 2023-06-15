@@ -4,7 +4,7 @@ import {Container, Paper} from '@mui/material';
 import AccountTotal from '../modals/AccountTotal.jsx'
 
 const LeftColTemp = ({user}) => (
-  <Container maxWidth="xs">
+  <Container className="leftColumnContainer" maxWidth="xs" sx={{marginLeft: 0,}}>
     <Paper sx={{ padding: 2, marginTop: 16 }}>
       <AccountTotal user={user}/>
     </Paper>

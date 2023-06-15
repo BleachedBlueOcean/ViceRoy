@@ -157,7 +157,13 @@ const handleSetting = (e) => {
             >
               ViceRoy
             </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            <Box className="navBarButtons" sx={{
+              flexGrow: 1,
+              display: { xs: 'none', md: 'flex' },
+              justifyContent: 'flex-end',
+              gap: '4rem',
+              paddingRight: '4rem',
+            }}>
               {pages.map((page) => (
                 <Button value={page}
                   key={page}

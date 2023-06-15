@@ -118,10 +118,10 @@ const App = (props) => {
                 setView={setView} guest={guest} setGuest={setGuest}
                 setShowBadgesModal={setShowBadgesModal}
               />
-              <LeftColTemp user={user} />
+
             </>
             <div className="trading">
-
+              {/* <LeftColTemp user={user} /> */}
               <Trading setView={setView} user={user} signedIn={signedIn} guest={guest} setUser={setUser}/>
 
             </div>
