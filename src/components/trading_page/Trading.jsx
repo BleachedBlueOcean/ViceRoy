@@ -3,7 +3,6 @@ import GraphDisplay from './GraphDisplay.jsx'
 import NewsList from './NewsList.jsx';
 import axios from "axios"
 import WatchList from './WatchList.jsx';
-import DynamicGraph from './DynamicGraph.jsx';
 import AccountTotal from '../modals/AccountTotal.jsx'
 import controllers from '../../backend/controllers/index.js';
 function Trading({user, setUser, guest}){
@@ -414,8 +413,10 @@ function Trading({user, setUser, guest}){
     const getWatched = () => {
         setWatched(user.watchList)
     }
+
     useEffect(()=>{getWatched()}, [])
     useEffect(()=>{if (guest === false) {controllers.updateUser(user.id, {watchList: watched})}}, [watched])
+
     return(
         <>
         <div className='trading-page' style={{display: 'flex', flexDirection: 'row'}}>
