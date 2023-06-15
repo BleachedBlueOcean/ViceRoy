@@ -19,6 +19,7 @@ export const Context = React.createContext();
 // import global theme
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme.js';
+import theme from './theme.js';
 
 const App = (props) => {
   //will remove
@@ -184,8 +185,7 @@ const App = (props) => {
               />
             </>
             <div className="trading">
-              <AccountTotal user={user} unrealizedGains={unrealizedGains}/>
-              <Trading setView={setView} user={user} signedIn={signedIn} guest={guest}/>
+              <Trading setUser={setUser} setView={setView} user={user} signedIn={signedIn} guest={guest} unrealizedGains={unrealizedGains}/>
             </div>
           </>
       );
@@ -196,18 +196,17 @@ const App = (props) => {
             setSignedIn={setSignedIn}
             user={user} previewImage={previewImage} setPreviewImage={setPreviewImage}
             setView={setView} setGuest={setGuest}
-            setShowBadgesModal={setShowBadgesModal} open={open} handleOpen={handleOpen} handleClose={handleClose} getUser={getUser}
-            />
+            setShowBadgesModal={setShowBadgesModal} open={open} handleOpen={handleOpen} handleClose={handleClose} getUser={getUser}/>
           <div className="user_profile">
-            <AccountTotal user={user} unrealizedGains={unrealizedGains}/>
+            {/* <AccountTotal user={user} unrealizedGains={unrealizedGains}/>  */}
             <UserProfile setView={setView} user={user} setUser={setUser} signedIn={signedIn} previewImage={previewImage}
             setPreviewImage={setPreviewImage}
             showBadgesModal={showBadgesModal}
             setShowBadgesModal={setShowBadgesModal} unrealizedGains={unrealizedGains} setUnrealizedGains={setUnrealizedGains}/>
 
-          </div>
-        </>
-        )
+        </div>
+      </>
+      );
     }
   };
 
@@ -217,7 +216,13 @@ const App = (props) => {
       setView('user_profile');
     } else if(guest) {
       setView('trading')
+  useEffect(()=>{
+    if(signedIn){
+      setView('user_profile');
+    } else if(guest) {
+      setView('trading')
     }
+  },[signedIn, guest])
   },[signedIn, guest])
 
 
@@ -226,9 +231,13 @@ const App = (props) => {
     <ThemeProvider theme={theme}>
       {renderView()}
     </ThemeProvider>
+    <ThemeProvider theme={theme}>
+      {renderView()}
+    </ThemeProvider>
   );
 
 };
 
+export default App;
 export default App;
 

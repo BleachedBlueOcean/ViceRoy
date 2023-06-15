@@ -50,25 +50,25 @@ function WatchList ({coinOptions, user, setDynamicCoin, watched, setWatched}) {
           renderValue={(selected) => (
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, bgcolor: 'gray'}}>
               {selected.map((val) => (
-                <Chip key={val} label={val} sx={{color: 'white', bgcolor: 'black'}}/>
+                <Chip key={val} label={val.join(' ')} sx={{color: 'white', bgcolor: 'black'}}/>
               ))}
             </Box>
           )}
           MenuProps={MenuProps}
         >
-          {topcoins.map((coin) => (
+          {coinOptions.map((coin) => (
             <MenuItem
               key={coin}
               value={coin}
               sx={{color: 'green', bgcolor: 'black'}}
             >
-              {coin}
+              {coin.join(' ')}
             </MenuItem>
           ))}
         </Select>
       </FormControl>
       <div style={{backgroundColor: '#13C4A3', maxHeight: '300px', overflowY: 'auto', borderRadius: '10px'}}>
-        {watched.map((watchedcoin) => <WatchEntry coinname={watchedcoin} key={watchedcoin} setDynamicCoin={setDynamicCoin}/>)}
+        {watched.map((watchedcoin) => <WatchEntry watchedcoin={watchedcoin} key={watchedcoin} setDynamicCoin={setDynamicCoin}/>)}
       </div>
     </div>
   );
