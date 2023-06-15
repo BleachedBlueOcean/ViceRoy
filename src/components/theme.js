@@ -15,6 +15,7 @@ const theme = createTheme({
     },
   },
   typography: {
+
   },
   components: {
       // Name of the component
@@ -22,6 +23,9 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 24,
+          '&.Mui-focused': {
+            backgroundColor: 'secondary',
+          }
         },
       },
       defaultProps: {
@@ -30,6 +34,11 @@ const theme = createTheme({
 
       },
     },
+    // MuiInputLabel: {
+    //   defaultProps: {
+    //     color: 'white',
+    //   },
+    // },
     MuiOutlinedInput: {
       defaultProps: {
         color: 'secondary',
@@ -39,7 +48,10 @@ const theme = createTheme({
             borderRadius: 4,
           },
         }
-      }
+      },
+      // '& .MuiOutlinedInput-input:focused': {
+      //   borderColor: 'green',
+      // }
     },
     MuiPaper: {
       styleOverrides: {

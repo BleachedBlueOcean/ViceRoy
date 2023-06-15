@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import WatchEntry from './WatchEntry.jsx';
 import { List, Divider, Box, OutlinedInput, InputLabel, MenuItem, FormControl, Chip, Select } from '@mui/material';
-import controllers from '../../backend/controllers/index.js'
+import controllers from '../../backend/controllers/index.js';
 
 function WatchList ({coinOptions, user, setDynamicCoin, watched, setWatched}) {
   const [topcoins, setTopcoins] = useState([])
@@ -27,8 +27,8 @@ function WatchList ({coinOptions, user, setDynamicCoin, watched, setWatched}) {
     const {
       target: {value},
     } = event;
-    console.log('value :', value)
-    setWatched(value.slice(0,10));
+    console.log('value :', value);
+    setWatched(value.slice(0, 10));
     // controllers.updateUser(user.id, {watchList: watched})
   }
   // useEffect(()=>{getWatched()}, [])
@@ -41,6 +41,7 @@ function WatchList ({coinOptions, user, setDynamicCoin, watched, setWatched}) {
         <Select
           labelId = 'watch-list-label'
           id = 'watch-list-chip'
+          defaultValue={watched[0] || ''}
           multiple
           sx={{color: 'black'}}
           value={watched.slice(0, 10)}
@@ -70,7 +71,7 @@ function WatchList ({coinOptions, user, setDynamicCoin, watched, setWatched}) {
         {watched.map((watchedcoin) => <WatchEntry coinname={watchedcoin} key={watchedcoin} setDynamicCoin={setDynamicCoin}/>)}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default WatchList
+export default WatchList;

@@ -16,7 +16,7 @@ const guestSettings = ['Register', 'Logout'];
 
 
 
-function NavBarTemp({signedIn, setSignedIn, setView, previewImage, setPreviewImage, setShowBadgesModal, user, guest, setGuest}) {
+const NavBarTemp = ({signedIn, setSignedIn, setView, previewImage, setPreviewImage, setShowBadgesModal, user, guest, setGuest}) => {
   const [anchorNav, setAnchorNav] = useState(null);
   const [anchorUser, setAnchorUser] = useState(null);
   //NavBar Pages
@@ -65,13 +65,19 @@ const handleSetting = (e) => {
   };
 
   return (
-    <div>
-      <AppBar position="static">
+    <div className="navbar">
+      <AppBar position="static" sx={{
+          borderRadius: '0px',
+          marginTop: '1rem',
+          padding: '8px',
+      }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <SvgIcon>
-              <Logo />
-            </SvgIcon>
+            <Box component="img"
+            sx={{
+              height: '10vh',
+              width: 'auto',
+            }} alt="ViceRoy Website Logo" src="icons/logo.png" />
             {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
             <Typography
               variant="h6"
@@ -81,14 +87,16 @@ const handleSetting = (e) => {
               sx={{
                 mr: 2,
                 display: { xs: 'none', md: 'flex' },
-                fontFamily: 'monospace',
+                fontFamily: 'optima',
                 fontWeight: 700,
+                fontSize: '3rem',
                 letterSpacing: '.3rem',
-                color: 'inherit',
+                color: 'primary',
                 textDecoration: 'none',
               }}
+              className="navbar-title"
             >
-              LOGO GOES HERE
+              ViceRoy
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -140,14 +148,14 @@ const handleSetting = (e) => {
                 mr: 2,
                 display: { xs: 'flex', md: 'none' },
                 flexGrow: 1,
-                fontFamily: 'monospace',
+                fontFamily: 'optima',
                 fontWeight: 700,
                 letterSpacing: '.3rem',
                 color: 'inherit',
                 textDecoration: 'none',
               }}
             >
-              LOGO GOES GOES HERE 
+              ViceRoy
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {pages.map((page) => (
@@ -181,7 +189,7 @@ const handleSetting = (e) => {
                 }}
                 open={Boolean(anchorUser)}
                 onClose={handleCloseUserMenu}>
-                {guest ? 
+                {guest ?
                 guestSettings.map((setting) => (
                   <MenuItem key={setting} value={setting}
                     onClick={handleSetting}>
