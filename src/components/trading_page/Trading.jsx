@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import GraphDisplay from './GraphDisplay.jsx';
 import NewsList from './NewsList.jsx';
 import axios from "axios"
-import WatchList from './WatchList.jsx';;
+import WatchList from './WatchList.jsx';
+import DynamicGraph from './DynamicGraph.jsx';
 import AccountTotal from '../modals/AccountTotal.jsx'
 import controllers from '../../backend/controllers/index.js';
 function Trading({user, setUser, guest}){
