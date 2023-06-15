@@ -4,13 +4,14 @@ import Trading from './trading_page/Trading.jsx';
 import '../css/App.css';
 import InitialPage from './initial_page/InitialPage.jsx';
 import UserProfile from './user_profile/UserProfile.jsx';
+import AccountTotal from './modals/AccountTotal.jsx';
+import { Box, Typography } from '@mui/material';
 
 // import controllers from '../backend/controllers'
 // import axios from 'axios';
 // import dns from 'dns'
 
 import NavBarTemp from './containerTemplates/NavBarTemp.jsx';
-import LeftColTemp from './containerTemplates/LeftColTemp.jsx';
 import GraphNavTemp from './containerTemplates/GraphNavTemp.jsx';
 import CryptoBuySellTemp from './containerTemplates/CryptoBuySellTemp.jsx';
 
@@ -27,6 +28,7 @@ const App = (props) => {
   const [guest, setGuest] = useState(false);
   const [previewImage, setPreviewImage] = useState(user.profilePic);
   const [showBadgesModal, setShowBadgesModal] = useState(false);
+  const [unrealizedGains, setUnrealizedGains] = useState([]);
 
   const getUsers = async () => {
     try {
@@ -74,13 +76,39 @@ const App = (props) => {
 
 
   const renderView = () => {
+    console.log('rendered!', view);
     switch (view) {
     case 'default':
       return (
-          <div>
-
-            <InitialPage setView={setView} setUser={setUser} setGuest={setGuest} setSignedIn={setSignedIn} setPreviewImage={setPreviewImage}/>
-          </div>
+          <Box
+            sx={{
+              backgroundImage: 'url("img/loginpage.png")',
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover',
+              height: '102.6vh',
+            }}
+          >
+            <p className="login-page-title">
+              ViceRoy
+            </p>
+            <Box sx={{
+              position: 'relative',
+              display: 'flex',
+              objectFit: 'contain',
+              height: '50vh',
+              width: '22vw',
+              left: '40vw',
+              alignItems: 'center',
+              flexDirection: 'row',
+            }}>
+              <Box component="img" sx={{
+                position: 'absolute',
+                height: '100%',
+                width: 'auto',
+              }} alt="ViceRoy Website Logo" src="icons/logo.png" />
+              <InitialPage setView={setView} setUser={setUser} setGuest={setGuest} setSignedIn={setSignedIn} setPreviewImage={setPreviewImage}/>
+            </Box>
+          </Box>
       );
     case 'trading':
       return (
@@ -92,10 +120,10 @@ const App = (props) => {
                 setView={setView} guest={guest} setGuest={setGuest}
                 setShowBadgesModal={setShowBadgesModal}
               />
-              <LeftColTemp user={user} />
             </>
             <div className="trading">
-              <Trading setView={setView} user={user} signedIn={signedIn} />
+              <AccountTotal user={user} unrealizedGains={unrealizedGains}/>
+              <Trading setView={setView} user={user} signedIn={signedIn} guest={guest}/>
             </div>
           </>
       );
@@ -105,42 +133,34 @@ const App = (props) => {
           <NavBarTemp signedIn={signedIn}
             setSignedIn={setSignedIn}
             user={user} previewImage={previewImage} setPreviewImage={setPreviewImage}
-            setView={setView}
+            setView={setView} setGuest={setGuest} 
             setShowBadgesModal={setShowBadgesModal}/>
-          {/* <LeftColTemp user={user}/> */}
           <div className="user_profile">
-
+            <AccountTotal user={user} unrealizedGains={unrealizedGains}/>
             <UserProfile setView={setView} user={user} setUser={setUser} signedIn={signedIn} previewImage={previewImage}
             setPreviewImage={setPreviewImage}
             showBadgesModal={showBadgesModal}
-            setShowBadgesModal={setShowBadgesModal}/>
+            setShowBadgesModal={setShowBadgesModal} unrealizedGains={unrealizedGains} setUnrealizedGains={setUnrealizedGains}/>
           </div>
         </>
         )
     }
   };
 
-  useEffect(() => {
-
-    renderView()
-  }, [view])
 
   useEffect(()=>{
-    if(signedIn || guest ){
-      setView('trading');
-    } else {
-      console.log('signed in use effect triggered');
-      setView('default');
+    if(signedIn){
+      setView('user_profile');
+    } else if(guest) {
+      setView('trading')
     }
-
   },[signedIn, guest])
+
 
 
   return (
     <ThemeProvider theme={theme}>
-
       {renderView()}
-
     </ThemeProvider>
   );
 

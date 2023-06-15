@@ -6,13 +6,14 @@ import { Button, Dialog, DialogTitle, DialogContent, DialogActions, DialogConten
 import controllers from '../../backend/controllers/index.js'
 
 
-const ResetAccount = ({user, setUser}) => {
+const ResetAccount = ({user, setUser, setUnrealizedGains}) => {
   const [open, setOpen] = useState(false);
 
 
   const confirmReset = async () => {
-    const form = {...user, coinsOwned: ['asdlfkasjdhkj'], totalAssets: 598700, availableCash: 509780}
+    const form = {...user, coinsOwned: [], totalAssets: 500, availableCash: 500}
     setUser(form);
+    setUnrealizedGains(0)
     console.log('this is form', form.id)
     try{
       // console.log('this is form id', form.id)

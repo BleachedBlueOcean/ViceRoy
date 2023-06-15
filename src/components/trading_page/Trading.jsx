@@ -4,8 +4,9 @@ import NewsList from './NewsList.jsx';
 import axios from "axios"
 import WatchList from './WatchList.jsx';
 import DynamicGraph from './DynamicGraph.jsx';
-
-function Trading({user, setUser}){
+import AccountTotal from '../modals/AccountTotal.jsx'
+import controllers from '../../backend/controllers/index.js';
+function Trading({user, setUser, guest}){
     const [coinOptions, setCoinOptions] = useState([
         [
             "BTC",
@@ -408,34 +409,33 @@ function Trading({user, setUser}){
             "Zilliqa"
         ]
     ])
-    const [dynamicCoin, setDynamicCoin] = useState('ETH')
-    // useEffect(() => {
-    //     axios(`https://min-api.cryptocompare.com/data/top/totalvolfull?limit=100&tsym=USD`)
-    //     .then((result) => {
-    //       console.log('coinOptions data', result.data.Data)
-    //       return result.data.Data
-    //     })
-    //     .then((result) => {
-    //       // console.log('This is what setChartData sees ', result)
-    //       let data = result.map((point, index) => {
-    //         return [index, point]
-    //       })
-    //       // console.log('This is the data going to the chart', data)
-    //       setCoinOptions(data)
-    //     })
-    //     .catch((err) => console.log('Did not get info from API', err))
-    //   }, [])
-
+    const [dynamicCoin, setDynamicCoin] = useState(['ETH', 'Ethereum'])
+    const [watched, setWatched] = useState(['BTC'])
+    const getWatched = () => {
+        setWatched(user.watchList)
+    }
+    useEffect(()=>{getWatched()}, [])
+    useEffect(()=>{if (guest === false) {controllers.updateUser(user.id, {watchList: watched})}}, [watched])
     return(
         <>
-        {/* <LineChart coin={'bitcoin'} interval={'d1'}/> */}
-
-        <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser}/>
-        <div className='dynamic-graph'>
-        <DynamicGraph coinOptions={coinOptions} user={user} dynamicCoin={dynamicCoin}/>
+        <div className='trading-page' style={{display: 'flex', flexDirection: 'row'}}>
+            <div className='trading-leftcol' style={{width: '30%'}}>
+                <NewsList watched={watched}/>
+                <WatchList coinOptions={coinOptions} user={user} setDynamicCoin={setDynamicCoin} watched={watched} setWatched={setWatched}/>
+            </div>
+            <div className='trading-rightcol'>
+              <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser} dynamic={false} dynamicCoin={dynamicCoin}/>
+              <div className='dynamic-graph'>
+                <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser} dynamic={true} dynamicCoin={dynamicCoin}/>
+              </div>
+            </div>
         </div>
-        <NewsList/>
-        <WatchList coinOptions={coinOptions} user={user} setDynamicCoin={setDynamicCoin}/>
+        {/* <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser} dynamic={false} dynamicCoin={dynamicCoin}/>
+        <div className='dynamic-graph'>
+        <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser} dynamic={true} dynamicCoin={dynamicCoin}/>
+        </div> */}
+        {/* <NewsList watched={watched}/>
+        <WatchList coinOptions={coinOptions} user={user} setDynamicCoin={setDynamicCoin} watched={watched} setWatched={setWatched}/> */}
         </>
     )
 
