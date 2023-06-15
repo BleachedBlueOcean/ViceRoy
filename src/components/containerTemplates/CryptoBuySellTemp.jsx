@@ -72,10 +72,13 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser }) => {
         console.log('This is the currentCoin', currentCoin)
         console.log('currentCoinIdx', currentCoinIdx)
         console.log('This is the currentCoin[currentCoinIdx]', currentCoin[currentCoinIdx])
+        console.log('This is the (currentCoin[currentCoinIdx].quantity + Number(buyAmt))', (currentCoin[currentCoinIdx].quantity + Number(buyAmt)))
+        console.log('This is the ((currentCoin[currentCoinIdx].quantity * currentCoin[currentCoinIdx].avgBuyVal) + (Number(buyAmt) * price))', ((currentCoin[currentCoinIdx].quantity * currentCoin[currentCoinIdx].avgBuyVal) + (Number(buyAmt) * price)))
+        let newAvgBuyVal = ((currentCoin[currentCoinIdx].quantity * currentCoin[currentCoinIdx].avgBuyVal) + (Number(buyAmt) * price))/(currentCoin[currentCoinIdx].quantity + Number(buyAmt));
         let updateCurrCoin = {
           ...currentCoin[currentCoinIdx],
-          avgBuyVal: ((currentCoin[currentCoinIdx].quantity * currentCoin[currentCoinIdx].avgBuyVal) + (Number(buyAmt) * price))/(currentCoin[currentCoinIdx].quantity + buyAmt),
-          quantity: Number(currentCoin[currentCoinIdx].quantity) + Number(buyAmt),
+          avgBuyVal: newAvgBuyVal,
+          quantity: Number(Number(currentCoin[currentCoinIdx].quantity) + Number(buyAmt)),
         }
         console.log('This is NOT the first purchase of this coin')
         let update = user.coinsOwned
