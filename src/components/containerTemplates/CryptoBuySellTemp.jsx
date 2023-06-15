@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Container, Paper, Stack, Button,  Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField} from '@mui/material';
+import {Container, Paper, Stack, Button,  Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, DialogActions, Dialog, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
 import axios from 'axios';
 import controllers from '../../backend/controllers/index.js'
 
@@ -8,6 +8,8 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser }) => {
   const [buyAmt, setBuyAmt] = useState('');
   const [sellAmt, setSellAmt] = useState('');
   const [price, setPrice] = useState('');
+  const [open, setOpen] = useState(false);
+  const [trade, setTrade] = useState('')
 
   useEffect(() => {
     let updatePrice = () => {
@@ -38,9 +40,7 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser }) => {
     setSellAmt(e.target.value)
   ]
 
-  const handleBuyClick = (e) => {
-    e.preventDefault()
-
+  const handleBuyClick = () => {
     if((buyAmt * price) > user.availableCash) {
       console.log("Sorry, you don't seem to have enough funds for this trade at this time")
     } else {
@@ -93,8 +93,7 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser }) => {
 
   }
 
-  const handleSellClick = (e) => {
-    e.preventDefault()
+  const handleSellClick = () => {
     // grab current profile and coin balances
     // if coin balances do not allow for transaction refuse.
     // if good proceed and update user profile
@@ -124,6 +123,27 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser }) => {
       updating(form);
     }
   }
+
+  const handleOpen = (e) => {
+    setTrade(e.target.id)
+    setOpen(true);
+  };
+
+
+  const handleClose = async (e) => {
+    const confirmation = e.target.id;
+      if(confirmation === 'no') {
+        console.log('account is open')
+      } else {
+        if(trade === 'sell') {
+          handleSellClick()
+        } else if(trade === 'buy') {
+          handleBuyClick()
+        }
+      }
+      setOpen(false);
+  };
+
 
   return (
     <Container maxWidth="xs">
@@ -170,8 +190,20 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser }) => {
           paddingTop: '4px',
         }}>
           {/* <Button variant="contained">ExecuteOrder</Button> */}
-          <Button variant="contained" onClick={handleBuyClick}>Buy</Button>
-          <Button variant="contained" onClick={handleSellClick}>Sell</Button>
+          <Button variant="contained" onClick={handleOpen} id='buy'>Buy</Button>
+          <Button variant="contained" onClick={handleOpen} id='sell'>Sell</Button>
+          <Dialog open={open} onClose={handleClose}>
+            <DialogTitle>Reset Account</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+            Are you sure you want to {trade} {coin[0]}?
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose} id='no'>No</Button>
+             <Button onClick={handleClose} id='yes'>Yes</Button>
+           </DialogActions>
+          </Dialog>
         </Stack>
       </Paper>
     </Container>
