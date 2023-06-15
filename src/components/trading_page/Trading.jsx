@@ -405,13 +405,13 @@ function Trading({user, setUser, guest}){
         ],
         [
             "ZIL",
-            "Zilliqa"
+            "Zilliqa" 
         ]
     ]);
     const [dynamicCoin, setDynamicCoin] = useState(['ETH', 'Ethereum']);
     const [watched, setWatched] = useState(['BTC']);
     const getWatched = () => {
-        setWatched(user.watchList)
+        setWatched(user.watchList)  
     }
 
     useEffect(()=>{getWatched()}, [])
@@ -424,14 +424,14 @@ function Trading({user, setUser, guest}){
                 <LeftColTemp user={user} />
                 <NewsList watched={watched}/>
                 <WatchList coinOptions={coinOptions} user={user} setDynamicCoin={setDynamicCoin} watched={watched} setWatched={setWatched}/>
-            </div>
+            </div> 
             <div className='trading-rightcol'>
               <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser} dynamic={false} dynamicCoin={dynamicCoin}/>
-              <div className='dynamic-graph'>
+              <div className='dynamic-graph'> 
                 <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser} dynamic={true} dynamicCoin={dynamicCoin}/>
               </div>
             </div>
-        </div>
+        </div> 
         {/* <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser} dynamic={false} dynamicCoin={dynamicCoin}/>
         <div className='dynamic-graph'>
         <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser} dynamic={true} dynamicCoin={dynamicCoin}/>

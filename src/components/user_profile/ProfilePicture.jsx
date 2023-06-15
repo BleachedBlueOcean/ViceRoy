@@ -12,9 +12,9 @@ const ProfilePicture = ({user, setUser, previewImage, setPreviewImage}) => {
   const handleSelection = (event) => {
       console.log('this is selection user', user)
       const file = event.target.files[0]
-      setProfileImage(file)
+      setProfileImage(file) 
 
-      const reader = new FileReader();
+      const reader = new FileReader(); 
 
       reader.onload = (e) => {
         setPreviewImage(e.target.result);
@@ -23,7 +23,7 @@ const ProfilePicture = ({user, setUser, previewImage, setPreviewImage}) => {
   };
 
   const handlePicClick = () => {
-    document.getElementById('profile-picture-upload').click()
+    document.getElementById('profile-picture-upload').click() 
   };
 
   // const updateDB = async () => {
@@ -51,10 +51,10 @@ const ProfilePicture = ({user, setUser, previewImage, setPreviewImage}) => {
     formData.append("upload_preset", "ebqmycin")
 
     axios.post("https://api.cloudinary.com/v1_1/doryckkpf/image/upload", formData)
-    .then((response) => {
-      const updatedUser = {...user, profilePic: response.data.secure_url}
-      setUser(updatedUser)
-      controllers.updateUser(updatedUser.id, updatedUser)
+    .then((response) => { 
+      const updatedUser = {...user, profilePic: response.data.secure_url} 
+      setUser(updatedUser) 
+      controllers.updateUser(updatedUser.id, updatedUser) 
     })
     .catch((error) => {
       console.log('Profile pic error: ', error);
@@ -63,7 +63,7 @@ const ProfilePicture = ({user, setUser, previewImage, setPreviewImage}) => {
 
   useEffect(() => {
     if (profileImage) {
-      updateDB()
+      updateDB() 
     }
   }, [profileImage])
 
