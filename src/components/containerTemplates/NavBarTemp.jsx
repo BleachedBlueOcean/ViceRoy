@@ -43,14 +43,29 @@ const handleSetting = (e) => {
   let name = e.target.innerHTML;
   if(name === 'Logout') {
     console.log(guest)
-    setSignedIn(false)
-    setGuest(false)
-    setView('default');
-  } else if(name === `Profile`) {
-    setView('user_profile')
-  }
-}
-
+    if(signedIn){
+      setSignedIn(false)
+    } else if(guest){
+      console.log('here setting guest to false');
+      setGuest(false)
+=========
+  const handleSetting = (e) => {
+    console.log('testing 2', e.target.innerHTML);
+    let name = e.target.innerHTML;
+    console.log(name);
+    if(name === 'Logout') {
+      console.log('logged out');
+      if(signedIn) {
+        setSignedIn(false);
+      } else if(guest) {
+        setGuest(false);
+      }
+>>>>>>>>> Temporary merge branch 2
+    }
+    if(name === `Profile`) {
+      setView('user_profile');
+    }
+  };
 
   //For Pages
   const openDialog = (page) => {
@@ -154,7 +169,13 @@ const handleSetting = (e) => {
             >
               ViceRoy
             </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            <Box className="navBarButtons" sx={{
+              flexGrow: 1,
+              display: { xs: 'none', md: 'flex' },
+              justifyContent: 'flex-end',
+              gap: '4rem',
+              paddingRight: '4rem',
+            }}>
               {pages.map((page) => (
                 <Button value={page}
                   key={page}

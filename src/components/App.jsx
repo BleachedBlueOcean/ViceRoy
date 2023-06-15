@@ -133,7 +133,7 @@ const App = (props) => {
           <NavBarTemp signedIn={signedIn}
             setSignedIn={setSignedIn}
             user={user} previewImage={previewImage} setPreviewImage={setPreviewImage}
-            setView={setView} setGuest={setGuest} 
+            setView={setView} setGuest={setGuest}
             setShowBadgesModal={setShowBadgesModal}/>
           <div className="user_profile">
             <AccountTotal user={user} unrealizedGains={unrealizedGains}/>

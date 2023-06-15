@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import GraphDisplay from './GraphDisplay.jsx'
+import GraphDisplay from './GraphDisplay.jsx';
 import NewsList from './NewsList.jsx';
 import axios from "axios"
 import WatchList from './WatchList.jsx';
@@ -407,9 +407,9 @@ function Trading({user, setUser, guest}){
             "ZIL",
             "Zilliqa"
         ]
-    ])
-    const [dynamicCoin, setDynamicCoin] = useState(['ETH', 'Ethereum'])
-    const [watched, setWatched] = useState(['BTC'])
+    ]);
+    const [dynamicCoin, setDynamicCoin] = useState(['ETH', 'Ethereum']);
+    const [watched, setWatched] = useState(['BTC']);
     const getWatched = () => {
         setWatched(user.watchList)
     }
@@ -421,6 +421,7 @@ function Trading({user, setUser, guest}){
         <>
         <div className='trading-page' style={{display: 'flex', flexDirection: 'row'}}>
             <div className='trading-leftcol' style={{width: '30%'}}>
+                <LeftColTemp user={user} />
                 <NewsList watched={watched}/>
                 <WatchList coinOptions={coinOptions} user={user} setDynamicCoin={setDynamicCoin} watched={watched} setWatched={setWatched}/>
             </div>
@@ -438,8 +439,8 @@ function Trading({user, setUser, guest}){
         {/* <NewsList watched={watched}/>
         <WatchList coinOptions={coinOptions} user={user} setDynamicCoin={setDynamicCoin} watched={watched} setWatched={setWatched}/> */}
         </>
-    )
+    );
 
-}
+};
 
 export default Trading;
