@@ -141,6 +141,7 @@ const App = (props) => {
             setPreviewImage={setPreviewImage} 
             showBadgesModal={showBadgesModal} 
             setShowBadgesModal={setShowBadgesModal} unrealizedGains={unrealizedGains} setUnrealizedGains={setUnrealizedGains}/> 
+
           </div>
         </>
         )

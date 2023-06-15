@@ -109,13 +109,14 @@ const InitialPage = ({setView, setUser, setGuest, setSignedIn, setPreviewImage})
   return (
     <Box className="initialpage" sx={{
       backgroundColor: '#32322C',
-      width: 'auto',
+      width: '22rem',
       height: 'auto',
+      minWidth: '16rem',
       maxHeight: '60vh',
       borderRadius: '12px',
       position: 'absolute',
       top: '38vh',
-      left: '2vw',
+      left: '0vw',
       display: 'flex',
       flexDirection: 'column',
     }}>

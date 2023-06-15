@@ -154,7 +154,13 @@ const handleSetting = (e) => {
             >
               ViceRoy
             </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            <Box className="navBarButtons" sx={{
+              flexGrow: 1,
+              display: { xs: 'none', md: 'flex' },
+              justifyContent: 'flex-end',
+              gap: '4rem',
+              paddingRight: '4rem',
+            }}>
               {pages.map((page) => (
                 <Button value={page}
                   key={page}
@@ -186,7 +192,7 @@ const handleSetting = (e) => {
                 }}
                 open={Boolean(anchorUser)}
                 onClose={handleCloseUserMenu}>
-                {guest ? 
+                {guest ?
                 guestSettings.map((setting) => (
                   <MenuItem key={setting} value={setting}
                     onClick={handleSetting}>
