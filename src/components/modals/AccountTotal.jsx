@@ -4,9 +4,7 @@ import {Card, CardContent, CardActions, Typography} from '@mui/material';
 // https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH&tsyms=USD
 const AccountTotal = ({user, unrealizedGains}) => {
 
-
   const calcAssets = () => {
-    //set to unrealized gain/loss
     if(unrealizedGains.length > 0) {
     const arryL = unrealizedGains?.length
     const usage = unrealizedGains?.slice(0, (arryL/2))
@@ -16,10 +14,6 @@ const AccountTotal = ({user, unrealizedGains}) => {
     }
     return 0
   }
-  
-  useEffect(()=>{
-    console.log('unrealized gains', unrealizedGains)
-  },[])
 
     return (
       <Card>

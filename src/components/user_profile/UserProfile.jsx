@@ -11,13 +11,7 @@ import AccountTotal from '../modals/AccountTotal.jsx';
 
 const UserProfile = ({user, setUser, previewImage, setPreviewImage, setShowBadgesModal, showBadgesModal, setView, unrealizedGains, setUnrealizedGains}) => {
 
-
-  //const [unrealizedGains, setUnrealizedGains] = useState([]);
-  // console.log('inside UserPorfile', setAccountTotal);
-
-  const updateUnrealizedGains =  async (val)=>{
-    // console.log('this is updated gains:', unrealizedGains);
-    
+  const updateUnrealizedGains =  async (val)=>{    
     console.log('value calculated is', val);
     const newVal = [...unrealizedGains, val];
     console.log('newVal', newVal)
@@ -25,26 +19,22 @@ const UserProfile = ({user, setUser, previewImage, setPreviewImage, setShowBadge
       return [...prevGain, val]
     });
   }
-  // useEffect(()=>{
-    
-  // },[])
+
  
   return (
     <div style={{display: "flex"}}>
       <div>
-      <ProfilePicture user={user} setUser={setUser} previewImage={previewImage} setPreviewImage={setPreviewImage}/>
-      {/* {unrealizedGains.length > 0 ? <AccountTotal setAccountTotal={setAccountTotal} user={user} unrealizedGains={unrealizedGains}/> : <p>no value</p>} */}
-      <AccountTotal user={user} unrealizedGains={unrealizedGains}/>
-      <CompletedAchievements achievedBadges={user.achievements} setShowBadgesModal={setShowBadgesModal} showBadgesModal={showBadgesModal} />
+        <ProfilePicture user={user} setUser={setUser} previewImage={previewImage} setPreviewImage={setPreviewImage}/>
+        <AccountTotal user={user} unrealizedGains={unrealizedGains}/>
+        <CompletedAchievements achievedBadges={user.achievements} setShowBadgesModal={setShowBadgesModal} showBadgesModal={showBadgesModal} />
       </div>
       <div style={{display: 'inline'}}>
-      <Button variant="contained" color="primary"
-        onClick={() => setView('trading')}>Trading Page</Button>
-      <ResetAccount user={user} setUser={setUser} setUnrealizedGains={setUnrealizedGains}/>
+        <Button variant="contained" color="primary"
+          onClick={() => setView('trading')}>Trading Page</Button>
+        <ResetAccount user={user} setUser={setUser} setUnrealizedGains={setUnrealizedGains}/>
      </div>
-      <HistoricalData user={user}/>
-      <SelfCoins_Values ownedCoins={user.coinsOwned} 
-      updateUnrealizedGains={updateUnrealizedGains}/> 
+        <HistoricalData user={user}/>
+        <SelfCoins_Values ownedCoins={user.coinsOwned} updateUnrealizedGains={updateUnrealizedGains}/> 
     </div>
   );
 }

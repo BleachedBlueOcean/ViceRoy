@@ -3,20 +3,19 @@ import axios from 'axios';
 import NewsEntry from './NewsEntry.jsx';
 import { List, Divider } from '@mui/material';
 
-function NewsList () {
+function NewsList ({watched}) {
 
   const [articles, setArticles] = useState([])
-  const [coin, setCoin] = useState('')
 
   const getNews = () => {
 
-      return axios(`http://127.0.0.1:5173/api/?auth_token=${import.meta.env.VITE_NEWS_API}&kind=news&filter=hot&public=true&currencies=${coin}`)
+      return axios(`http://127.0.0.1:5173/api/?auth_token=${import.meta.env.VITE_NEWS_API}&kind=news&filter=hot&public=true&currencies=${watched.join()}`)
       .then((result) => {setArticles(result.data.results)})
       .catch((err) => {console.log('fetch error: ', err)})
 
   }
 
-  useEffect(()=>{getNews();}, [])
+  useEffect(()=>{getNews();}, [watched])
 
   const style = {
     width: '80%',
@@ -32,16 +31,11 @@ function NewsList () {
         <List sx={style}>
           {articles.map((article) =>
             <div style={{borderBottom: 'solid gray', width: '100%'}}key={article.title}>
-              {/* <Divider> */}
                 <NewsEntry article={article}/>
-              {/* </Divider> */}
             </div>
           )}
         </List>
       </div>
-    // <div className='newslist'>
-    //   {articles.map((article) => <NewsEntry article={article} key={article.title}/>)}
-    // </div>
   )
 }
 
