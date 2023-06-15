@@ -18,17 +18,17 @@ import CryptoBuySellTemp from './containerTemplates/CryptoBuySellTemp.jsx';
 export const Context = React.createContext();
 // import global theme
 import { ThemeProvider } from '@mui/material/styles';
-import theme from './theme.js';
+import theme from './theme.js'; 
 
 const App = (props) => {
-  //will remove
-  const [user, setUser] = useState({});
-  const [view, setView] = useState('default');
-  const [signedIn, setSignedIn] = useState(false);
-  const [guest, setGuest] = useState(false);
-  const [previewImage, setPreviewImage] = useState(user.profilePic);
-  const [showBadgesModal, setShowBadgesModal] = useState(false);
-  const [unrealizedGains, setUnrealizedGains] = useState([]);
+  //will remove 
+  const [user, setUser] = useState({}); 
+  const [view, setView] = useState('default'); 
+  const [signedIn, setSignedIn] = useState(false); 
+  const [guest, setGuest] = useState(false); 
+  const [previewImage, setPreviewImage] = useState(user.profilePic); 
+  const [showBadgesModal, setShowBadgesModal] = useState(false); 
+  const [unrealizedGains, setUnrealizedGains] = useState([]); 
 
   const getUsers = async () => {
     try {
@@ -130,17 +130,17 @@ const App = (props) => {
       case "user_profile":
         return (
         <>
-          <NavBarTemp signedIn={signedIn}
-            setSignedIn={setSignedIn}
-            user={user} previewImage={previewImage} setPreviewImage={setPreviewImage}
-            setView={setView} setGuest={setGuest} 
-            setShowBadgesModal={setShowBadgesModal}/>
-          <div className="user_profile">
-            <AccountTotal user={user} unrealizedGains={unrealizedGains}/>
-            <UserProfile setView={setView} user={user} setUser={setUser} signedIn={signedIn} previewImage={previewImage}
-            setPreviewImage={setPreviewImage}
-            showBadgesModal={showBadgesModal}
-            setShowBadgesModal={setShowBadgesModal} unrealizedGains={unrealizedGains} setUnrealizedGains={setUnrealizedGains}/>
+          <NavBarTemp signedIn={signedIn} 
+            setSignedIn={setSignedIn} 
+            user={user} previewImage={previewImage} setPreviewImage={setPreviewImage} 
+            setView={setView} setGuest={setGuest}  
+            setShowBadgesModal={setShowBadgesModal}/> 
+          <div className="user_profile"> 
+            <AccountTotal user={user} unrealizedGains={unrealizedGains}/> 
+            <UserProfile setView={setView} user={user} setUser={setUser} signedIn={signedIn} previewImage={previewImage} 
+            setPreviewImage={setPreviewImage} 
+            showBadgesModal={showBadgesModal} 
+            setShowBadgesModal={setShowBadgesModal} unrealizedGains={unrealizedGains} setUnrealizedGains={setUnrealizedGains}/> 
           </div>
         </>
         )
@@ -148,23 +148,23 @@ const App = (props) => {
   };
 
 
-  useEffect(()=>{
-    if(signedIn){
-      setView('user_profile');
-    } else if(guest) {
-      setView('trading')
+  useEffect(()=>{ 
+    if(signedIn){ 
+      setView('user_profile'); 
+    } else if(guest) { 
+      setView('trading') 
     }
-  },[signedIn, guest])
+  },[signedIn, guest]) 
 
 
 
   return (
-    <ThemeProvider theme={theme}>
-      {renderView()}
-    </ThemeProvider>
+    <ThemeProvider theme={theme}> 
+      {renderView()} 
+    </ThemeProvider> 
   );
 
 };
 
-export default App;
+export default App; 
 

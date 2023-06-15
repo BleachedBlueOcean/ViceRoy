@@ -42,12 +42,12 @@ const handleSetting = (e) => {
   console.log('testing 2', e.target.innerHTML)
   let name = e.target.innerHTML;
   if(name === 'Logout') {
-    console.log(guest)
-    setSignedIn(false)
-    setGuest(false)
-    setView('default');
-  } else if(name === `Profile`) {
-    setView('user_profile')
+    console.log(guest); 
+    setSignedIn(false); 
+    setGuest(false);  
+    setView('default'); 
+  } else if(name === `Profile`) { 
+    setView('user_profile') 
   }
 }
 
