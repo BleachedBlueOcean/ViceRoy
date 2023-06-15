@@ -69,9 +69,6 @@ function Register({ handleClose, getUser, setView, setSignedIn, setGuest }) {
         if (registrationData.response.password === registrationData.response.confirmPass) {
             await addUser();
             alert('Registration Complete');
-            await setView('default');
-            setSignedIn(false);
-            setGuest(false);
             await handleClose();
             await getUser(registrationData.response.email, registrationData.response.password)
             setPassMinError(false);
