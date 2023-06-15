@@ -18,7 +18,7 @@ const UserProfile = ({user, setUser, previewImage, setPreviewImage, setShowBadge
     <div style={{display: "flex"}}>
       <div>
       <ProfilePicture user={user} setUser={setUser} previewImage={previewImage} setPreviewImage={setPreviewImage}/>
-      <AccountTotal user={user}/>
+      <AccountTotal user={user} unrealizedGains={unrealizedGains}/>
       <CompletedAchievements achievedBadges={user.achievements} setShowBadgesModal={setShowBadgesModal} showBadgesModal={showBadgesModal} />
       </div>
       <div style={{display: 'inline'}}>

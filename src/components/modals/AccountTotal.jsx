@@ -3,7 +3,7 @@ import axios from 'axios'
 import {Card, CardContent, CardActions, Typography} from '@mui/material';
 
 // https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH&tsyms=USD
-const AccountTotal = ({user}) => {
+const AccountTotal = ({user, unrealizedGains}) => {
 
   // const [currPrice, setCurrPrice] = useState(undefined)
 
@@ -13,15 +13,13 @@ const AccountTotal = ({user}) => {
   // }
 
 
-  // const calcAssets = () => {
-  //   //set to unrealized gain/loss
-  //   const buyIn = user.coinsOwned.reduce((acc, user) => {
-  //     return (acc + (user.quantity * user.avgBuyVal))
-  //   }, 0)
+  const calcAssets = () => {
+    //set to unrealized gain/loss
+    const buyIn = unrealizedGains.reduce((acc, user) => acc + user, 0)
 
-  //   // const sellAll =
-  //   return buyIn.toFixed(2)
-  // }
+    // const sellAll =
+    return buyIn.toFixed(2)
+  }
 
     return (
       <Card>
