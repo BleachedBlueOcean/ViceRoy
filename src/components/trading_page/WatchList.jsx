@@ -2,11 +2,11 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import WatchEntry from './WatchEntry.jsx';
 import { List, Divider, Box, OutlinedInput, InputLabel, MenuItem, FormControl, Chip, Select } from '@mui/material';
-import controllers from '../../backend/controllers/index.js'
+import controllers from '../../backend/controllers/index.js';
 
-function WatchList ({coinOptions, user, setDynamicCoin}) {
-  const [topcoins, setTopcoins] = useState([])
-  const [watched, setWatched] = useState(['BTC'])
+const WatchList = ({coinOptions, user, setDynamicCoin}) => {
+  const [topcoins, setTopcoins] = useState([]);
+  const [watched, setWatched] = useState(['BTC']);
 
   const MenuProps = {
     PaperProps: {
@@ -15,36 +15,37 @@ function WatchList ({coinOptions, user, setDynamicCoin}) {
         width: 250,
       }
     }
-  }
+  };
   // const getTopCoins = () => {
   //   return axios.get('https://min-api.cryptocompare.com/data/top/totalvolfull?limit=50&tsym=USD')
   //     .then((result) => {setTopcoins(result.data.Data.map((coin) => coin.CoinInfo.Name))})
   //     .catch((err) => {console.log('top coin err: ', err)})
   // }
   const getTopCoins = () => {
-    setTopcoins(coinOptions.map((coin) => coin[0]))
-  }
+    setTopcoins(coinOptions.map((coin) => coin[0]));
+  };
   const getWatched = () => {
-    setWatched(user.watchList)
-  }
+    setWatched(user.watchList);
+  };
   const handleChange = (event) => {
     const {
       target: {value},
     } = event;
-    console.log('value :', value)
-    setWatched(value.slice(0,10));
+    console.log('value :', value);
+    setWatched(value.slice(0, 10));
     // controllers.updateUser(user.id, {watchList: watched})
-  }
-  useEffect(()=>{getWatched()}, [])
-  useEffect(()=>{getTopCoins()}, [])
-  useEffect(()=>{controllers.updateUser(user.id, {watchList: watched})}, [watched])
+  };
+  useEffect(()=>{ getWatched(); }, []);
+  useEffect(()=>{ getTopCoins(); }, []);
+  useEffect(()=>{ controllers.updateUser(user.id, {watchList: watched});}, [watched]);
   return (
-    <div style={{marginTop: '15px'}}onClick={()=>{console.log('top coins: ', topcoins, 'watched :', watched, 'user :', user)}}>Watch List
+    <div style={{marginTop: '15px'}}onClick={()=>{console.log('top coins: ', topcoins, 'watched :', watched, 'user :', user);}}>Watch List
       <FormControl sx={{ m: 1, width: 300, bgcolor: 'gray', borderRadius: '5px'}}>
         <InputLabel sx={{color: 'white'}} id='watch-list-label'>Watched Coins</InputLabel>
         <Select
           labelId = 'watch-list-label'
           id = 'watch-list-chip'
+          defaultValue={watched[0] || ''}
           multiple
           sx={{color: 'black'}}
           value={watched.slice(0, 10)}
@@ -74,7 +75,7 @@ function WatchList ({coinOptions, user, setDynamicCoin}) {
         {watched.map((watchedcoin) => <WatchEntry coinname={watchedcoin} key={watchedcoin} setDynamicCoin={setDynamicCoin}/>)}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default WatchList
+export default WatchList;

@@ -4,6 +4,7 @@ import Trading from './trading_page/Trading.jsx';
 import '../css/App.css';
 import InitialPage from './initial_page/InitialPage.jsx';
 import UserProfile from './user_profile/UserProfile.jsx';
+import { Box, Typography } from '@mui/material';
 
 // import controllers from '../backend/controllers'
 // import axios from 'axios';
@@ -77,10 +78,35 @@ const App = (props) => {
     switch (view) {
     case 'default':
       return (
-          <div>
-
-            <InitialPage setView={setView} setUser={setUser} setGuest={setGuest} setSignedIn={setSignedIn} setPreviewImage={setPreviewImage}/>
-          </div>
+          <Box
+            sx={{
+              backgroundImage: 'url("img/loginpage.png")',
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover',
+              height: '102.6vh',
+            }}
+          >
+            <p className="login-page-title">
+              ViceRoy
+            </p>
+            <Box sx={{
+              position: 'relative',
+              display: 'flex',
+              objectFit: 'contain',
+              height: '50vh',
+              width: '22vw',
+              left: '40vw',
+              alignItems: 'center',
+              flexDirection: 'row',
+            }}>
+              <Box component="img" sx={{
+                position: 'absolute',
+                height: '100%',
+                width: 'auto',
+              }} alt="ViceRoy Website Logo" src="icons/logo.png" />
+              <InitialPage setView={setView} setUser={setUser} setGuest={setGuest} setSignedIn={setSignedIn} setPreviewImage={setPreviewImage}/>
+            </Box>
+          </Box>
       );
     case 'trading':
       return (
@@ -122,8 +148,8 @@ const App = (props) => {
 
   useEffect(() => {
 
-    renderView()
-  }, [view])
+    renderView();
+  }, [view]);
 
   useEffect(()=>{
     if(signedIn || guest ){
@@ -134,7 +160,7 @@ const App = (props) => {
     }
 
 
-  },[signedIn, guest])
+  },[signedIn, guest]);
 
 
   return (

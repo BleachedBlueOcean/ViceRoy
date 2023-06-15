@@ -26,7 +26,7 @@ const style = {
 };
 
 
-function InitialPage({setView, setUser, setGuest, setSignedIn, setPreviewImage}) {
+const InitialPage = ({setView, setUser, setGuest, setSignedIn, setPreviewImage}) => {
     const [open, setOpen] = useState(false);
     const [signInEmail, setSignInEmail] = useState('');
     const [signInPassword, setSignInPassword] = useState('');
@@ -83,28 +83,59 @@ function InitialPage({setView, setUser, setGuest, setSignedIn, setPreviewImage})
     }
 
   return (
-    <Box className="initialpage">
-      <h1>Login</h1>
-      <form onSubmit={(e) => {
+    <Box className="initialpage" sx={{
+      backgroundColor: '#32322C',
+      width: 'auto',
+      height: 'auto',
+      maxHeight: '60vh',
+      borderRadius: '12px',
+      position: 'absolute',
+      top: '38vh',
+      left: '2vw',
+      display: 'flex',
+      flexDirection: 'column',
+    }}>
+      <Typography sx={{
+        fontSize: '40px',
+      }}>
+        Login
+      </Typography>
+      <form className="login-form" onSubmit={(e) => {
         e.preventDefault();
         getUser(signInEmail, signInPassword);
       }}>
         <div>
-          <InputLabel htmlFor="signInEmail">Email:</InputLabel>
+          <InputLabel className="signInEmail" htmlFor="signInEmail" sx={{
+            color: 'white',
+          }}>
+            Email:
+          </InputLabel>
           <OutlinedInput id="signInEmail" type="text" placeholder="E-mail" onChange={onEmailChange} />
         </div>
         <div>
-          <InputLabel htmlFor="signInPassword">Password:</InputLabel>
+          <InputLabel htmlFor="signInPassword" sx={{
+            color: 'white',
+          }}>
+            Password:
+          </InputLabel>
           <OutlinedInput id="signInPassword" type="password" placeholder="Password" onChange={onPasswordChange} />
         </div>
-        <div>
+        <Box sx={{
+          margin: '2rem',
+        }}
+        >
           <Button className="loginButton" type="submit" variant="contained">Login</Button>
-        </div>
-        <div className="loginoptions">
-          <Button className="registerButton" onClick={handleOpen}>Register</Button>
-          <Typography> or </Typography>
-          <Button className="guest-login" onClick={guestLogin}>Continue as Guest</Button>
-        </div>
+        </Box>
+        <Box className="loginoptions">
+          <Box sx={{
+            display: 'flex',
+            justifyContent: 'space-around',
+          }}>
+            <Button className="registerButton" onClick={handleOpen}>Register</Button>
+            {/* <Typography> or </Typography> */}
+            <Button className="guest-login" onClick={guestLogin}>Guest Login</Button>
+            </Box>
+        </Box>
       </form>
       <Dialog open={open} aria-labelledby="dialog-title" sx={style}>
         <DialogTitle id="dialog-title">Register</DialogTitle>

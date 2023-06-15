@@ -15,7 +15,7 @@ const settings = ['Profile', 'Logout'];
 
 
 
-function NavBarTemp({signedIn, setSignedIn, setView, previewImage, setPreviewImage, setShowBadgesModal, user, guest, setGuest}) {
+const NavBarTemp = ({signedIn, setSignedIn, setView, previewImage, setPreviewImage, setShowBadgesModal, user, guest, setGuest}) => {
   const [anchorNav, setAnchorNav] = useState(null);
   const [anchorUser, setAnchorUser] = useState(null);
   //NavBar Pages
@@ -37,22 +37,22 @@ function NavBarTemp({signedIn, setSignedIn, setView, previewImage, setPreviewIma
   };
 
 // FOR Settings
-const handleSetting = (e) => {
-  console.log('testing 2', e.target.innerHTML)
-  let name = e.target.innerHTML;
-  console.log(name)
-  if(name === 'Logout') {
-    console.log('logged out')
-    if(signedIn){
-      setSignedIn(false)
-    } else if(guest){
-      setGuest(false)
+  const handleSetting = (e) => {
+    console.log('testing 2', e.target.innerHTML);
+    let name = e.target.innerHTML;
+    console.log(name);
+    if(name === 'Logout') {
+      console.log('logged out');
+      if(signedIn) {
+        setSignedIn(false);
+      } else if(guest) {
+        setGuest(false);
+      }
     }
-  }
-  if(name === `Profile`) {
-    setView('user_profile')
-  }
-}
+    if(name === `Profile`) {
+      setView('user_profile');
+    }
+  };
 
   //For Pages
   const openDialog = (page) => {
@@ -65,13 +65,19 @@ const handleSetting = (e) => {
 
 
   return (
-    <div>
-      <AppBar position="static">
+    <div className="navbar">
+      <AppBar position="static" sx={{
+          borderRadius: '0px',
+          marginTop: '1rem',
+          padding: '8px',
+      }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <SvgIcon>
-              <Logo />
-            </SvgIcon>
+            <Box component="img"
+            sx={{
+              height: '10vh',
+              width: 'auto',
+            }} alt="ViceRoy Website Logo" src="icons/logo.png" />
             {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
             <Typography
               variant="h6"
@@ -81,14 +87,16 @@ const handleSetting = (e) => {
               sx={{
                 mr: 2,
                 display: { xs: 'none', md: 'flex' },
-                fontFamily: 'monospace',
+                fontFamily: 'optima',
                 fontWeight: 700,
+                fontSize: '3rem',
                 letterSpacing: '.3rem',
-                color: 'inherit',
+                color: 'primary',
                 textDecoration: 'none',
               }}
+              className="navbar-title"
             >
-              LOGO GOES HERE
+              ViceRoy
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -140,14 +148,14 @@ const handleSetting = (e) => {
                 mr: 2,
                 display: { xs: 'flex', md: 'none' },
                 flexGrow: 1,
-                fontFamily: 'monospace',
+                fontFamily: 'optima',
                 fontWeight: 700,
                 letterSpacing: '.3rem',
                 color: 'inherit',
                 textDecoration: 'none',
               }}
             >
-              LOGO GOES GOES HERE
+              ViceRoy
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {pages.map((page) => (
