@@ -19,7 +19,6 @@ export const Context = React.createContext();
 // import global theme
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme.js';
-import theme from './theme.js';
 
 const App = (props) => {
   //will remove
@@ -216,14 +215,7 @@ const App = (props) => {
       setView('user_profile');
     } else if(guest) {
       setView('trading')
-  useEffect(()=>{
-    if(signedIn){
-      setView('user_profile');
-    } else if(guest) {
-      setView('trading')
-    }
-  },[signedIn, guest])
-  },[signedIn, guest])
+  }},[signedIn, guest])
 
 
 
@@ -231,13 +223,9 @@ const App = (props) => {
     <ThemeProvider theme={theme}>
       {renderView()}
     </ThemeProvider>
-    <ThemeProvider theme={theme}>
-      {renderView()}
-    </ThemeProvider>
   );
 
 };
 
-export default App;
 export default App;
 
