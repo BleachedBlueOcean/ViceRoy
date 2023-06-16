@@ -85,8 +85,8 @@ const PossibleBadge = ({ achievedBadges, dialogOpen, closeDialog }) => {
                 <Typography
                   variant='body1'
                   sx={isAchieved.length
-                    ? { textDecoration: 'line-through', textDecorationColor: '#d9d9d9', whiteSpace: 'nowrap', flexGrow: '1' }
-                    : { whiteSpace: 'nowrap', flexGrow: '1' }} >
+                    ? { color: 'black', whiteSpace: 'nowrap', flexGrow: '1' }
+                    : { color: '#d9d9d9', whiteSpace: 'nowrap', flexGrow: '1' }} >
                   {badge.title}
                 </Typography>
               </Box>
@@ -102,8 +102,8 @@ const PossibleBadge = ({ achievedBadges, dialogOpen, closeDialog }) => {
                 <Typography
                 variant='body1'
                 sx={isAchieved.length
-                  ? { textDecoration: 'line-through', textDecorationColor: '#d9d9d9', marginLeft: '3rem', whiteSpace: 'nowrap', flexGrow: '1' }
-                  : { marginLeft: '3rem', whiteSpace: 'nowrap', flexGrow: '1' }} >
+                  ? { color: 'black', marginLeft: '3rem', whiteSpace: 'nowrap', flexGrow: '1' }
+                  : { color: '#d9d9d9', marginLeft: '3rem', whiteSpace: 'nowrap', flexGrow: '1' }} >
                 {badge.description}
                 </Typography>
               </Box>

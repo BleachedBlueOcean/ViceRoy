@@ -24,25 +24,28 @@ const UserProfile = ({user, setUser, previewImage, setPreviewImage, setShowBadge
   return (
     <Container style={{
       display: 'flex',
-      margin: 0
+      margin: 0,
+      width: '100%',
     }}>
-      <div>
+      <div className="=userLeftCol" style={{minWidth: '16vw'}}>
         <ProfilePicture user={user} setUser={setUser} previewImage={previewImage} setPreviewImage={setPreviewImage}/>
         <AccountTotal user={user} unrealizedGains={unrealizedGains}/>
         <CompletedAchievements achievedBadges={user.achievements} setShowBadgesModal={setShowBadgesModal} showBadgesModal={showBadgesModal} />
       </div>
-      <div style={{display: 'inline', marginTop: '1rem'}}>
-        <Button variant="contained" color="primary" sx={{ width:"120px"}}
+      <div style={{display: 'inline', marginTop: '1rem', position: 'absolute', left: '22rem'}}>
+        <Button variant="contained" color="primary"
           onClick={() => setView('trading')}>Trading Page</Button>
      </div>
         <Box className="historicalAndOwned" sx={{
           display: 'flex',
           flexDirection: 'column',
+          width: '100%',
+          minWidth: '80vw'
         }}>
           <HistoricalData user={user}/>
           <SelfCoins_Values ownedCoins={user.coinsOwned} updateUnrealizedGains={updateUnrealizedGains}/>
         </Box>
-        <ResetAccount user={user} setUser={setUser} setUnrealizedGains={setUnrealizedGains}/>
+        <ResetAccount className="resetAccount" user={user} setUser={setUser} setUnrealizedGains={setUnrealizedGains} />
     </Container>
   );
 };
