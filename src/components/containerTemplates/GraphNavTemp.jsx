@@ -5,12 +5,21 @@ import SearchIcon from '@mui/icons-material/Search';
 const GraphNavTemp = ({coinOptions, coin, interval, setCoin, setInterval, view, setView}) =>{
 
   return (
-    <AppBar className="GraphNavBar" position="static" sx={{
-      borderRadius: '36px 36px 0px 0px'
+    <AppBar className="GraphNavBar" position="relative" sx={{
+      borderRadius: '36px 36px 0px 0px',
+      height: '4rem'
     }}>
-      <Toolbar>
+      <Toolbar sx={{
+        position: 'absolute',
+        ml: '3rem',
+        display: 'flex',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        top: '0',
+        gap: '4rem',
+      }}>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          MyApp
+          {coin[1]}({coin[0]})
         </Typography>
         <Box sx={{ minWidth: 120, mr: 2 }}>
           <Select value={interval} displayEmpty onChange={(e) => setInterval(e.target.value)}>
@@ -23,7 +32,7 @@ const GraphNavTemp = ({coinOptions, coin, interval, setCoin, setInterval, view, 
           </Select>
         </Box>
         <Box sx={{ minWidth: 120, mr: 2 }}>
-          <Select value={coin} displayEmpty onChange={(e) => setCoin(e.target.value)}>
+          <Select value={coin[0]} displayEmpty onChange={(e) => setCoin(e.target.value)}>
             <MenuItem value={[`BTC`,`Bitcoin`]} disabled>
               Select Coin
             </MenuItem>

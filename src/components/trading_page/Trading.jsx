@@ -410,7 +410,7 @@ function Trading({user, setUser, guest, unrealizedGains}){
         ]
     ])
     const [dynamicCoin, setDynamicCoin] = useState(['ETH', 'Ethereum'])
-    const [watched, setWatched] = useState([['BTC', 'BitCoin']])
+    const [watched, setWatched] = useState([['BTC', 'Bitcoin']])
     // const getWatched = () => {
     //     setWatched(user.watchList)
     // }
@@ -431,12 +431,12 @@ function Trading({user, setUser, guest, unrealizedGains}){
                 <NewsList watched={watched}/>
                 <WatchList coinOptions={coinOptions} user={user} setDynamicCoin={setDynamicCoin} watched={watched} setWatched={setWatched}/>
             </Box>
-            <div className='trading-rightcol'>
+            <Box className='trading-rightcol' >
               <GraphDisplay className="Graphtopbar" coinOptions={coinOptions} user={user} setUser={setUser} dynamic={false} dynamicCoin={dynamicCoin}/>
               <div className='dynamic-graph'>
                 <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser} dynamic={true} dynamicCoin={dynamicCoin}/>
               </div>
-            </div>
+            </Box>
         </div>
         {/* <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser} dynamic={false} dynamicCoin={dynamicCoin}/>
         <div className='dynamic-graph'>
