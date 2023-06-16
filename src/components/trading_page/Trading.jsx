@@ -409,7 +409,7 @@ function Trading({user, setUser, guest, unrealizedGains}){
         ]
     ])
     const [dynamicCoin, setDynamicCoin] = useState(['ETH', 'Ethereum'])
-    const [watched, setWatched] = useState([["BTC", "Bitcoin"], ['XRP', 'XRP']])
+    const [watched, setWatched] = useState([["BTC", "Bitcoin"]])
     const getWatched = () => {
         user.watchList
         setWatched(user.watchList.map((watch) => watch.coin))
