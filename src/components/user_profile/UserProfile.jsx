@@ -38,10 +38,6 @@ const UserProfile = ({user, setUser, previewImage, setPreviewImage, setShowBadge
         <Box className="historicalAndOwned" sx={{
           display: 'flex',
           flexDirection: 'column',
-
-          // display: flex;
-          // flex-direction: column;
-          // gap: 10rem;
         }}>
           <HistoricalData user={user}/>
           <SelfCoins_Values ownedCoins={user.coinsOwned} updateUnrealizedGains={updateUnrealizedGains}/>
