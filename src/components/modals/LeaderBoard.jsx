@@ -10,7 +10,7 @@ const LeaderBoard = ({dialogOpen, closeDialog, page}) => {
       try {
         const data = await controllers.getAllUsers();
         const sortedData = data.sort((a, b) => {
-          return (b.totalAssets - a.totalAssets);
+          return (b.availableCash - a.availableCash);
         })
           setUserList(sortedData)
       } catch(error) {
@@ -18,14 +18,9 @@ const LeaderBoard = ({dialogOpen, closeDialog, page}) => {
       }
     };
     fetchData();
+    // let intervalId = setInterval(fetchData, 10000);
+    // return () => clearInterval(intervalId)
   }, [])
-
-  // useEffect(()=> {
-  //   console.log('USER LIST: ', userList);
-  //   const test = userList.map((user) => {
-  //     console.log('user coins: ', user.coinsOwned);
-  //   })
-  // }, [userList])
 
   return (
     <>
@@ -48,7 +43,8 @@ const LeaderBoard = ({dialogOpen, closeDialog, page}) => {
               {userList.map((row, index) => {
                 return (<TableRow key={index}>
                   <TableCell>{row.firstName + ' ' + row.lastName}</TableCell>
-                  <TableCell>{row.totalAssets}</TableCell>
+                  <TableCell>{(row.availableCash)?.toFixed(2)
+                  }</TableCell>
                 </TableRow>)
               })}
             </TableBody>

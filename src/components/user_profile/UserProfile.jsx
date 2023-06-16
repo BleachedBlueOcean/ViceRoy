@@ -12,12 +12,14 @@ import AccountTotal from '../modals/AccountTotal.jsx';
 const UserProfile = ({user, setUser, previewImage, setPreviewImage, setShowBadgesModal, showBadgesModal, setView, unrealizedGains, setUnrealizedGains}) => {
 
   const updateUnrealizedGains = async (val)=>{
+    if(val > 0) {
     console.log('value calculated is', val);
     const newVal = [...unrealizedGains, val];
     console.log('newVal', newVal);
     await setUnrealizedGains((prevGain) => {
       return [...prevGain, val];
     });
+    }
   }
 
 

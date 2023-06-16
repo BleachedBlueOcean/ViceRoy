@@ -137,9 +137,14 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser, guest }) => {
         ...user.coinsOwned[coinOwnedIdx],
         quantity: Number(user.coinsOwned[coinOwnedIdx].quantity) - Number(sellAmt)
       }
+      //array.splice(coinOwnedIdx, 1)
       let newBalance = user.availableCash + (sellAmt * price)
       let update = user.coinsOwned
-      update[coinOwnedIdx] = updateCurrCoin
+      if(updateCurrCoin.quantity == 0) {
+        update.splice(coinOwnedIdx, 1)
+      } else {
+        update[coinOwnedIdx] = updateCurrCoin
+      }
       const form = {...user, coinsOwned: update, availableCash: newBalance};
       // console.log('This is what we are about to update the user to ', form)
       updating(form);
