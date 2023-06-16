@@ -16,7 +16,7 @@ const GraphDisplay = ({coinOptions, user, setUser, dynamic, dynamicCoin, guest }
         <div className="graph">
           {view === 'candle' && <CandleChart interval={interval} coin={dynamicCoin} height={"400px"}/>}
           {view === 'line' && <LineChart interval={interval} coin={dynamicCoin} height={"400px"}/>}
-          <CryptoBuySellTemp coin={dynamicCoin} user={user} setUser={setUser}/>
+          <CryptoBuySellTemp coin={dynamicCoin} user={user} setUser={setUser} guest={guest}/>
         </div>
       </Box>
     );
