@@ -35,13 +35,12 @@ const OwnedCoinRow = ({ coin, liveValue, updateUnrealizedGains }) => {
         <Typography variant='body1' sx={{color: 'black'}}>{coin.icon}</Typography>
         <Typography variant='body1' sx={{color: 'black'}}>{coin.name}</Typography>
         <Typography variant='body1' sx={{color: 'black'}}>{coin.quantity}</Typography>
-        <Typography variant='body1' sx={{color: 'black'}}>{coin.avgBuyVal.toFixed(2)}</Typography>
-        <Typography variant='body1' sx={{color: 'black'}}>{liveValue.toFixed(2)}</Typography>
-        <Typography variant='body1' sx={{color: 'black'}}>{finalValue.toFixed(2)}</Typography>
+        <Typography variant='body1' sx={{color: 'black'}}>${coin.avgBuyVal}</Typography>
+        <Typography variant='body1' sx={{color: 'black'}}>${liveValue.toFixed(2)}</Typography>
+        <Typography variant='body1' sx={{color: 'black'}}>${finalValue.toFixed(2)}</Typography>
       </Box>
     </Box>
   );
 };
 
 export default OwnedCoinRow;
-//
