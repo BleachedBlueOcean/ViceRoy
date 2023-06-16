@@ -15,17 +15,30 @@ const AccountTotal = ({user, unrealizedGains}) => {
     return 0
   }
 
+  const summaryStyle={
+    fontWeight: 'bold',
+    fontSize: '20px',
+    margin: '10px'
+  }
+
+
     return (
       <Card>
         <CardContent>
-          <Typography>
+          <Typography sx={ {fontWeight: 'bold', fontSize: '25px', margin: '10px'}}>
             Account Summary for {user.firstName} {user.lastName}
           </Typography>
           <Typography>
-            Available Purchasing Power: ${user.availableCash.toFixed(2)}
+            Available Purchasing Power: 
+          </Typography>
+          <Typography sx={summaryStyle}>
+            ${user.availableCash.toFixed(2)}
           </Typography>
           <Typography>
-            Unrealized Gain/Loss: ${calcAssets()}
+            Unrealized Gain/Loss:
+          </Typography>
+          <Typography sx={summaryStyle}>
+            ${calcAssets()}
           </Typography>
         </CardContent>
       </Card>

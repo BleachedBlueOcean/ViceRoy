@@ -15,7 +15,7 @@ const theme = createTheme({
     },
   },
   typography: {
-
+    fontFamily:['Titillium Web']
   },
   components: {
       // Name of the component
