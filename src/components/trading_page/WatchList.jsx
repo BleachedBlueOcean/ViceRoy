@@ -81,6 +81,7 @@ function WatchList ({coinOptions, user, setDynamicCoin, watched, setWatched}) {
         maxHeight: '300px',
         overflow: 'auto',
         borderRadius: '10px',
+        scrollbarGutter: 'stable',
         '&::-webkit-scrollbar': {
           width: '8px',
           background: 'lightgray',
