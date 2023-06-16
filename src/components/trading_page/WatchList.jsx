@@ -78,7 +78,6 @@ function WatchList ({coinOptions, user, setDynamicCoin, watched, setWatched}) {
       </FormControl>
       <Box className="watchListScroll" sx={{
         backgroundColor: '#13C4A3',
-        height: '300px',
         maxHeight: '300px',
         overflow: 'auto',
         borderRadius: '10px',
