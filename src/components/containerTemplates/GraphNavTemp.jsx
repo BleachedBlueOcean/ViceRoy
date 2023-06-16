@@ -1,8 +1,20 @@
 import React, {useState} from 'react';
-import {AppBar, Toolbar, Typography, Box, MenuItem, Select, TextField, IconButton } from '@mui/material';
+import {AppBar, Toolbar, Typography, Box, MenuItem, FormGroup, Button, Select, TextField, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
 const GraphNavTemp = ({coinOptions, coin, interval, setCoin, setInterval, view, setView}) =>{
+
+  const changeHandler = (val)=> {
+    console.log(val)
+    const newCoin = coinOptions.filter(coinPair=> {
+      return coinPair[0].toLowerCase()===val.toLowerCase()|| coinPair[1].toLowerCase()===val.toLowerCase()
+    })
+    if(newCoin.length > 0) setCoin(newCoin[0]);
+  }
+
+  const submitHandler= (e)=> {
+    console.log(e.target)
+  }
 
   return (
     <AppBar className="GraphNavBar" position="relative" sx={{
@@ -51,17 +63,22 @@ const GraphNavTemp = ({coinOptions, coin, interval, setCoin, setInterval, view, 
             <MenuItem value={'candle'}>Candle Stick</MenuItem>
           </Select>
         </Box>
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <TextField
-            id="search"
-            label="Search"
-            variant="outlined"
-            size="small"
-            sx={{ mr: 1 }}
-          />
-          <IconButton color="inherit" aria-label="search">
-            <SearchIcon />
-          </IconButton>
+        <Box sx={{ display: 'flex', alignItems: 'center'}}>
+          {/* <form> */}
+            <TextField
+              id="search"
+              label="Search"
+              variant="outlined"
+              size="small"
+              sx={{ mr: 1 }}
+              onChange={(e)=>{changeHandler(e.target.value)}}
+            />
+           <IconButton type="submit" aria-label="search">
+              <SearchIcon />
+           </IconButton>
+          {/* </form> */}
+            {/* <SearchIcon /> */}
+          {/* </IconButton>  */}
         </Box>
       </Toolbar>
     </AppBar>
