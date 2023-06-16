@@ -32,7 +32,7 @@ const UserProfile = ({user, setUser, previewImage, setPreviewImage, setShowBadge
         <CompletedAchievements achievedBadges={user.achievements} setShowBadgesModal={setShowBadgesModal} showBadgesModal={showBadgesModal} />
       </div>
       <div style={{display: 'inline', marginTop: '1rem'}}>
-        <Button variant="contained" color="primary"
+        <Button variant="contained" color="primary" sx={{ width:"120px"}}
           onClick={() => setView('trading')}>Trading Page</Button>
      </div>
         <Box className="historicalAndOwned" sx={{

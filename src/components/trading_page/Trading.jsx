@@ -440,9 +440,9 @@ function Trading({user, setUser, guest, unrealizedGains}){
                 <WatchList coinOptions={coinOptions} user={user} setDynamicCoin={setDynamicCoin} watched={watched} setWatched={setWatched}/>
             </Box>
             <Box className='trading-rightcol' >
-              <GraphDisplay className="Graphtopbar" coinOptions={coinOptions} user={user} setUser={setUser} dynamic={false} dynamicCoin={dynamicCoin}/>
+              <GraphDisplay className="Graphtopbar" guest={guest} coinOptions={coinOptions} user={user} setUser={setUser} dynamic={false} dynamicCoin={dynamicCoin}/>
               <div className='dynamic-graph'>
-                <GraphDisplay coinOptions={coinOptions} user={user} setUser={setUser} dynamic={true} dynamicCoin={dynamicCoin}/>
+                <GraphDisplay coinOptions={coinOptions} guest={guest} user={user} setUser={setUser} dynamic={true} dynamicCoin={dynamicCoin}/>
               </div>
             </Box>
         </div>

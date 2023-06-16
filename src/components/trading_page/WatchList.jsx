@@ -81,16 +81,6 @@ function WatchList ({coinOptions, user, setDynamicCoin, watched, setWatched}) {
         maxHeight: '300px',
         overflowY: 'auto',
         borderRadius: '10px',
-        '&::-webkit-scrollbar': {
-          width: '8px',
-          background: 'lightgray',
-          borderRadius: '0 10px 10px 0',
-          backgroundColor: '#13C4A3'
-        },
-        '&::-webkit-scrollbar-thumb': {
-          background: '#888',
-          borderRadius: '4px',
-        }
       }}>
         <List>
           {watched.map((watchedcoin) => <WatchEntry watchedcoin={watchedcoin} key={watchedcoin} setDynamicCoin={setDynamicCoin}/>)}
