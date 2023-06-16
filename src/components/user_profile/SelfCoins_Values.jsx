@@ -7,7 +7,18 @@ const SelfCoins_Values = ({ ownedCoins, updateUnrealizedGains}) => {
 
   const [liveCoins, setLiveCoins] = useState(null);
   const getAPI = () => {
-    const icons = [(ownedCoins).map(coin=>coin.icon)];
+
+    const icons = [(ownedCoins).map(coin=>coin.icon)]
+    // const icons = ownedCoins.filter(coin=>coin.quantity>0)
+      // .map(coin=>coin.icon)
+    // const icons = [(ownedCoins).map((coin) => {
+    //   if(coin.quantity > 0){
+    //   return coin.icon
+    //   }
+    // })];
+    // console.log('TESTINGGGGG', ownedCoins)
+    // console.log('TESTINGGGGG', tester)
+
     axios(`https://min-api.cryptocompare.com/data/pricemulti?fsyms=${icons.join('')}&tsyms=USD`)
     .then((result) => {
       console.log('this is the api call', result.data);
@@ -22,7 +33,7 @@ const SelfCoins_Values = ({ ownedCoins, updateUnrealizedGains}) => {
       getAPI();
     }, 100000);
     return () => clearInterval(interval);
-  }, []) 
+  }, [])
 
   return (
     <>
@@ -47,8 +58,9 @@ const SelfCoins_Values = ({ ownedCoins, updateUnrealizedGains}) => {
           <Typography variant='body1' sx={{fontWeight: 'bold', color: 'black', textDecoration: 'underline'}}>Live Value</Typography>
           <Typography variant='body1' sx={{fontWeight: 'bold', color: 'black', textDecoration: 'underline'}}>Final Value</Typography>
         </Box>
-          {liveCoins ? ownedCoins.map((coin, i) => <OwnedCoinRow key={i} coin={coin}
-          liveValue={liveCoins[coin.icon].USD} updateUnrealizedGains={updateUnrealizedGains}/>) : <p>No Coin found</p>}
+          {liveCoins ? ownedCoins.map((coin, i) => <OwnedCoinRow key={i} coin={coin} liveValue={liveCoins[coin.icon].USD}
+            updateUnrealizedGains={updateUnrealizedGains}/>)
+          : <p>No Coin found</p>}
         </Box>
       </Box>
     </>
