@@ -55,7 +55,7 @@ const HistoricalData = ({user}) => {
     <Box className="historicalData" sx={{
       display: 'flex',
       flexDirection: 'column',
-      width: '70vw',
+      width: '100%',
     }}>
       <Typography variant='h3'>
         Historical Profit/Loss Graph

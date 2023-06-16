@@ -76,10 +76,11 @@ function WatchList ({coinOptions, user, setDynamicCoin, watched, setWatched}) {
           ))}
         </Select>
       </FormControl>
-      <Box id="watchListScroll" style={{
+      <Box className="watchListScroll" sx={{
         backgroundColor: '#13C4A3',
+        height: '300px',
         maxHeight: '300px',
-        overflowY: 'auto',
+        overflow: 'auto',
         borderRadius: '10px',
         '&::-webkit-scrollbar': {
           width: '8px',
@@ -92,9 +93,7 @@ function WatchList ({coinOptions, user, setDynamicCoin, watched, setWatched}) {
           borderRadius: '4px',
         }
       }}>
-        <List>
           {watched.map((watchedcoin) => <WatchEntry watchedcoin={watchedcoin} key={watchedcoin} setDynamicCoin={setDynamicCoin}/>)}
-        </List>
       </Box>
     </div>
   );

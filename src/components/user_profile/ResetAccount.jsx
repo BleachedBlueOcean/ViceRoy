@@ -45,8 +45,12 @@ const ResetAccount = ({user, setUser, setUnrealizedGains}) => {
   };
 
   return (
-    <div>
-      <Button variant="contained" color="error" onClick={handleOpen} sx={{marginTop: '1rem'}}>Reset Account</Button>
+    <div >
+      <Button variant="contained" color="error" onClick={handleOpen} sx={{
+        position: 'absolute',
+        right: '1rem',
+        marginTop: '1rem'
+      }}>Reset Account</Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Reset Account</DialogTitle>
         <DialogContent>
