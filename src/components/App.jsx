@@ -90,7 +90,7 @@ const App = (props) => {
         setSignedIn(false);
         console.log('error signing in: ', error);
     }
-}
+  }
 
   const getUsers = async () => {
     try {
