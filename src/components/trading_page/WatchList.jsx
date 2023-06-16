@@ -22,9 +22,9 @@ function WatchList ({coinOptions, user, setDynamicCoin, watched, setWatched}) {
       watched.map((watch) => (`${watch[0]} ${watch[1]}`))
     )
   }
-  
+
   useEffect(()=> handleSelected(), [watched])
-  
+
   const handleChange = (event) => {
     const {
       target: {value},
@@ -44,7 +44,6 @@ function WatchList ({coinOptions, user, setDynamicCoin, watched, setWatched}) {
   return (
     <div style={{marginTop: '15px'}}onClick={()=>{console.log('watched :', watched, 'user :', user, 'preselected: ', selected)}}>Watch List
       <FormControl sx={{ m: 1, width: 300, bgcolor: 'gray', borderRadius: '5px'}}>
-        <InputLabel sx={{color: 'white'}} id='watch-list-label'>Watched Coins</InputLabel>
         <Select
           labelId = 'watch-list-label'
           id = 'watch-list-chip'

@@ -65,7 +65,7 @@ const GraphNavTemp = ({coinOptions, coin, interval, setCoin, setInterval, view, 
         </Box>
       </Toolbar>
     </AppBar>
-);
+  );
 };
 
-export default GraphNavTemp
+export default GraphNavTemp;

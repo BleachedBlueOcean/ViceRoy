@@ -29,7 +29,7 @@ const LeaderBoard = ({dialogOpen, closeDialog, page}) => {
 
   return (
     <>
-    <Dialog open={dialogOpen} onClose={closeDialog}>
+    <Dialog sx={{maxHeight: '600px', marginTop: '5%'}} open={dialogOpen} onClose={closeDialog}>
       <DialogTitle>Leaderboard</DialogTitle>
       {/* <IconButton >
         Replace with your close icon
