@@ -1,13 +1,17 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import svgr from 'vite-plugin-svgr'
 
 
 // https://vitejs.dev/config/
 export default defineConfig({
   title: 'Title of the site',
   description: 'Description of the site',
-  plugins: [react(), svgr()],
+  plugins: [react()],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: '/src/components/tests/setup.js',
+  },
   server: {
     cors: { origin: "*" },
     proxy: {
@@ -19,5 +23,5 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
     }
-  }
-})
+  },
+});

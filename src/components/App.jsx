@@ -142,7 +142,7 @@ const App = (props) => {
     switch (view) {
     case 'default':
       return (
-          <Box
+          <Box data-testid="app"
             sx={{
               backgroundImage: 'url("img/loginpage.png")',
               backgroundRepeat: 'no-repeat',
@@ -196,7 +196,7 @@ const App = (props) => {
             user={user} previewImage={previewImage} setPreviewImage={setPreviewImage}
             setView={setView} setGuest={setGuest}
             setShowBadgesModal={setShowBadgesModal} open={open} handleOpen={handleOpen} handleClose={handleClose} getUser={getUser}/>
-          <div className="user_profile">
+          <div className="user_profile" data-testid="userProfile">
             {/* <AccountTotal user={user} unrealizedGains={unrealizedGains}/>  */}
             <UserProfile setView={setView} user={user} setUser={setUser} signedIn={signedIn} previewImage={previewImage}
             setPreviewImage={setPreviewImage}

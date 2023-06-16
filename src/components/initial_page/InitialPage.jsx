@@ -65,9 +65,9 @@ const InitialPage = ({ handleOpen, handleClose, open, setView, setUser, setGuest
           }}>
             Email:
           </InputLabel>
-          <OutlinedInput id="signInEmail" type="text" placeholder="E-mail" onChange={onEmailChange} />
+          <OutlinedInput id="signInEmail" type="text" placeholder="E-mail" onChange={onEmailChange} data-testid="emailField"/>
         </div>
-        {showEmailMessage && (<div className="error">Invalid E-Mail Address</div>)}
+        {showEmailMessage && (<div className="error" data-testid="invalidEmail">Invalid E-Mail Address</div>)}
         {showInvalidEmail && (<div className="error">E-Mail Address Not Found</div>)}
         <div>
           <InputLabel htmlFor="signInPassword" sx={{
@@ -75,7 +75,7 @@ const InitialPage = ({ handleOpen, handleClose, open, setView, setUser, setGuest
           }}>
             Password:
           </InputLabel>
-          <OutlinedInput id="signInPassword" type="password" placeholder="Password" onChange={onPasswordChange} />
+          <OutlinedInput id="signInPassword" type="password" placeholder="Password" onChange={onPasswordChange} data-testid="passwordField"/>
         </div>
         <Box sx={{
           margin: '2rem',
@@ -83,7 +83,7 @@ const InitialPage = ({ handleOpen, handleClose, open, setView, setUser, setGuest
         >
         {showMissingPass && (<div className="error">Invalid Password</div>)}
         {showPasswordMessage && (<div className="error">Incorrect Password</div>)}
-          <Button className="loginButton" type="submit" variant="contained">Login</Button>
+          <Button className="loginButton" type="submit" variant="contained" data-testid="loginButton">Login</Button>
         </Box>
         <Box className="loginoptions">
           <Box sx={{

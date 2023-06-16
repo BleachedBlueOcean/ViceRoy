@@ -5,7 +5,6 @@ import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, 
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
 // import Logo
-import { ReactComponent as Logo } from '../../../icons/ViceRoySVG.svg';
 
 import LeaderBoard from '../modals/LeaderBoard.jsx';
 
@@ -146,9 +145,7 @@ const handleSetting = (e) => {
                 ))}
               </Menu>
             </Box>
-            <SvgIcon>
-              <Logo />
-            </SvgIcon>
+
             {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
             <Typography
               variant="h5"

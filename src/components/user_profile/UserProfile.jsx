@@ -26,11 +26,11 @@ const UserProfile = ({user, setUser, previewImage, setPreviewImage, setShowBadge
       display: 'flex',
       margin: 0,
       width: '100%',
-    }}>
+    }} data-testid="userProfile">
       <div className="=userLeftCol" style={{minWidth: '16vw'}}>
         <ProfilePicture user={user} setUser={setUser} previewImage={previewImage} setPreviewImage={setPreviewImage}/>
         <AccountTotal user={user} unrealizedGains={unrealizedGains}/>
-        <CompletedAchievements achievedBadges={user.achievements} setShowBadgesModal={setShowBadgesModal} showBadgesModal={showBadgesModal} />
+        <CompletedAchievements achievedBadges={1} setShowBadgesModal={setShowBadgesModal} showBadgesModal={showBadgesModal} />
       </div>
       <div style={{display: 'inline', marginTop: '1rem', position: 'absolute', left: '22rem'}}>
         <Button variant="contained" color="primary"
