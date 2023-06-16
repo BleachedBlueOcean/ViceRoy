@@ -217,6 +217,7 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser, guest }) => {
                     type="number"
                     value={buyAmt}
                     onChange={handleBuy}
+                    disabled={guest? true: false}
                   />
                 </TableCell>
 
@@ -226,6 +227,7 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser, guest }) => {
                     type="number"
                     value={sellAmt}
                     onChange={handleSell}
+                    disabled={guest? true: false}
                   />
                 </TableCell>
               </TableRow>
