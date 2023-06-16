@@ -6,8 +6,7 @@ import controllers from '../../backend/controllers/index.js';
 
 function WatchList ({coinOptions, user, setDynamicCoin, watched, setWatched}) {
   const [topcoins, setTopcoins] = useState([])
-  // const [watched, setWatched] = useState(['BTC'])
-
+  const [open, setOpen] = useState(false)
   const MenuProps = {
     PaperProps: {
       style: {
@@ -16,41 +15,55 @@ function WatchList ({coinOptions, user, setDynamicCoin, watched, setWatched}) {
       }
     }
   }
-
-  const getTopCoins = () => {
-    setTopcoins(coinOptions.map((coin) => coin[0]))
+  const [selected, setSelected] = useState([])
+  const handleSelected = () => {
+    setSelected(
+      watched.map((watch) => (`${watch[0]} ${watch[1]}`))
+    )
   }
-  // const getWatched = () => {
-  //   setWatched(user.watchList)
+  useEffect(()=> handleSelected(), [watched])
+  // const getTopCoins = () => {
+  //   setTopcoins(coinOptions.map((coin) => coin[0]))
   // }
+  // console.log('WATCHED AT 00', watched[0][1], 'coinOptions at 00', coinOptions[0][1])
+  // console.log('IS THIS TRUE: ', (`${watched[0][0]} ${watched[0][1]}` === `${coinOptions[0][0]} ${coinOptions[0][1]}`))
   const handleChange = (event) => {
     const {
       target: {value},
     } = event;
-    console.log('value :', value);
-    setWatched(value.slice(0, 10));
-    // controllers.updateUser(user.id, {watchList: watched})
+    // setWatched(value.slice(0, 10));
+    // console.log(value)
+    setWatched(value.map((val) => val.match(/^(\S+)\s(.*)/).slice(1)))
+    handleClose();
   }
-  // useEffect(()=>{getWatched()}, [])
-  useEffect(()=>{getTopCoins()}, [])
+  const handleOpen = () => {
+    setOpen(true)
+  }
+  const handleClose = () => {
+    setOpen(false)
+  }
+  // useEffect(()=>{getTopCoins()}, [])
 
   return (
-    <div style={{marginTop: '15px'}}onClick={()=>{console.log('watched :', watched, 'user :', user)}}>Watch List
+    <div style={{marginTop: '15px'}}onClick={()=>{console.log('watched :', watched, 'user :', user, 'preselected: ', selected)}}>Watch List
       <FormControl sx={{ m: 1, width: 300, bgcolor: 'gray', borderRadius: '5px'}}>
         <InputLabel sx={{color: 'white'}} id='watch-list-label'>Watched Coins</InputLabel>
         <Select
           labelId = 'watch-list-label'
           id = 'watch-list-chip'
-          defaultValue={watched[0] || ''}
+          defaultValue={watched.map((watch) => watch) || ''}
           multiple
+          open={open}
+          onClose={handleClose}
+          onOpen={handleOpen}
           sx={{color: 'black'}}
-          value={watched.slice(0, 10)}
+          value={selected}
           onChange={handleChange}
           input={<OutlinedInput id='select-multiple-chip' label='Watched Coins' sx={{bgcolor: 'black'}}/>}
           renderValue={(selected) => (
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, bgcolor: 'gray'}}>
               {selected.map((val) => (
-                <Chip key={val} label={val.join(' ')} sx={{color: 'white', bgcolor: 'black'}}/>
+                <Chip key={val} label={val} sx={{color: 'white', bgcolor: 'black'}}/>
               ))}
             </Box>
           )}
@@ -59,10 +72,10 @@ function WatchList ({coinOptions, user, setDynamicCoin, watched, setWatched}) {
           {coinOptions.map((coin) => (
             <MenuItem
               key={coin}
-              value={coin}
+              value={`${coin[0]} ${coin[1]}`}
               sx={{color: 'green', bgcolor: 'black'}}
             >
-              {coin.join(' ')}
+              {`${coin[0]} ${coin[1]}`}
             </MenuItem>
           ))}
         </Select>
