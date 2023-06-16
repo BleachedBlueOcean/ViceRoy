@@ -11,18 +11,21 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser, guest }) => {
   const [price, setPrice] = useState('');
   const [open, setOpen] = useState(false);
   const [trade, setTrade] = useState('')
+  const [validTrade, setValidTrade] = useState(false)
 
   useEffect(() => {
     let updatePrice = () => {
       axios.get(`https://min-api.cryptocompare.com/data/price?fsym=${coin[0]}&tsyms=USD`)
         .then((result) => {
-          console.log('This is what the buy click gets for current value ', result.data.USD)
+          // console.log('This is what the buy click gets for current value ', result.data.USD)
           setPrice(result.data.USD.toFixed(2));
         }
       )
     }
     updatePrice()
     let intervalId = setInterval(updatePrice, 10000);
+    setBuyAmt('')
+    setSellAmt('')
     return () => clearInterval(intervalId)
     },
   [coin])
@@ -36,15 +39,33 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser, guest }) => {
 
   const handleBuy = (e) => {
     setBuyAmt(e.target.value)
+    if((e.target.value * price) > user.availableCash || e.target.value < .01) {
+      setValidTrade(false)
+    } else {
+      setValidTrade(true)
+    }
   }
-  const handleSell = (e) => [
+  const handleSell = (e) => {
     setSellAmt(e.target.value)
-  ]
+    let coinOwned = false;
+    let coinOwnedIdx = null;
+    for(var i = 0; i < user.coinsOwned.length; i++) {
+      if(user.coinsOwned[i].icon === coin[0]) {
+        coinOwned = true;
+        coinOwnedIdx = i
+        // console.log('This is user.coinsOwned[coinOwnedIdx]', user.coinsOwned[coinOwnedIdx])
+        // console.log('You own ',user.coinsOwned[coinOwnedIdx].quantity, ' of ',  user.coinsOwned[i].icon)
+      }
+    }
+    if(!coinOwned || user.coinsOwned[coinOwnedIdx].quantity < e.target.value) {
+      // console.log('The trade is being set to false')
+      setValidTrade(false)
+    } else {
+      setValidTrade(true)
+    }
+  }
 
   const handleBuyClick = () => {
-    if((buyAmt * price) > user.availableCash) {
-      console.log("Sorry, you don't seem to have enough funds for this trade at this time")
-    } else {
       // setUser and update DB
       let currentCoinIdx = null;
       let currentCoin = null;
@@ -70,24 +91,24 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser, guest }) => {
         const form = {...user, coinsOwned: update, availableCash: newBalance};
         updating(form);
       } else {
-        console.log('This is the currentCoin', currentCoin)
-        console.log('currentCoinIdx', currentCoinIdx)
-        console.log('This is the currentCoin[currentCoinIdx]', currentCoin[currentCoinIdx])
-        console.log('This is the (currentCoin[currentCoinIdx].quantity + Number(buyAmt))', (currentCoin[currentCoinIdx].quantity + Number(buyAmt)))
-        console.log('This is the ((currentCoin[currentCoinIdx].quantity * currentCoin[currentCoinIdx].avgBuyVal) + (Number(buyAmt) * price))', ((currentCoin[currentCoinIdx].quantity * currentCoin[currentCoinIdx].avgBuyVal) + (Number(buyAmt) * price)))
+        // console.log('This is the currentCoin', currentCoin)
+        // console.log('currentCoinIdx', currentCoinIdx)
+        // console.log('This is the currentCoin[currentCoinIdx]', currentCoin[currentCoinIdx])
+        // console.log('This is the (currentCoin[currentCoinIdx].quantity + Number(buyAmt))', (currentCoin[currentCoinIdx].quantity + Number(buyAmt)))
+        // console.log('This is the ((currentCoin[currentCoinIdx].quantity * currentCoin[currentCoinIdx].avgBuyVal) + (Number(buyAmt) * price))', ((currentCoin[currentCoinIdx].quantity * currentCoin[currentCoinIdx].avgBuyVal) + (Number(buyAmt) * price)))
         let newAvgBuyVal = ((currentCoin[currentCoinIdx].quantity * currentCoin[currentCoinIdx].avgBuyVal) + (Number(buyAmt) * price))/(currentCoin[currentCoinIdx].quantity + Number(buyAmt));
         let updateCurrCoin = {
           ...currentCoin[currentCoinIdx],
           avgBuyVal: newAvgBuyVal,
           quantity: Number(Number(currentCoin[currentCoinIdx].quantity) + Number(buyAmt)),
         }
-        console.log('This is NOT the first purchase of this coin')
+        // console.log('This is NOT the first purchase of this coin')
         let update = user.coinsOwned
         update[currentCoinIdx] = updateCurrCoin
         const form = {...user, coinsOwned: update, availableCash: newBalance};
         updating(form);
+        setBuyAmt('')
       }
-    }
     // grab current balance and purchase price
     // if current balance and purchase price don't allow for sale refuse transaction
     // if good proceed and update user profile
@@ -102,16 +123,16 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser, guest }) => {
     let coinOwnedIdx = null;
     for(var i = 0; i < user.coinsOwned.length; i++) {
       if(user.coinsOwned[i].icon === coin[0]) {
-        console.log('You own ', user.coinsOwned[i].icon)
+        // console.log('You own ', user.coinsOwned[i].icon)
         coinOwned = true;
         coinOwnedIdx = i
       }
     }
     if(coinOwned && user.coinsOwned[coinOwnedIdx].quantity >= sellAmt) {
-      console.log('Congrats you have enough to sell')
-      console.log('This is the currentCoin', user.coinsOwned)
-      console.log('coinOwnedIdx', coinOwnedIdx)
-      console.log('This is the currentCoin[currentCoinIdx]', user.coinsOwned[coinOwnedIdx])
+      // console.log('Congrats you have enough to sell')
+      // console.log('This is the currentCoin', user.coinsOwned)
+      // console.log('coinOwnedIdx', coinOwnedIdx)
+      // console.log('This is the currentCoin[currentCoinIdx]', user.coinsOwned[coinOwnedIdx])
       let updateCurrCoin = {
         ...user.coinsOwned[coinOwnedIdx],
         quantity: Number(user.coinsOwned[coinOwnedIdx].quantity) - Number(sellAmt)
@@ -120,8 +141,9 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser, guest }) => {
       let update = user.coinsOwned
       update[coinOwnedIdx] = updateCurrCoin
       const form = {...user, coinsOwned: update, availableCash: newBalance};
-      console.log('This is what we are about to update the user to ', form)
+      // console.log('This is what we are about to update the user to ', form)
       updating(form);
+      setSellAmt('')
     }
   }
 
@@ -226,16 +248,19 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser, guest }) => {
             width: '7rem',
           }}>Sell</Button>}
           <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>Reset Account</DialogTitle>
+            <DialogTitle>Trade Information</DialogTitle>
             <DialogContent>
               <DialogContentText>
-            Are you sure you want to {trade} {coin[0]}?
+                {!validTrade? `You are not able to do this trade.  Please review your account` : `Are you sure you want to ${trade} ${coin[0]}?`}
               </DialogContentText>
             </DialogContent>
-            <DialogActions>
+            {validTrade?<DialogActions>
               <Button onClick={handleClose} id='no'>No</Button>
              <Button onClick={handleClose} id='yes'>Yes</Button>
-           </DialogActions>
+           </DialogActions>:
+           <DialogActions>
+              <Button onClick={handleClose} id='no'>Close</Button>
+           </DialogActions>}
           </Dialog>
         </Stack>
       </Paper>
