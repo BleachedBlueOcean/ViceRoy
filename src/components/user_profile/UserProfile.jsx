@@ -31,7 +31,7 @@ const UserProfile = ({user, setUser, previewImage, setPreviewImage, setShowBadge
         <AccountTotal user={user} unrealizedGains={unrealizedGains}/>
         <CompletedAchievements achievedBadges={user.achievements} setShowBadgesModal={setShowBadgesModal} showBadgesModal={showBadgesModal} />
       </div>
-      <div style={{display: 'inline'}}>
+      <div style={{display: 'inline', marginTop: '1rem'}}>
         <Button variant="contained" color="primary"
           onClick={() => setView('trading')}>Trading Page</Button>
      </div>

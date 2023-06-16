@@ -44,4 +44,3 @@ const OwnedCoinRow = ({ coin, liveValue, updateUnrealizedGains }) => {
 };
 
 export default OwnedCoinRow;
-//
