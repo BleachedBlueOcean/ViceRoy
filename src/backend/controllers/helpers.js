@@ -11,7 +11,7 @@ const helpers = {
             availableCash: 500,
             coinsOwned: [],
             achievements: [],
-            watchList: [ 
+            watchList: [
                 {coin: ['BTC', 'Bitcoin']}
             ]
         }

@@ -42,7 +42,8 @@ function WatchList ({coinOptions, user, setDynamicCoin, watched, setWatched}) {
   }
 
   return (
-    <div style={{marginTop: '15px'}}onClick={()=>{console.log('watched :', watched, 'user :', user, 'preselected: ', selected)}}>Watch List
+    <div style={{marginTop: '15px'}}
+      onClick={()=>{console.log('watched :', watched, 'user :', user, 'preselected: ', selected)}}>Watch List
       <FormControl sx={{ m: 1, width: 300, bgcolor: 'gray', borderRadius: '5px'}}>
         <Select
           labelId = 'watch-list-label'

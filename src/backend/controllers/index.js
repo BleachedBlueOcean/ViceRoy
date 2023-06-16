@@ -20,7 +20,7 @@ const controllers =  {
         try{
             const userCred = await signInWithEmailAndPassword(auth, email, pw)
             const user = userCred.user;
-            console.log('signed in as', user)
+            // console.log('signed in as', user)
             try{
                 const docRef = collection(db, "users");
                 const q = query(docRef, where("uid", "==", user.uid));
@@ -54,7 +54,7 @@ const controllers =  {
 
     },
     createUser: async (obj) => {
-        console.log('create user', obj)
+        // console.log('create user', obj)
         try{
             const userCred = await createUserWithEmailAndPassword(auth, obj.response.email, obj.response.password)
             console.log(userCred)

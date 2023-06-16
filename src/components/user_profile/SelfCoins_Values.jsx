@@ -21,13 +21,13 @@ const SelfCoins_Values = ({ ownedCoins, updateUnrealizedGains}) => {
 
     axios(`https://min-api.cryptocompare.com/data/pricemulti?fsyms=${icons.join('')}&tsyms=USD`)
     .then((result) => {
-      console.log('this is the api call', result.data);
+      // console.log('this is the api call', result.data);
       setLiveCoins(result.data);
     }).catch((err) => console.log('Did not get info from API', err));
   };
 
   useEffect(() => {
-    console.log('making api call');
+    // console.log('making api call');
     getAPI();
     const interval = setInterval(() => {
       getAPI();

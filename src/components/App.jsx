@@ -85,10 +85,10 @@ const App = (props) => {
             setShowPasswordMessage(false);
             setShowInvalidEmail(false);
         }
-        console.log('User Data: ', userData);
+        // console.log('User Data: ', userData);
     } catch(error) {
         setSignedIn(false);
-        console.log('error signing in: ', error);
+        // console.log('error signing in: ', error);
     }
   }
 

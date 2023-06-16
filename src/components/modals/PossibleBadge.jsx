@@ -76,7 +76,7 @@ const PossibleBadge = ({ achievedBadges, dialogOpen, closeDialog }) => {
         <Box sx={{ flexGrow: '1' }}>
           {badgesData.map((badge, index) => {
             const IconComponent = iconComponents[badge.icon];
-            console.log('achieved badges', achievedBadges);
+            // console.log('achieved badges', achievedBadges);
             const isAchieved = achievedBadges.filter((achievedBadge => achievedBadge.name === badge.title));
 
             return (
