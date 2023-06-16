@@ -41,10 +41,10 @@ function CandleChart({coin, interval, height}) {
     },
     titleTextStyle: {color: "white"},
     bar: { groupWidth: "100%" }, // Remove space between bars.
-  candlestick: {
+    candlestick: {
     fallingColor: { strokeWidth: 0, fill: "#a52714" }, // red
     risingColor: { strokeWidth: 0, fill: "#0f9d58" }, // green
-  },
+    },
   };
 
   return (

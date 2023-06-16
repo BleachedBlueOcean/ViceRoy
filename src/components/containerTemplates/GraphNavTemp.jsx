@@ -32,11 +32,14 @@ const GraphNavTemp = ({coinOptions, coin, interval, setCoin, setInterval, view, 
           </Select>
         </Box>
         <Box sx={{ minWidth: 120, mr: 2 }}>
-          <Select value={coin[0]} displayEmpty onChange={(e) => setCoin(e.target.value)}>
-            <MenuItem value={[`BTC`,`Bitcoin`]} disabled>
-              Select Coin
-            </MenuItem>
-            {coinOptions.map((target, i) => <MenuItem key={i} value={target}>{target[0]}  {target[1]}</MenuItem>)}
+
+//           <Select value={coin[0]} displayEmpty onChange={(e) => setCoin(e.target.value)}>
+//             <MenuItem value={[`BTC`,`Bitcoin`]} disabled>
+//               Select Coin
+//             </MenuItem>
+//             {coinOptions.map((target, i) => <MenuItem key={i} value={target}>{target[0]}  {target[1]}</MenuItem>)}
+          <Select value={coin} displayEmpty onChange={(e) => setCoin(e.target.value.split(','))}>
+            {coinOptions.map((target, i) => <MenuItem key={i} value={target[0]+ ',' + target[1]}>{target[0]}  {target[1]}</MenuItem>)}
           </Select>
         </Box>
         <Box sx={{ minWidth: 120, mr: 2 }}>

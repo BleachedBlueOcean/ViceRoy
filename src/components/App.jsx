@@ -7,7 +7,7 @@ import UserProfile from './user_profile/UserProfile.jsx';
 import AccountTotal from './modals/AccountTotal.jsx';
 import { Box, Typography } from '@mui/material';
 
-// import controllers from '../backend/controllers'
+import controllers from '../backend/controllers'
 // import axios from 'axios';
 // import dns from 'dns'
 
@@ -29,6 +29,68 @@ const App = (props) => {
   const [previewImage, setPreviewImage] = useState(user.profilePic);
   const [showBadgesModal, setShowBadgesModal] = useState(false);
   const [unrealizedGains, setUnrealizedGains] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [signInEmail, setSignInEmail] = useState('');
+  const [signInPassword, setSignInPassword] = useState('');
+  const [showEmailMessage, setShowEmailMessage] = useState(false);
+  const [showInvalidEmail, setShowInvalidEmail] = useState(false);
+  const [showMissingPass, setShowMissingPass] = useState(false);
+  const [showPasswordMessage, setShowPasswordMessage] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const onEmailChange = (event) => {
+    setSignInEmail(event.target.value);
+  };
+  const onPasswordChange = (event) => {
+    setSignInPassword(event.target.value);
+  };
+  const getUser = async (signInEmail, signInPassword) => {
+    try {
+        const userData = await controllers.getUser(signInEmail, signInPassword);
+        if (userData.code === 'auth/invalid-email') {
+          setShowEmailMessage(true);
+          setShowInvalidEmail(false);
+          setShowPasswordMessage(false);
+          setShowMissingPass(false);
+        }
+        if (userData.code === 'auth/user-not-found') {
+          setShowEmailMessage(false);
+          setShowInvalidEmail(true);
+          setShowPasswordMessage(false);
+          setShowMissingPass(true);
+        }
+        if (userData.code === 'auth/missing-password') {
+          setShowEmailMessage(false);
+          setShowInvalidEmail(false);
+          setShowMissingPass(true);
+          setShowPasswordMessage(false);
+        }
+        if (userData.code === 'auth/wrong-password') {
+          setShowEmailMessage(false);
+          setShowMissingPass(false);
+          setShowInvalidEmail(false);
+          setShowPasswordMessage(true);
+        }
+        if(!userData.code){
+            setSignedIn(true);
+            setUser(userData);
+            setPreviewImage(userData.profilePic);
+            setShowEmailMessage(false);
+            setShowMissingPass(false);
+            setShowPasswordMessage(false);
+            setShowInvalidEmail(false);
+        }
+        console.log('User Data: ', userData);
+    } catch(error) {
+        setSignedIn(false);
+        console.log('error signing in: ', error);
+    }
+}
 
   const getUsers = async () => {
     try {
@@ -106,7 +168,7 @@ const App = (props) => {
                 height: '100%',
                 width: 'auto',
               }} alt="ViceRoy Website Logo" src="icons/logo.png" />
-              <InitialPage setView={setView} setUser={setUser} setGuest={setGuest} setSignedIn={setSignedIn} setPreviewImage={setPreviewImage}/>
+              <InitialPage open={open} handleOpen={handleOpen} handleClose={handleClose} setView={setView} setUser={setUser} setGuest={setGuest} setSignedIn={setSignedIn} setPreviewImage={setPreviewImage} onEmailChange={onEmailChange} onPasswordChange={onPasswordChange} getUser={getUser} signInEmail={signInEmail} signInPassword={signInPassword} showEmailMessage={showEmailMessage} showPasswordMessage={showPasswordMessage} showInvalidEmail={showInvalidEmail} showMissingPass={showMissingPass}/>
             </Box>
           </Box>
       );
@@ -118,7 +180,7 @@ const App = (props) => {
                 setSignedIn={setSignedIn}
                 user={user} previewImage={previewImage} setPreviewImage={setPreviewImage}
                 setView={setView} guest={guest} setGuest={setGuest}
-                setShowBadgesModal={setShowBadgesModal}
+                setShowBadgesModal={setShowBadgesModal} open={open} handleOpen={handleOpen} handleClose={handleClose} getUser={getUser}
               />
             </>
             <div className="trading">
@@ -126,20 +188,20 @@ const App = (props) => {
             </div>
           </>
       );
-    case "user_profile":
-      return (
-      <>
-        <NavBarTemp signedIn={signedIn}
-          setSignedIn={setSignedIn}
-          user={user} previewImage={previewImage} setPreviewImage={setPreviewImage}
-          setView={setView} setGuest={setGuest}
-          setShowBadgesModal={setShowBadgesModal}/>
-        <div className="user_profile">
-          {/* <AccountTotal user={user} unrealizedGains={unrealizedGains}/>  */}
-          <UserProfile setView={setView} user={user} setUser={setUser} signedIn={signedIn} previewImage={previewImage}
-          setPreviewImage={setPreviewImage}
-          showBadgesModal={showBadgesModal}
-          setShowBadgesModal={setShowBadgesModal} unrealizedGains={unrealizedGains} setUnrealizedGains={setUnrealizedGains}/>
+      case "user_profile":
+        return (
+        <>
+          <NavBarTemp signedIn={signedIn}
+            setSignedIn={setSignedIn}
+            user={user} previewImage={previewImage} setPreviewImage={setPreviewImage}
+            setView={setView} setGuest={setGuest}
+            setShowBadgesModal={setShowBadgesModal} open={open} handleOpen={handleOpen} handleClose={handleClose} getUser={getUser}/>
+          <div className="user_profile">
+            {/* <AccountTotal user={user} unrealizedGains={unrealizedGains}/>  */}
+            <UserProfile setView={setView} user={user} setUser={setUser} signedIn={signedIn} previewImage={previewImage}
+            setPreviewImage={setPreviewImage}
+            showBadgesModal={showBadgesModal}
+            setShowBadgesModal={setShowBadgesModal} unrealizedGains={unrealizedGains} setUnrealizedGains={setUnrealizedGains}/>
 
         </div>
       </>
@@ -153,8 +215,7 @@ const App = (props) => {
       setView('user_profile');
     } else if(guest) {
       setView('trading')
-    }
-  },[signedIn, guest])
+  }},[signedIn, guest])
 
 
 

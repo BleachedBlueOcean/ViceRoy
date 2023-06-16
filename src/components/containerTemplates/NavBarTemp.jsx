@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PossibleBadge from '../modals/PossibleBadge';
-import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem, Select, SvgIcon } from '@mui/material';
+import Register from '../modals/Register';
+import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem, Select, SvgIcon, Dialog, DialogTitle} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
 // import Logo
@@ -14,9 +15,20 @@ const pages = ['LeaderBoard', 'All Badges'];
 const settings = ['Profile', 'Logout'];
 const guestSettings = ['Register', 'Logout'];
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '100%',
+  height: '100%',
+  bgcolor: 'rgba(0, 0, 0, .1)',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
-
-const NavBarTemp = ({signedIn, setSignedIn, setView, previewImage, setPreviewImage, setShowBadgesModal, user, guest, setGuest}) => {
+const NavBarTemp = ({signedIn, setSignedIn, setView, previewImage, setPreviewImage, setShowBadgesModal, user, guest, setGuest, open, handleOpen, handleClose, getUser}) => {
   const [anchorNav, setAnchorNav] = useState(null);
   const [anchorUser, setAnchorUser] = useState(null);
   //NavBar Pages
@@ -42,12 +54,14 @@ const handleSetting = (e) => {
   console.log('testing 2', e.target.innerHTML)
   let name = e.target.innerHTML;
   if(name === 'Logout') {
-    console.log(guest); 
-    setSignedIn(false); 
-    setGuest(false);  
-    setView('default'); 
-  } else if(name === `Profile`) { 
-    setView('user_profile') 
+    console.log(guest);
+    setSignedIn(false);
+    setGuest(false);
+    setView('default');
+  } else if(name === `Profile`) {
+    setView('user_profile')
+  } else if (name === `Register`) {
+    handleOpen();
   }
 }
 
@@ -231,6 +245,10 @@ const handleSetting = (e) => {
           </>
         )
       }
+      <Dialog open={open} aria-labelledby="dialog-title" sx={style}>
+        <DialogTitle id="dialog-title">Register</DialogTitle>
+        <Register handleOpen={handleOpen} handleClose={handleClose} getUser={getUser} setGuest={setGuest}/>
+      </Dialog>
     </div>
   );
 };

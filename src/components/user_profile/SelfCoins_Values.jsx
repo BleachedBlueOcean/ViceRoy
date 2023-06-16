@@ -18,7 +18,12 @@ const SelfCoins_Values = ({ ownedCoins, updateUnrealizedGains}) => {
   useEffect(() => {
     console.log('making api call');
     getAPI();
-  }, []);
+    const interval = setInterval(() => {
+      getAPI();
+    }, 100000);
+    return () => clearInterval(interval);
+  }, []) 
+
   return (
     <>
       <Box>
