@@ -4,8 +4,8 @@ import WatchEntry from './WatchEntry.jsx';
 import { List, Divider, Box, OutlinedInput, InputLabel, MenuItem, FormControl, Chip, Select } from '@mui/material';
 import controllers from '../../backend/controllers/index.js';
 
-function WatchList ({coinOptions, user, setDynamicCoin, watched, setWatched}) {
-  const [topcoins, setTopcoins] = useState([])
+const WatchList = ({coinOptions, user, setDynamicCoin, watched, setWatched}) => {
+  const [topcoins, setTopcoins] = useState([]);
   // const [watched, setWatched] = useState(['BTC'])
 
   const MenuProps = {
@@ -15,11 +15,11 @@ function WatchList ({coinOptions, user, setDynamicCoin, watched, setWatched}) {
         width: 250,
       }
     }
-  }
+  };
 
   const getTopCoins = () => {
-    setTopcoins(coinOptions.map((coin) => coin[0]))
-  }
+    setTopcoins(coinOptions.map((coin) => coin[0]));
+  };
   // const getWatched = () => {
   //   setWatched(user.watchList)
   // }
@@ -30,9 +30,9 @@ function WatchList ({coinOptions, user, setDynamicCoin, watched, setWatched}) {
     console.log('value :', value);
     setWatched(value.slice(0, 10));
     // controllers.updateUser(user.id, {watchList: watched})
-  }
+  };
   // useEffect(()=>{getWatched()}, [])
-  useEffect(()=>{getTopCoins()}, [])
+  useEffect(()=>{ getTopCoins(); }, []);
 
   return (
     <div style={{marginTop: '15px'}}onClick={()=>{console.log('watched :', watched, 'user :', user)}}>Watch List
@@ -67,9 +67,28 @@ function WatchList ({coinOptions, user, setDynamicCoin, watched, setWatched}) {
           ))}
         </Select>
       </FormControl>
-      <div style={{backgroundColor: '#13C4A3', maxHeight: '300px', overflowY: 'auto', borderRadius: '10px'}}>
-        {watched.map((watchedcoin) => <WatchEntry watchedcoin={watchedcoin} key={watchedcoin} setDynamicCoin={setDynamicCoin}/>)}
-      </div>
+      <Box id="watchListScroll" style={{
+        backgroundColor: '#13C4A3',
+        maxHeight: '300px',
+        overflowY: 'auto',
+        borderRadius: '10px',
+        '&::-webkit-scrollbar': {
+          width: '8px',
+          background: 'lightgray',
+          borderRadius: '0 10px 10px 0',
+          backgroundColor: '#13C4A3'
+        },
+        '&::-webkit-scrollbar-thumb': {
+          background: '#888',
+          borderRadius: '4px',
+        }
+      }}>
+        <List>
+          {watched.map((watchedcoin) => <WatchEntry watchedcoin={watchedcoin} key={watchedcoin} setDynamicCoin={setDynamicCoin}/>)}
+
+        </List>
+
+      </Box>
     </div>
   );
 };
