@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import NewsEntry from './NewsEntry.jsx';
-import { Box, List, Divider } from '@mui/material';
+import { Box, List, Divider, Typography } from '@mui/material';
 
 const NewsList = ({watched}) => {
-  
+
   const [articles, setArticles] = useState([])
   const getNews = () => {
 
@@ -28,6 +28,8 @@ const NewsList = ({watched}) => {
   };
 
   return (
+    <>
+      <Typography variant='h5' sx={{ mb: '-1rem' }}>News</Typography>
       <Box className='newslist' sx={{
         height: '10rem',
         overflowY: 'auto',
@@ -52,6 +54,7 @@ const NewsList = ({watched}) => {
           )}
         </List>
       </Box>
+    </>
   );
 };
 
