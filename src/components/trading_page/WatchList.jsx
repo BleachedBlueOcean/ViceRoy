@@ -92,6 +92,7 @@ function WatchList ({coinOptions, user, setDynamicCoin, watched, setWatched}) {
           background: '#888',
           borderRadius: '4px',
         }
+
       }}>
           {watched.map((watchedcoin) => <WatchEntry watchedcoin={watchedcoin} key={watchedcoin} setDynamicCoin={setDynamicCoin}/>)}
       </Box>

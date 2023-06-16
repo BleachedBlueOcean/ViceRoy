@@ -138,7 +138,7 @@ const App = (props) => {
 
 
   const renderView = () => {
-    console.log('rendered!', view);
+    // console.log('rendered!', view);
     switch (view) {
     case 'default':
       return (
