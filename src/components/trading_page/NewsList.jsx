@@ -4,14 +4,13 @@ import NewsEntry from './NewsEntry.jsx';
 import { Box, List, Divider } from '@mui/material';
 
 const NewsList = ({watched}) => {
-
-  const [articles, setArticles] = useState([]);
-
+  
+  const [articles, setArticles] = useState([])
   const getNews = () => {
 
-    return axios(`http://127.0.0.1:5173/api/?auth_token=${import.meta.env.VITE_NEWS_API}&kind=news&filter=hot&public=true&currencies=${watched.join()}`)
-      .then((result) => { setArticles(result.data.results); })
-      .catch((err) => { console.log('fetch error: ', err); });
+      return axios(`http://127.0.0.1:5173/api/?auth_token=${import.meta.env.VITE_NEWS_API}&kind=news&filter=hot&public=true&currencies=${watched.map((coin) => coin[0]).join()}`)
+      .then((result) => {setArticles(result.data.results)})
+      .catch((err) => {console.log('fetch error: ', err)})
 
   };
 

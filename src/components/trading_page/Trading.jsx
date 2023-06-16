@@ -410,12 +410,20 @@ function Trading({user, setUser, guest, unrealizedGains}){
         ]
     ])
     const [dynamicCoin, setDynamicCoin] = useState(['ETH', 'Ethereum'])
-    const [watched, setWatched] = useState([['BTC', 'Bitcoin']])
-    // const getWatched = () => {
-    //     setWatched(user.watchList)
-    // }
-    // useEffect(()=>{getWatched()}, [])
-    // useEffect(()=>{if (guest === false) {controllers.updateUser(user.id, {watchList: watched})}}, [watched])
+
+    const [watched, setWatched] = useState([["BTC", "Bitcoin"]])
+    const getWatched = () => {
+        user.watchList
+        setWatched(user.watchList.map((watch) => watch.coin))
+    }
+    useEffect(()=>{if (guest === false) {getWatched()}}, [])
+    useEffect(()=>{
+        if (guest === false) {
+            controllers.updateUser(user.id, {watchList: watched.map((watch) => ({coin: watch}))
+            })
+        }
+    }, [watched])
+
     return(
         <>
         <div className='trading-page' style={{display: 'flex', flexDirection: 'row'}}>

@@ -4,9 +4,9 @@ import WatchEntry from './WatchEntry.jsx';
 import { List, Divider, Box, OutlinedInput, InputLabel, MenuItem, FormControl, Chip, Select } from '@mui/material';
 import controllers from '../../backend/controllers/index.js';
 
-const WatchList = ({coinOptions, user, setDynamicCoin, watched, setWatched}) => {
-  const [topcoins, setTopcoins] = useState([]);
-  // const [watched, setWatched] = useState(['BTC'])
+function WatchList ({coinOptions, user, setDynamicCoin, watched, setWatched}) {
+  const [topcoins, setTopcoins] = useState([])
+  const [open, setOpen] = useState(false)
 
   const MenuProps = {
     PaperProps: {
@@ -15,42 +15,52 @@ const WatchList = ({coinOptions, user, setDynamicCoin, watched, setWatched}) => 
         width: 250,
       }
     }
-  };
-
-  const getTopCoins = () => {
-    setTopcoins(coinOptions.map((coin) => coin[0]));
-  };
-  // const getWatched = () => {
-  //   setWatched(user.watchList)
-  // }
+  }
+  const [selected, setSelected] = useState([])
+  const handleSelected = () => {
+    setSelected(
+      watched.map((watch) => (`${watch[0]} ${watch[1]}`))
+    )
+  }
+  
+  useEffect(()=> handleSelected(), [watched])
+  
   const handleChange = (event) => {
     const {
       target: {value},
     } = event;
-    console.log('value :', value);
-    setWatched(value.slice(0, 10));
-    // controllers.updateUser(user.id, {watchList: watched})
-  };
-  // useEffect(()=>{getWatched()}, [])
-  useEffect(()=>{ getTopCoins(); }, []);
+    // setWatched(value.slice(0, 10));
+    // console.log(value)
+    setWatched(value.map((val) => val.match(/^(\S+)\s(.*)/).slice(1)))
+    handleClose();
+  }
+  const handleOpen = () => {
+    setOpen(true)
+  }
+  const handleClose = () => {
+    setOpen(false)
+  }
 
   return (
-    <div style={{marginTop: '15px'}}onClick={()=>{console.log('watched :', watched, 'user :', user)}}>Watch List
+    <div style={{marginTop: '15px'}}onClick={()=>{console.log('watched :', watched, 'user :', user, 'preselected: ', selected)}}>Watch List
       <FormControl sx={{ m: 1, width: 300, bgcolor: 'gray', borderRadius: '5px'}}>
         <InputLabel sx={{color: 'white'}} id='watch-list-label'>Watched Coins</InputLabel>
         <Select
           labelId = 'watch-list-label'
           id = 'watch-list-chip'
-          defaultValue={watched[0] || ''}
+          defaultValue={watched.map((watch) => watch) || ''}
           multiple
+          open={open}
+          onClose={handleClose}
+          onOpen={handleOpen}
           sx={{color: 'black'}}
-          value={watched.slice(0, 10)}
+          value={selected}
           onChange={handleChange}
           input={<OutlinedInput id='select-multiple-chip' label='Watched Coins' sx={{bgcolor: 'black'}}/>}
           renderValue={(selected) => (
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, bgcolor: 'gray'}}>
               {selected.map((val) => (
-                <Chip key={val} label={val.join(' ')} sx={{color: 'white', bgcolor: 'black'}}/>
+                <Chip key={val} label={val} sx={{color: 'white', bgcolor: 'black'}}/>
               ))}
             </Box>
           )}
@@ -59,10 +69,10 @@ const WatchList = ({coinOptions, user, setDynamicCoin, watched, setWatched}) => 
           {coinOptions.map((coin) => (
             <MenuItem
               key={coin}
-              value={coin}
+              value={`${coin[0]} ${coin[1]}`}
               sx={{color: 'green', bgcolor: 'black'}}
             >
-              {coin.join(' ')}
+              {`${coin[0]} ${coin[1]}`}
             </MenuItem>
           ))}
         </Select>
@@ -85,9 +95,7 @@ const WatchList = ({coinOptions, user, setDynamicCoin, watched, setWatched}) => 
       }}>
         <List>
           {watched.map((watchedcoin) => <WatchEntry watchedcoin={watchedcoin} key={watchedcoin} setDynamicCoin={setDynamicCoin}/>)}
-
         </List>
-
       </Box>
     </div>
   );
