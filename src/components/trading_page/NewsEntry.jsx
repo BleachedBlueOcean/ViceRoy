@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListItem, Divider, Typography } from '@mui/material';
+import { ListItem, Divider, Typography, Tooltip } from '@mui/material';
 import { formatDistanceToNow, parseISO } from "date-fns";
 
 const  NewsEntry = ( {article} ) => {
@@ -24,7 +24,9 @@ const  NewsEntry = ( {article} ) => {
           <span style={{color: 'black', marginRight: '5px', fontSize: '10px'}}>{timestamp}</span>
           {/* <span style={{color: 'black'}} onClick={()=>{console.log(article)}}>4h ago</span> */}
           <span>
-            <a href={article.url}>{article.title}</a>
+            <Tooltip title={article.title}>
+              <a href={article.url} style={{fontSize: '10pt'}}>{`${article.title.substring(0, 30)}...`}</a>
+            </Tooltip>
           </span>
         </Typography>
       </ListItem>
