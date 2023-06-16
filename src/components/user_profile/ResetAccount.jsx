@@ -14,9 +14,7 @@ const ResetAccount = ({user, setUser, setUnrealizedGains}) => {
     const form = {...user, coinsOwned: [], totalAssets: 500, availableCash: 500, watchList:[{coin:['BTC', 'Bitcoin']}]}
     setUser(form);
     setUnrealizedGains(0)
-    console.log('this is form', form.id)
     try{
-      // console.log('this is form id', form.id)
       await controllers.updateUser(form.id, form);
     }catch(err){
       console.log('error', err)

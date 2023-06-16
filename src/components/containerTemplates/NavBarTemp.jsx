@@ -51,10 +51,10 @@ const NavBarTemp = ({signedIn, setSignedIn, setView, previewImage, setPreviewIma
 
 // FOR Settings
 const handleSetting = (e) => {
-  console.log('testing 2', e.target.innerHTML)
+  // console.log('testing 2', e.target.innerHTML)
   let name = e.target.innerHTML;
   if(name === 'Logout') {
-    console.log(guest);
+    // console.log(guest);
     setSignedIn(false);
     setGuest(false);
     setView('default');

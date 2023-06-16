@@ -32,7 +32,7 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser, guest }) => {
 
   const updating = (form) => {
       setUser(form);
-      console.log('this is form', form.id)
+      // console.log('this is form', form.id)
       // console.log('this is form id', form.id)
      controllers.updateUser(form.id, form);
     }
@@ -71,14 +71,14 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser, guest }) => {
       let currentCoin = null;
       let newBalance = user.availableCash - (buyAmt * price)
       for(var i = 0; i < user.coinsOwned.length; i++ ) {
-        console.log('This is what is being evaluateed in user.coinsOwned', user.coinsOwned[i])
+        // console.log('This is what is being evaluateed in user.coinsOwned', user.coinsOwned[i])
         if(user.coinsOwned[i].icon === coin[0]) {
           currentCoinIdx = i
           currentCoin = user.coinsOwned
         }
       }
       if(currentCoin === null) {
-        console.log('This is the first purchase of this coin')
+        // console.log('This is the first purchase of this coin')
         currentCoin = {
           name: coin[1],
           icon: coin[0],

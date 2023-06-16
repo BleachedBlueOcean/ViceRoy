@@ -5,16 +5,16 @@ import SearchIcon from '@mui/icons-material/Search';
 const GraphNavTemp = ({coinOptions, coin, interval, setCoin, setInterval, view, setView}) =>{
 
   const changeHandler = (val)=> {
-    console.log(val)
+    // console.log(val)
     const newCoin = coinOptions.filter(coinPair=> {
       return coinPair[0].toLowerCase()===val.toLowerCase()|| coinPair[1].toLowerCase()===val.toLowerCase()
     })
     if(newCoin.length > 0) setCoin(newCoin[0]);
   }
 
-  const submitHandler= (e)=> {
-    console.log(e.target)
-  }
+  // const submitHandler= (e)=> {
+  //   console.log(e.target)
+  // }
 
   return (
     <AppBar className="GraphNavBar" position="relative" sx={{

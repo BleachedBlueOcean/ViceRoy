@@ -4,11 +4,11 @@ import { Box, Typography } from '@mui/material';
 const OwnedCoinRow = ({ coin, liveValue, updateUnrealizedGains }) => {
  //api call for current coin prices
  //https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH&tsyms=USD,EUR
-  console.log('this is coin', coin);
+  // console.log('this is coin', coin);
   const [finalValue, setFinalValue] = useState(0);
 
   const calculate = () =>{
-    console.log('calculating...')
+    // console.log('calculating...')
     const val = (coin.quantity*liveValue) - (coin.quantity*coin.avgBuyVal);
     setFinalValue(val);
     updateUnrealizedGains(val);

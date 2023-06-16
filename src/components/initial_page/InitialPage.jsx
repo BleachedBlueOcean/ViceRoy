@@ -30,10 +30,10 @@ const InitialPage = ({ handleOpen, handleClose, open, setView, setUser, setGuest
 
     const guestLogin = async () => {
         const guestUser = await controllers.getUserById();
-        console.log(guestUser)
+        // console.log(guestUser)
         setGuest(true);
         setUser(guestUser);
-        console.log(guestUser);
+        // console.log(guestUser);
     }
 
   return (
