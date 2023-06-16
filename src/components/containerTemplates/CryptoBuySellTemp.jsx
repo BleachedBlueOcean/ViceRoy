@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {Container, Paper, Stack, Button,  Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField} from '@mui/material';
+import {Container, Box, Paper, Stack, Button,  Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, DialogActions, Dialog, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
+
 import axios from 'axios';
 import controllers from '../../backend/controllers/index.js'
 
@@ -8,13 +9,15 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser, guest }) => {
   const [buyAmt, setBuyAmt] = useState('');
   const [sellAmt, setSellAmt] = useState('');
   const [price, setPrice] = useState('');
+  const [open, setOpen] = useState(false);
+  const [trade, setTrade] = useState('')
 
   useEffect(() => {
     let updatePrice = () => {
       axios.get(`https://min-api.cryptocompare.com/data/price?fsym=${coin[0]}&tsyms=USD`)
         .then((result) => {
           console.log('This is what the buy click gets for current value ', result.data.USD)
-          setPrice(result.data.USD)
+          setPrice(result.data.USD.toFixed(2));
         }
       )
     }
@@ -38,9 +41,7 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser, guest }) => {
     setSellAmt(e.target.value)
   ]
 
-  const handleBuyClick = (e) => {
-    e.preventDefault()
-
+  const handleBuyClick = () => {
     if((buyAmt * price) > user.availableCash) {
       console.log("Sorry, you don't seem to have enough funds for this trade at this time")
     } else {
@@ -93,8 +94,7 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser, guest }) => {
 
   }
 
-  const handleSellClick = (e) => {
-    e.preventDefault()
+  const handleSellClick = () => {
     // grab current profile and coin balances
     // if coin balances do not allow for transaction refuse.
     // if good proceed and update user profile
@@ -125,19 +125,69 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser, guest }) => {
     }
   }
 
+  const handleOpen = (e) => {
+    setTrade(e.target.id)
+    setOpen(true);
+  };
+
+
+  const handleClose = async (e) => {
+    const confirmation = e.target.id;
+      if(confirmation === 'no') {
+        console.log('account is open')
+      } else {
+        if(trade === 'sell') {
+          handleSellClick()
+        } else if(trade === 'buy') {
+          handleBuyClick()
+        }
+      }
+      setOpen(false);
+  };
+
+
   return (
-    <Container maxWidth="xs">
-      <Paper sx={{ padding: 2, marginTop: 16 }}>{props}
-        <TableContainer>
-          <Table>
+    <Container className="buySell">
+      <Paper sx={{
+        padding: 2,
+        height: '16rem',
+        width: '18rem',
+        display: 'flex',
+        flexDirection: 'column',
+      }}>
+          {props}
+        <TableContainer className="buySellInfoHolder" sx={{
+          height: '21rem',
+        }}>
+          <Table className="buySellInfoNText" sx={{
+            display: 'grid',
+            gridTemplateRows: '1fr 1fr',
+            height: '100%',
+          }}>
             <TableHead>
               <TableRow>
-                <TableCell size="small">Buy Amount</TableCell>
-                <TableCell size="small">Price Point of {coin}</TableCell>
-                <TableCell size="small">Sell Amount</TableCell>
+                <TableCell size="small" sx={{
+                  fontWeight: 'bold',
+                  fontSize: 'xx-large',
+                }}>{coin[0]}
+                <TableCell size="small" sx={{
+                  fontWeight: 'bold',
+                  fontSize: 'xx-large',
+                }}>$
+                {price}
+                </TableCell>
+              </TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody className="buySellFields">
+              <Box className="buySellFieldTitles" sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+              }}>
+                <TableCell size="small">Shares to Buy</TableCell>
+                <TableCell size="small">Shares to Sell</TableCell>
+              </Box>
               <TableRow>
                 <TableCell size="small">
                   <TextField
@@ -147,7 +197,7 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser, guest }) => {
                     onChange={handleBuy}
                   />
                 </TableCell>
-                <TableCell size="small">$ {price} </TableCell>
+
                 <TableCell size="small">
                   <TextField
                     size="small"
@@ -167,11 +217,26 @@ const CryptoBuySellTemp = ({ props, coin, user, setUser, guest }) => {
           justifyContent: 'space-between',
           paddingLeft: '1rem',
           paddingRight: '1rem',
-          paddingTop: '4px',
         }}>
           {/* <Button variant="contained">ExecuteOrder</Button> */}
-          {!guest && <Button variant="contained" onClick={handleBuyClick}>Buy</Button>}
-          {!guest && <Button variant="contained" onClick={handleSellClick}>Sell</Button>}
+          {!guest && <Button variant="contained" onClick={handleOpen} id='buy' sx={{
+            width: '7rem',
+          }}>Buy</Button>}
+          {!guest && <Button variant="contained" onClick={handleOpen} id='sell' sx={{
+            width: '7rem',
+          }}>Sell</Button>}
+          <Dialog open={open} onClose={handleClose}>
+            <DialogTitle>Reset Account</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+            Are you sure you want to {trade} {coin[0]}?
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose} id='no'>No</Button>
+             <Button onClick={handleClose} id='yes'>Yes</Button>
+           </DialogActions>
+          </Dialog>
         </Stack>
       </Paper>
     </Container>
