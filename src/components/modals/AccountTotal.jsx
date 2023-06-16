@@ -23,9 +23,10 @@ const AccountTotal = ({user, unrealizedGains}) => {
 
 
     return (
-      <Card>
-        <CardContent>
-          <Typography sx={ {fontWeight: 'bold', fontSize: '25px', margin: '10px'}}>
+
+      <Card sx={{ backgroundColor: '#13C4A3', borderRadius: '10px', marginBottom: '2rem' }}>
+        <CardContent sx={{ color: 'black' }}>
+          <Typography sx={{fontWeight: 'bold', fontSize: '25px', margin: '10px'}}>
             Account Summary for {user.firstName} {user.lastName}
           </Typography>
           <Typography>
